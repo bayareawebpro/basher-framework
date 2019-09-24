@@ -16,7 +16,7 @@ function git:init() {
     git init
     echo "Local Repository Created!"
   fi
-  get:connect
+  git:connect
   git:make:readMe
   git:make:ignore
   git:make:develop
@@ -24,7 +24,7 @@ function git:init() {
 }
 
 # Add Remote Connection
-function get:connect() {
+function git:connect() {
   echo "Connecting to Remote Repository..."
   REPO=$(basename "$PWD")
   git remote add origin "git@github.com:bayareawebpro/${REPO}"
