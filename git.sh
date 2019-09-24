@@ -1,28 +1,34 @@
 #!/bin/bash
 
-function git:initRepo() {
-  echo 'test'
+# Hard Reset to HEAD
+function git:reset() {
+  git reset --hard HEAD
+  echo "Repository Reverted."
 }
 
-
 # Initialize GIT Repository
-function git:initRepo() {
+function git:init() {
   if [ -d ".git" ]; then
     echo "This directory has already been initialized with git."
     exit 1
   else
     git init
   fi
+  get:connect
+  git:make:readMe
+  git:make:ignore
+  git:make:docs
+  git:make:develop
 }
 
-# Add Remote
-function git_addRemote() {
+# Add Remote Connection
+function get:connect() {
   REPO=$(basename "$PWD")
   git remote add origin "git@github.com:bayareawebpro/${REPO}"
 }
 
 # Add ReadMe
-function git_addReadMe() {
+function git:make:readMe() {
   if [ -f "README.md" ]; then
     echo "README.md already exists."
   else
@@ -32,7 +38,7 @@ function git_addReadMe() {
 }
 
 # Add .gitignore
-function git:addIgnore() {
+function git:make:ignore() {
   if [ -f ".gitignore" ]; then
     echo ".gitignore already exists."
   else
@@ -45,7 +51,7 @@ function git:addIgnore() {
   fi
 }
 
-# Add Commit
+# Add Commit & Push to Remote
 function git:commitAndPush() {
   if [ -z "$1" ]; then
     MESSAGE="WIP"
@@ -57,18 +63,17 @@ function git:commitAndPush() {
 }
 
 # Add GithubPages Branch
-function git:docsBranch() {
+function git:make:docs() {
   git checkout --orphan "gh-pages" && git rm -rf .
   git push --set-upstream origin gh-pages
-  git add .
-  git commit -m "Initial GhPages Commit"
-  git push
+  git:make:ignore
+  git:make:readMe
+  #git:commitAndPush "Initial GhPages Commit"
 }
 
 # Add Develop Branch
-function git:developBranch() {
-  # Add Develop Branch
-  git checkout -b "develop" && git rm -rf .
+function git:make:develop() {
+  git checkout -b "develop"
   git push --set-upstream origin develop
-  git:addIgnore
+  #git:commitAndPush "Initial Develop Commit"
 }
