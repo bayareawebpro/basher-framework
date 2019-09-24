@@ -32,7 +32,7 @@ function git_addReadMe() {
 }
 
 # Add .gitignore
-function git_addIgnored() {
+function git:addIgnore() {
   if [ -f ".gitignore" ]; then
     echo ".gitignore already exists."
   else
@@ -46,20 +46,18 @@ function git_addIgnored() {
 }
 
 # Add Commit
-function git_commitAndPush() {
-  git add .
+function git:commitAndPush() {
   if [ -z "$1" ]; then
-    MESSAGE="$1"
-  else
     MESSAGE="WIP"
+  else
+    MESSAGE="$1"
   fi
-  # Initial Commit
-  git commit -m "${MESSAGE}"
-  git push
+  echo "${MESSAGE}";
+  git add . && git commit -m "${MESSAGE}" && git push
 }
 
 # Add GithubPages Branch
-function git_docsBranch() {
+function git:docsBranch() {
   git checkout --orphan "gh-pages" && git rm -rf .
   git push --set-upstream origin gh-pages
   git add .
@@ -67,12 +65,10 @@ function git_docsBranch() {
   git push
 }
 
-# Add GithubPages Branch
-function git_developBranch() {
+# Add Develop Branch
+function git:developBranch() {
   # Add Develop Branch
-  git checkout -b "develop"
+  git checkout -b "develop" && git rm -rf .
   git push --set-upstream origin develop
-  git add .
-  git commit -m "Initial Develop Commit"
-  git push
+  git:addIgnore
 }
