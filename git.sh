@@ -94,3 +94,19 @@ function git:make:develop() {
   echo "Run git:save to syncronize."
   #git:save "Initial Develop Commit"
 }
+
+# Make Project
+function make:project() {
+    PROJECT=$1
+    if [ -z "$PROJECT" ]; then
+        echo "Project name required"
+        return;
+    fi
+    laravel new "$PROJECT"
+    cd "$PROJECT" || exit 1;
+    composer require laravel-frontend-presets/tailwindcss --dev
+    php artisan preset tailwindcss-auth
+    npm install
+    npm run dev
+}
+
