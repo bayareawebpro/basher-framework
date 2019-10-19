@@ -104,7 +104,9 @@ function make:project() {
     fi
     laravel new "$PROJECT"
     cd "$PROJECT" || exit 1;
+
     composer require laravel-frontend-presets/tailwindcss --dev
+    php artisan preset tailwindcss
     php artisan preset tailwindcss-auth
     npm install
     npm run dev
