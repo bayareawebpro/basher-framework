@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Reload source
+function git:refresh() {
+  source git.sh
+}
+
+# Initialize GIT Repository
+function git:init() {
+  echo "===Initializing Local Repository==="
+  if [ -d ".git" ]; then
+    echo "This directory has already been initialized with git."
+    exit 1
+  else
+    git init
+    echo "Local Repository Created!"
+  fi
+}
+
 # Hard Reset to HEAD
 function git:reset() {
   if [ -d ".git" ]; then
@@ -11,59 +28,48 @@ function git:reset() {
   fi
 }
 
-# Initialize GIT Repository
-function git:init() {
-  echo "Initializing local repository..."
-  if [ -d ".git" ]; then
-    echo "This directory has already been initialized with git."
-    exit 1
-  else
-    git init
-    echo "Local Repository Created!"
-  fi
-}
-
 # Add Remote Connection
 function git:connect() {
+  echo "===Connecting To Remote Repository==="
   REPO=$(basename "$PWD")
-  ORIGIN="git@github.com:bayareawebpro/${REPO}"
+  ORIGIN="git@github.com:bayareawebpro/${REPO}.git"
   echo "Connecting to $ORIGIN..."
-  git remote add origin "git@github.com:bayareawebpro/${REPO}.git"
-  git push --set-upstream origin master
+
+  # Try to add origin
+  if [[ $(git remote) != *origin* ]]; then
+    git remote add origin "$ORIGIN"
+    echo "Added $ORIGIN successfully."
+  else
+    echo "Origin exists, skipping..."
+  fi
+
+  # Try to push to origin
+  if (git push -u origin master); then
+    echo "Connected to $ORIGIN complete."
+  else
+    echo "Connection to $ORIGIN failed!"
+  fi
 }
 
 # Rmove All Connections
 function git:disconnect() {
+  echo "===Disconnecting From Remote Repository==="
   git remote rm origin
 }
 
 # Add Commit & Push to Remote
-function git:save() {
-  echo "Synchronizing with Remote Repository..."
-  if [ -z "$1" ]; then
-    MESSAGE="WIP"
-  else
-    MESSAGE="$1"
-  fi
-  echo "${MESSAGE}"
-  git add . && git commit -m "${MESSAGE}" && git push
-  echo "Remote Repository Synchronized!"
-}
-
-# Add Commit & Push to Remote
 function git:sync() {
-  echo "Synchronizing with Remote Repository..."
+  echo "===Synchronizing Remote Repository==="
   if [ -z "$1" ]; then
     MESSAGE="WIP"
   else
     MESSAGE="$1"
   fi
   echo "Saving... ${MESSAGE}"
-
   if (git add . && git commit -m "${MESSAGE}"); then
-    git push && echo "Remote Repository Synchronized!"
+    git push && echo "Local Pushed to Remote Successfully!"
   else
-    echo "Command failed"
+    git pull && echo "Remote Pulled to Local Successfully!"
   fi
 }
 
