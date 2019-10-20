@@ -65,8 +65,8 @@ function git:sync() {
   else
     MESSAGE="$1"
   fi
-  echo "Saving... ${MESSAGE}"
   if (git add . && git commit -m "${MESSAGE}"); then
+    echo "Saving... ${MESSAGE}"
     git push && echo "Local Pushed to Remote Successfully!"
   else
     git pull && echo "Remote Pulled to Local Successfully!"
