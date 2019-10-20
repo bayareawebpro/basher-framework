@@ -29,6 +29,7 @@ function git:connect() {
   ORIGIN="git@github.com:bayareawebpro/${REPO}"
   echo "Connecting to $ORIGIN..."
   git remote add origin "git@github.com:bayareawebpro/${REPO}.git"
+  git push --set-upstream origin master
 }
 
 
