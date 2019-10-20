@@ -2,8 +2,13 @@
 
 # Hard Reset to HEAD
 function git:reset() {
-  git reset --hard HEAD
-  echo "Repository Reverted!"
+  if [ -d ".git" ]; then
+    git reset --hard HEAD
+    echo "Repository Reverted!"
+  else
+    echo "Local repository not found!"
+    exit 1;
+  fi
 }
 
 # Initialize GIT Repository
@@ -16,18 +21,20 @@ function git:init() {
     git init
     echo "Local Repository Created!"
   fi
-  git:connect
-  git:make:readMe
-  git:make:ignore
-  git:make:develop
-  git:make:docs
 }
 
 # Add Remote Connection
 function git:connect() {
-  echo "Connecting to Remote Repository..."
   REPO=$(basename "$PWD")
-  git remote add origin "git@github.com:bayareawebpro/${REPO}"
+  ORIGIN="git@github.com:bayareawebpro/${REPO}"
+  echo "Connecting to $ORIGIN..."
+  git remote add origin "git@github.com:bayareawebpro/${REPO}.git"
+}
+
+
+# Rmove All Connections
+function git:disconnect() {
+  git remote rm origin
 }
 
 # Add Commit & Push to Remote
@@ -44,13 +51,18 @@ function git:save() {
 }
 
 # Add ReadMe
-function git:make:readMe() {
+function git:make:readme() {
   echo "Making README.md..."
   if [ -f "README.md" ]; then
     echo "README.md already exists."
   else
-    touch README.md
-    echo "# ${REPO}" >>README.md
+    REPO=$(basename "$PWD")
+    {
+      echo "# $REPO" >>"README.md"
+      echo "[](https://github.com/bayareawebpro/{$REPO}/workflows/tests/badge.svg)"
+      echo '[](https://img.shields.io/badge/License-MIT-success.svg)'
+      echo '[](https://img.shields.io/badge/Version-1.0-blue.svg)'
+    } >>README.md
     echo "README.md Created!"
   fi
 }
@@ -58,16 +70,17 @@ function git:make:readMe() {
 # Add .gitignore
 function git:make:ignore() {
   echo "Making .gitignore..."
-  if [ -f ".gitignore" ]; then
+  if [ -f .gitignore ]; then
     echo ".gitignore already exists."
   else
-    touch .gitignore
-    echo ".idea
-*.lock
-/vendor
-/node_modules
-/public/hot" >>.gitignore
-    echo ".gitignore Created!"
+    {
+      echo ".idea"
+      echo "*.lock"
+      echo "/vendor"
+      echo "/node_modules"
+      echo "/public/hot"
+      echo ".gitignore Created!"
+    } >>.gitignore
   fi
 }
 
@@ -97,18 +110,17 @@ function git:make:develop() {
 
 # Make Project
 function make:project() {
-    PROJECT=$1
-    if [ -z "$PROJECT" ]; then
-        echo "Project name required"
-        return;
-    fi
-    laravel new "$PROJECT"
-    cd "$PROJECT" || exit 1;
+  PROJECT=$1
+  if [ -z "$PROJECT" ]; then
+    echo "Project name required"
+    return
+  fi
+  laravel new "$PROJECT"
+  cd "$PROJECT" || exit 1
 
-    composer require laravel-frontend-presets/tailwindcss --dev
-    php artisan preset tailwindcss
-    php artisan preset tailwindcss-auth
-    npm install
-    npm run dev
+  composer require laravel-frontend-presets/tailwindcss --dev
+  php artisan preset tailwindcss
+  php artisan preset tailwindcss-auth
+  npm install
+  npm run dev
 }
-
