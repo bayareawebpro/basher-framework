@@ -73,6 +73,7 @@ function git:sync() {
   fi
 }
 
+
 # Add ReadMe
 function git:make:readme() {
   echo "Making README.md..."
