@@ -7,7 +7,7 @@ function git:reset() {
     echo "Repository Reverted!"
   else
     echo "Local repository not found!"
-    exit 1;
+    exit 1
   fi
 }
 
@@ -32,7 +32,6 @@ function git:connect() {
   git push --set-upstream origin master
 }
 
-
 # Rmove All Connections
 function git:disconnect() {
   git remote rm origin
@@ -49,6 +48,23 @@ function git:save() {
   echo "${MESSAGE}"
   git add . && git commit -m "${MESSAGE}" && git push
   echo "Remote Repository Synchronized!"
+}
+
+# Add Commit & Push to Remote
+function git:sync() {
+  echo "Synchronizing with Remote Repository..."
+  if [ -z "$1" ]; then
+    MESSAGE="WIP"
+  else
+    MESSAGE="$1"
+  fi
+  echo "Saving... ${MESSAGE}"
+
+  if (git add . && git commit -m "${MESSAGE}"); then
+    git push && echo "Remote Repository Synchronized!"
+  else
+    echo "Command failed"
+  fi
 }
 
 # Add ReadMe
