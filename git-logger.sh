@@ -4,7 +4,7 @@ function logger:blank() {
 }
 function logger:info() {
   compiled=$(printf "%s\r""➜ 🤖 $1")
-  colors:blue "$compiled"
+  colors:lightblue "$compiled"
 }
 function logger:warning() {
   compiled=$(printf "%s\r""➜ ⚠️️$1")

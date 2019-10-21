@@ -9,7 +9,7 @@
 function git:ignore() {
   logger:info "Creating .gitignore..."
   if [ -f .gitignore ]; then
-    echo ".gitignore already exists."
+    logger:warning ".gitignore already exists."
   else
     {
       echo "/.idea"
@@ -19,6 +19,6 @@ function git:ignore() {
       echo "/public/hot"
       echo "/vendor"
     } >>.gitignore
-    echo ".gitignore Created!"
+    logger:success ".gitignore Created!"
   fi
 }

@@ -9,7 +9,6 @@ function git:setup() {
     exit 1
   else
     git init &&
-    git add . &&
-    git commit -m "Initial Commit"
+    git:initial
   fi
 }

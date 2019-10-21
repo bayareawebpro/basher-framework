@@ -6,22 +6,32 @@
 #logger:error
 #logger:debug
 #logger:info
-function git:connect() {
-  ORIGIN="$(git:origin)"
-  logger:info "📡 Connecting to $ORIGIN..."
-
-  if [[ $(git remote) != "*$ORIGIN*" ]]; then
-    git remote add origin "$ORIGIN"
-    git:sync
-    logger:success "Added $REPO as $ORIGIN successfully."
+function git:upstream() {
+  if git branch --set-upstream-to="$1" "$2"; then
+    logger:success "Origin Linked Successfully!"
   else
-    logger:info "Origin exists, skipping..."
+    logger:error "Failed to Link Origin."
   fi
-  #if (git push -u origin master); then
-  #  logger:success "🛠 $REPO push to $ORIGIN completed."
-  #  git:sync
-  #else
-  #  logger:error "Connection to $ORIGIN failed!"
-  #  logger:warning "Reository Required: https://github.com/new"
-  #fi
+}
+function git:connected() {
+  ORIGIN="$(git:origin)"
+  if [ "$(git remote)" != "*$ORIGIN*" ]; then
+    return 1
+  else
+    return 0
+  fi
+}
+function git:connect() {
+  ORIGIN="$(git origin)"
+  logger:info "📡 Connecting to $ORIGIN..."
+  if git:connected; then
+    logger:warning "Origin exists, skipping..."
+  else
+    logger:success "Added upstrean $ORIGIN to $REPO."
+    git branch --set-upstream-to="git-test-output/master" master
+    git fetch
+  fi
+  if git:connected; then
+    logger:success "GIT Connected"
+  fi
 }

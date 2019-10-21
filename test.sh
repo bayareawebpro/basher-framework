@@ -15,13 +15,28 @@ cd "$TEST_DIR" || exit 1
 #logger:warning "Testing failing..."
 #logger:error "Testing failed!"
 #logger:debug "Hmmm..."
-#logger:divider
 #logger:blank
-
 git:setup
-git:docs
+git:connect
+git:origin
+git:sync
+
+#if git:branch:exists gh-pages; then
+#  git:branch:delete gh-pages
+#fi
+#if git:branch:exists develop; then
+#  git:branch:delete develop
+#fi
+#
+#logger:divider
+
+
+#git:docs
+#git:sync
+
+#logger:divider
+
+
+#git:branch:delete develop
 #git:branch develop
-#git:connect
-#git push --force-with-lease
-#git:connect
-#git:save
+#git:sync
