@@ -21,7 +21,7 @@ cd "$TEST_DIR" || exit 1
 git:setup
 git:docs
 #git:branch develop
-git:connect
-git push --force-with-lease
+#git:connect
+#git push --force-with-lease
 #git:connect
 #git:save

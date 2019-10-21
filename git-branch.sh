@@ -6,7 +6,7 @@
 #logger:error
 #logger:debug
 #logger:info
-function git:docs() {
+function git:branch() {
   logger:info "Branching to docs..."
   exists=$(git show-ref "refs/heads/gh-pages")
   REPO=$(basename "$PWD")
