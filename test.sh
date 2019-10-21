@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source /Users/builder/git-functions/git.sh
+source git.sh
 clear
 
 # Setup
@@ -20,6 +20,7 @@ logger:blank
 
 git:setup
 git:docs
-git:develop
+git:branch develop
+git push --force
 #git:connect
 #git:save

@@ -20,7 +20,9 @@ function git:connect() {
 
   if (git push -u origin master); then
     logger:success "🛠 $REPO push to $ORIGIN completed."
+    git:sync
   else
     logger:error "Connection to $ORIGIN failed!"
+    logger:warning "Reository Required: https://github.com/new"
   fi
 }
