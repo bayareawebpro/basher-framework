@@ -1,0 +1,26 @@
+#!/bin/bash
+#logger:blank
+#logger:divider
+#logger:success
+#logger:warning
+#logger:error
+#logger:debug
+#logger:info
+function git:connect() {
+  REPO=$(basename "$PWD")
+  ORIGIN="git@github.com:$GIT_USER/$REPO.git"
+  logger:info "📡 Connecting to $ORIGIN..."
+
+  if [[ $(git remote) != *origin* ]]; then
+    git remote add origin "$ORIGIN"
+    logger:success "Added $REPO as $ORIGIN successfully."
+  else
+    logger:info "Origin exists, skipping..."
+  fi
+
+  if (git push -u origin master); then
+    logger:success "🛠 $REPO push to $ORIGIN completed."
+  else
+    logger:error "Connection to $ORIGIN failed!"
+  fi
+}

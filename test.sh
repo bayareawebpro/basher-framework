@@ -1,23 +1,25 @@
 #!/usr/bin/env bash
-
-# Clear the console
+source /Users/builder/git-functions/git.sh
 clear
 
-# Source git functions
-source git.sh
-
-# Cleanup previous run
+# Setup
 TEST_DIR="$HOME/Desktop/git-test-output"
 rm -rf "$TEST_DIR" || exit 1
 mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
 
-echo "Test Setup: $TEST_DIR"
+# Logger
+logger:divider
+logger:success "WorkingPath: $TEST_DIR"
+logger:info "Testing ready to start."
+logger:warning "Testing failing..."
+logger:error "Testing failed!"
+logger:debug "Hmmm..."
+logger:divider
+logger:blank
 
-git:init
-#git:make:readme
-#git:make:ignore
-#git:make:develop
-#git:make:docs
+git:setup
+git:docs
+git:develop
 #git:connect
 #git:save
