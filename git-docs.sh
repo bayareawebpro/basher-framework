@@ -15,11 +15,11 @@ function git:docs() {
     logger:success "Switched to Development Branch"
   else
     if (git checkout -b gh-pages && git rm -rf .); then
-      git push --set-upstream "git@github.com:$GIT_USER/$REPO.git" gh-pages
       git:ignore
       git:readme
       echo "- gh-pages" >> README.md
       if (git add . && git commit -m "Initial Commit"); then
+      git push --set-upstream origin gh-pages
         logger:success "Branch Saved Successfully!"
       else
         logger:error "Failed to Create docs Branch."

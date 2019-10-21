@@ -20,7 +20,8 @@ logger:blank
 
 git:setup
 git:docs
-git:branch develop
-git push --force
+#git:branch develop
+git:connect
+git push --force-with-lease
 #git:connect
 #git:save
