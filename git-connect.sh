@@ -7,8 +7,7 @@
 #logger:debug
 #logger:info
 function git:connect() {
-  REPO=$(basename "$PWD")
-  ORIGIN="git@github.com:$GIT_USER/$REPO.git"
+  ORIGIN="$(git:origin)"
   logger:info "📡 Connecting to $ORIGIN..."
 
   if [[ $(git remote) != *origin* ]]; then

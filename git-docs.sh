@@ -19,7 +19,7 @@ function git:docs() {
       git:readme
       echo "- gh-pages" >> README.md
       if (git add . && git commit -m "Initial Commit"); then
-      git push --set-upstream origin gh-pages
+        git push --set-upstream origin gh-pages
         logger:success "Branch Saved Successfully!"
       else
         logger:error "Failed to Create docs Branch."

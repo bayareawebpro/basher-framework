@@ -9,5 +9,5 @@
 function git:origin() {
   REPO=$(basename "$PWD")
   ORIGIN="git@github.com:$GIT_USER/$REPO.git"
-  return "$ORIGIN"
+  echo "$ORIGIN"
 }

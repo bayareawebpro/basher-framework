@@ -4,10 +4,11 @@
 
 GIT_USER=bayareawebpro
 source git-connect.sh
-source git-develop.sh
 source git-disconnect.sh
 source git-docs.sh
 source git-ignore.sh
+source git-origin.sh
+source git-branch.sh
 source git-logger.sh
 source git-project.sh
 source git-readme.sh
