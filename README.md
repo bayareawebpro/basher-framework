@@ -18,7 +18,7 @@ git:ignore
 git:readme
 ```
 
-## Save
+## Save (push)
 ```
 git:save "custom message"
 git:save (uses "wip" when no argument specified)
