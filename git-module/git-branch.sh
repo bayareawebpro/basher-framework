@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #logger:blank
 #logger:divider
 #logger:success

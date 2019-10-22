@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-source git.sh
-clear
+source ./git-module/git.sh
 
 # Setup
 TEST_DIR="$HOME/Desktop/git-test-output"
 rm -rf "$TEST_DIR" || exit 1
 mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
+clear
+echo "$pwd";
 
 # Logger
 #logger:divider
@@ -18,7 +19,6 @@ cd "$TEST_DIR" || exit 1
 #logger:blank
 git:setup
 git:connect
-git:origin
 git:sync
 
 #if git:branch:exists gh-pages; then
