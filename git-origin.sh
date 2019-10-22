@@ -18,7 +18,7 @@ function git:has:origin()
   [[ "$(git remote)" == "*origin*" ]]
 }
 
-function git:set:origin()
+function git:connect()
 {
   logger:divider
   if git:has:origin; then

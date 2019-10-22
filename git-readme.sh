@@ -15,9 +15,9 @@ function git:readme() {
     REPO=$(basename "$PWD")
     {
       echo "# $REPO"
-      echo "[](https://github.com/bayareawebpro/$REPO/workflows/ci/badge.svg)"
-      echo '[](https://img.shields.io/badge/License-MIT-success.svg)'
-      echo '[](https://img.shields.io/badge/Version-1.0-blue.svg)'
+      echo "![](https://github.com/bayareawebpro/$REPO/workflows/ci/badge.svg)"
+      echo '![](https://img.shields.io/badge/License-MIT-success.svg)'
+      echo '![](https://img.shields.io/badge/Version-1.0-blue.svg)'
     } >>README.md
     logger:success "Created README.md!"
   fi

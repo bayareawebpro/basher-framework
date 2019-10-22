@@ -1,30 +1,86 @@
 # Bash Profile Framework
 
-# Logger
-
-https://devhints.io/bash
-
+## Create Repo in CWD
 ```
-#logger:divider
-#logger:success "WorkingPath: $TEST_DIR"
-#logger:info "Testing ready to start."
-#logger:warning "Testing failing..."
-#logger:error "Testing failed!"
-#logger:debug "Hmmm..."
-#logger:blank
+git:setup
 ```
 
+## Set Origin to Master
+CWD name must match repo name
+```
+git:connect
+```
+
+## Ignore & ReadMe
+Created if doesn't exist.
+```
+git:ignore
+git:readme
+```
+
+## Save
+```
+git:save "custom message"
+git:save (uses "wip" when no argument specified)
+```
+
+
+## Branch
+Full
+```
+git:branch dev
+```
+Fresh
+```
+git:branch gh-pages fresh
+```
+Switching
+```
+git:switch master
+```
+Deleting
+```
+git:branch:delete dev
+```
+
+## Reset
+Revert to Head (Hard)
+```
+git:reset
+```
+
+#### Logger
+```
+logger:divider
+===================================================================================================
+```
 
 ```
-echo "# git-test-output" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin git@github.com:bayareawebpro/git-test-output.git
-git push -u origin master
+logger:success "Cool!"
+✅ Cool! (green text)
+```
 
-…or push an existing repository from the command line
+```
+logger:info "Testing ready to start."
+🤖 Testing ready to start. (blue text)
+```
 
-git remote add origin git@github.com:bayareawebpro/git-test-output.git
-git push -u origin master
+```
+logger:warning "Tests failing..."
+⚠️ Tests failing... (yellow text)
+```
+
+```
+logger:warning "Testing failed!"
+🤬 Testing failed! (red text)
+```
+
+```
+logger:debug "Hmmm..."
+Hmmm... (grey text)
+```
+
+```
+logger:blank
+(empty line)
 ```
