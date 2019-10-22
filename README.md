@@ -24,6 +24,11 @@ git:save "custom message"
 git:save (uses "wip" when no argument specified)
 ```
 
+## Sync (pull)
+```
+git:sync
+```
+
 
 ## Branch
 Full
