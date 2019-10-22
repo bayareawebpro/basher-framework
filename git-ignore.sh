@@ -6,7 +6,9 @@
 #logger:error
 #logger:debug
 #logger:info
-function git:ignore() {
+function git:ignore()
+{
+  logger:divider
   logger:info "Creating .gitignore..."
   if [ -f .gitignore ]; then
     logger:warning ".gitignore already exists."

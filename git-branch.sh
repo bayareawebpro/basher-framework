@@ -6,53 +6,66 @@
 #logger:error
 #logger:debug
 #logger:info
-function git:branch()
-{
+
+function git:switch() {
+  logger:divider
+  local BRANCH
   BRANCH="$1"
-  logger:info "Branching..."
-  if git:branch:exists "$BRANCH"; then
+  local EXISTS
+  EXISTS=$(git:branch:exists "$BRANCH")
+  if [[ -z "$BRANCH" ]]; then
+    logger:error "Branch name not specified."
+  elif [ -n "$EXISTS" ]; then
+    logger:info "Switching Branch to $BRANCH..."
     git checkout "$BRANCH"
-    logger:success "Switched to Development $BRANCH"
+    logger:success "Switched to $BRANCH"
   else
-    if git:branch:fresh "$BRANCH"; then
-      git:ignore
-      git:readme
-      echo "- $BRANCH v0.1" >>README.md
-      if git:initial && git:upstream "$BRANCH"; then
-        logger:success "Branch Saved Successfully!"
-      else
-        logger:error "Failed to Create docs Branch."
-      fi
-    fi
+    logger:error "Failed to Switch to branch $BRANCH."
+    logger:debug "Create new: git:branch $BRANCH."
   fi
 }
 
-function git:branch:exists()
-{
-  echo git show-ref "refs/heads/$1"
+function git:branch:exists() {
+  git show-ref "refs/heads/$1"
 }
 
-function git:branch:delete()
-{
-  if git push origin --delete "$1"; then
+function git:branch:delete() {
+  logger:divider
+  logger:info "Deleting Branch..."
+  local BRANCH
+  BRANCH="$1"
+  if git:branch:exists "$BRANCH" && git push origin --delete "$BRANCH"; then
     logger:success "Branch Deleted Successfully!"
   else
-    logger:error "Failed to Delete $1 Branch."
+    logger:error "Failed to Delete Branch."
   fi
 }
 
-function git:branch:publish()
-{
-  if git push -u origin "bayareawebpro/$REPO" master; then
-    logger:success "🛠 $REPO push to $ORIGIN completed."
-    git:sync
-  else
-    logger:error "Connection to $ORIGIN failed!"
-    logger:warning "Reository Required: https://github.com/new"
+function git:branch() {
+  logger:divider
+  local BRANCH
+  local FRESH
+  BRANCH="$1"
+  FRESH="$2"
+  if [[ -z "$BRANCH" ]]; then
+    logger:error "Branch name not specified." && exit 1
+  elif [[ -n "$BRANCH" ]]; then
+    logger:info "Creating Branch $BRANCH..."
+    if git checkout -b "$BRANCH"; then
+      logger:success "Branch created successfully."
+    else
+      logger:success "Branch exists, checking out $BRANCH."
+      git checkout "$BRANCH"
+    fi
+    if [[ "$FRESH" == "fresh" ]]; then
+      git status
+      logger:warning "Creating clean branch exit now or regret it, waiting 10 seconds..."
+      sleep 10
+      git rm -rf .
+      logger:success "Branch cleared."
+    fi
+    git:ignore
+    git:readme
+    git push --set-upstream origin "$BRANCH"
   fi
-}
-
-function git:branch:fresh()
-{
-  git checkout -b "$1" && git rm -rf .
 }

@@ -1,15 +1,26 @@
 #!/bin/bash
-function git:sync() {
-  logger:info "Synchronizing Remote Repository"
+function git:save()
+{
   if [ -z "$1" ]; then
     MESSAGE="WIP"
   else
     MESSAGE="$1"
   fi
-  if (git add . && git commit -m "${MESSAGE}"); then
-    logger:info "Saving... ${MESSAGE}"
-    git push && logger:success "Local Pushed to Remote Successfully!"
+  logger:divider
+  logger:info "Saving... ${MESSAGE}"
+  if git add . && git commit -m "${MESSAGE}" && git push; then
+    logger:success "Local Pushed to Remote Successfully!"
   else
-    git pull && logger:error "Remote Pulled to Local Successfully!"
+    logger:error "Failed to push to remote!"
+  fi
+}
+function git:sync()
+{
+  logger:divider
+  logger:info "Synchronizing Remote Repository"
+  if git pull; then
+    logger:success "Remote Pulled to Local Successfully!"
+  else
+    logger:error "Remote Pull Failed!"
   fi
 }

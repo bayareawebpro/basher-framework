@@ -1,12 +1,12 @@
 #!/bin/bash
 # Hard Reset to HEAD
 function git:reset() {
-  log:info "Re-Setting Local Repository"
-  if [ -d ".git" ]; then
-    git reset --hard HEAD
-    echo "Repository Reverted!"
+  logger:divider
+  logger:info "Reverting Repository State"
+  if git reset --hard HEAD; then
+    logger:success "Repository Reverted!"
   else
-    echo "Local repository not found!"
+    logger:error "Reverting Repository Failed!"
     exit 1
   fi
 }

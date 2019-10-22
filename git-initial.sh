@@ -9,10 +9,10 @@
 
 function git:initial()
 {
+  logger:divider
   if git add . && git commit -m "Initial Commit"; then
     logger:success "Branch Initial Commit Created Successfully!"
   else
-    logger:error "Failed to Create Branch Initial Commit."
-    exit 1
+    logger:error "Failed to Create Branch Initial Commit." && exit 1
   fi
 }

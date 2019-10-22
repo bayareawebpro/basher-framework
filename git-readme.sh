@@ -19,6 +19,6 @@ function git:readme() {
       echo '[](https://img.shields.io/badge/License-MIT-success.svg)'
       echo '[](https://img.shields.io/badge/Version-1.0-blue.svg)'
     } >>README.md
-    logger:success "README.md Created!"
+    logger:success "Created README.md!"
   fi
 }
