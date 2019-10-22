@@ -26,6 +26,7 @@ function git:connect()
   else
     logger:info "📡 Git Remote Connecting to $ORIGIN..."
     ORIGIN=$(git:origin)
+
     if git remote add origin "$ORIGIN" && git pull origin master; then
       logger:success "Git Remote is set to origin and syncronized: $ORIGIN."
       git push --set-upstream origin master
