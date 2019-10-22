@@ -1,5 +1,7 @@
-#!/bin/bash
-function git:setup() {
+#!/usr/bin/env bash
+
+function git:setup()
+{
   logger:divider
   logger:info "Initializing Local Repository..."
   git:ignore

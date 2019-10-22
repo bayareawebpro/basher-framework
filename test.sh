@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source ./git-module/git.sh
+source git.sh
 
 # Setup
 TEST_DIR="$HOME/Desktop/git-test-output"
@@ -7,7 +7,6 @@ rm -rf "$TEST_DIR" || exit 1
 mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
 clear
-echo "$pwd";
 
 # Logger
 #logger:divider

@@ -6,7 +6,8 @@
 #logger:error
 #logger:debug
 #logger:info
-function git:branch() {
+function git:branch()
+{
   BRANCH="$1"
   logger:info "Branching..."
   if git:branch:exists "$BRANCH"; then
@@ -25,17 +26,23 @@ function git:branch() {
     fi
   fi
 }
-function git:branch:exists() {
+
+function git:branch:exists()
+{
   echo git show-ref "refs/heads/$1"
 }
-function git:branch:delete() {
+
+function git:branch:delete()
+{
   if git push origin --delete "$1"; then
     logger:success "Branch Deleted Successfully!"
   else
     logger:error "Failed to Delete $1 Branch."
   fi
 }
-function git:branch:publish(){
+
+function git:branch:publish()
+{
   if git push -u origin "bayareawebpro/$REPO" master; then
     logger:success "🛠 $REPO push to $ORIGIN completed."
     git:sync
@@ -44,6 +51,8 @@ function git:branch:publish(){
     logger:warning "Reository Required: https://github.com/new"
   fi
 }
-function git:branch:fresh() {
-  echo git checkout -b "$1" && git rm -rf .
+
+function git:branch:fresh()
+{
+  git checkout -b "$1" && git rm -rf .
 }

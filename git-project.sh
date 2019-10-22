@@ -1,7 +1,10 @@
 #!/bin/bash
 # Make Project
-function git:laravel() {
+
+function git:laravel()
+{
   echo "===Making Project==="
+
   PROJECT=$1
   if [ -z "$PROJECT" ]; then
     echo "Project name required" && exit 1
