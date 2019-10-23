@@ -1,6 +1,4 @@
 # Bash Profile Framework
-![](https://i.imgur.com/eRnNQj8.mp4)
-
 https://imgur.com/a/GNsxOb5
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
