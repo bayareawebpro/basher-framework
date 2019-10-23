@@ -10,8 +10,8 @@
 make:database() {
   local DATABASE
   DATABASE="${1//-/_}"
-  if [ -z "$DATABASE" ]; then
-    logger:error "Database Name not defined." && exit 1
+  if string:not:empty "$DATABASE"; then
+    logger:error "Database Name not defined." && return 0
   elif echo "CREATE DATABASE $DATABASE;" | mysql; then
     #echo "CREATE USER $1@localhost IDENTIFIED BY '$1';" | mysql -v
     #echo "GRANT ALL PRIVILEGES ON $1.* to $1@localhost;" | mysql -v

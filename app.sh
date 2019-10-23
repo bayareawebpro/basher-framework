@@ -24,11 +24,7 @@ app:require git-reset.sh
 app:require git-setup.sh
 app:require git-sync.sh
 
-# Utilities
-app:require utility-conditionals.sh
-app:require utility-filesystem.sh
-app:require utility-logger.sh
-
+# Services
 app:require services-phpstorm.sh
 app:require services-chrome.sh
 
@@ -40,5 +36,11 @@ app:require make-laravel.sh
 # Install Commands
 app:require install-animatecss.sh
 
+# Utilities
+app:require utility-conditionals.sh
+app:require utility-filesystem.sh
+app:require utility-installer.sh
+app:require utility-logger.sh
+
 # Run
-logger:info "BashApp Loaded 😎"
+#app:install

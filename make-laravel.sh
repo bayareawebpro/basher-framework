@@ -2,26 +2,27 @@
 function make:laravel() {
   local PROJECT
   PROJECT="$1"
-  make:project "$PROJECT"
+  if make:project "$PROJECT"; then
+     # Install dependancies...
+    logger:divider
+    logger:info "Running Composer Install"
+    composer create-project --prefer-dist laravel/laravel ./
+    composer require laravel-frontend-presets/tailwindcss --dev
+    php artisan preset tailwindcss-auth
 
-  # Install dependancies...
-  logger:divider
-  logger:info "Running Composer Install"
-  composer create-project laravel/laravel .
-  composer require laravel-frontend-presets/tailwindcss --dev
+    # Configure & Create Database
+    make:database "$PROJECT" || exit 0
+    php artisan migrate
 
-  # Configure & Create Database
-  make:database "$PROJECT"
-  php artisan migrate
-
-  # Install & Compile Assets
-  #php artisan preset tailwindcss
-  php artisan preset tailwindcss-auth
-
-  logger:info "Running NPM Install"
-  npm install
-  npm run dev
-  # Serve the project.
+    # Install & Compile Assets
+    logger:divider
+    logger:info "Running NPM Install"
+    npm install
+    npm run dev
+    return 0;
+  fi
+  logger:error "Failed to Create $PROJECT"
+  return 1;
 }
 
 

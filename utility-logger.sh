@@ -13,11 +13,6 @@ function logger:input()
   read -r "$2"
 }
 
-function logger:blank()
-{
-  printf "\n"
-}
-
 function logger:info()
 {
   compiled=$(printf "%s\r""➜ 🤖 $1")
@@ -56,13 +51,17 @@ function logger:text()
 
 function logger:divider()
 {
-  local JOT
   for i in {1..50}; do
-    JOT=$(jot -s "=" -b "=" $((i)))
-    printf "%s\r""$JOT"
+    OUTPUT=$(jot -s "=" -b "=" $((i)))
+    printf "%s\r""$OUTPUT"
     sleep 0.001
   done
   logger:blank
+}
+
+function logger:blank()
+{
+  printf "\n"
 }
 
 # Colors

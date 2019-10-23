@@ -32,3 +32,12 @@ function file:older:than(){
 function file:equal:to(){
   [[ "$1" -ef  "$2" ]]
 }
+function file:copy(){
+  cp "$1" "$2"
+}
+function directory:make(){
+  mkdir "$1" || return 1;
+}
+function directory:change(){
+  cd "$1" || return 1;
+}
