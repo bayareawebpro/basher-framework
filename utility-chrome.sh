@@ -8,9 +8,10 @@ function chrome:serve(){
     logger:input "Domain Name or IP?" "ANSWER"
     DOMAIN="https://$ANSWER"
   fi
-  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "$DOMAIN"
+  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "$DOMAIN" --user-data-dir=/tmp/foo
   #php artisan serve
 }
+
 function chrome:secure(){
   local DOMAIN
   if [ -n "$1" ]; then
