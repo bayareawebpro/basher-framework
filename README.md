@@ -1,5 +1,7 @@
 # Bash Profile Framework
-!video[ title ](https://i.imgur.com/eRnNQj8.mp4){ size=10 }
+![](https://i.imgur.com/eRnNQj8.mp4)
+
+https://imgur.com/a/GNsxOb5
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
 - Or, add to to: ~/.profile
