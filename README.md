@@ -181,6 +181,28 @@ logger:debug "Hmmm..."
 logger:blank
 ```
 
+#### Colors
+```
+colors:black "im black"
+colors:blackb "im blackb"
+colors:white "im white"
+colors:whiteb "im whiteb"
+
+colors:red "im red"
+colors:redb "im redb"
+colors:green "im green"
+colors:greenb "im greenb"
+colors:yellow "im yellow"
+colors:yellowb "im yellowb"
+
+colors:blue "im blue"
+colors:blueb "im blueb"
+colors:purple "im purple"
+colors:purpleb "im purpleb"
+colors:lightblue "im lightblue"
+colors:lightblueb "im lightblueb"
+```
+
 #### Git Commands Test Output
 ```
 ➜ 🤖 Initializing Local Repository...

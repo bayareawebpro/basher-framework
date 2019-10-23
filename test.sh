@@ -8,18 +8,15 @@ mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
 clear
 
-git:setup
-git:connect
-git:save
-
-if logger:confirm "Testing App... Are you sure?"; then
-  logger:success "Completed."
-else
-  logger:error "Aborted."
-fi
+#logger:info "Hello."
+#if logger:confirm "Testing App... Are you sure?"; then
+#  logger:success "Completed."
+#else
+#  logger:error "Aborted."
+#fi
 
 #logger:input "Project Name?" "ANSWER"
-logger:success "$ANSWER.";
+#logger:success "$ANSWER.";
 
 #make:laravel "git-test-output"
 #git:ignore
@@ -31,6 +28,7 @@ logger:success "$ANSWER.";
 #artisan serve
 #chrome:serve
 
+### TEST Branching
 #git:branch gh-pages fresh
 #echo "Docs v1.0" >> "$TEST_DIR/README.md"
 #git:save
@@ -43,10 +41,9 @@ logger:success "$ANSWER.";
 #git:branch:delete dev
 #git:branch:delete gh-pages
 
-
+### TEST Database
 #if has:database "git_test_output"; then
 #  drop:database "git_test_output"
-#else
-#  make:database git-test-output
 #fi
+#make:database git-test-output
 #has:database "git_test_output" || logger:error "Database Not Found."

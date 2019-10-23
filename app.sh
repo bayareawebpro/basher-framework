@@ -37,3 +37,5 @@ app:require make-laravel.sh
 # Install Commands
 app:require install-animatecss.sh
 
+# Run
+logger:info "BashApp Loaded 😎"
