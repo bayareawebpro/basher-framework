@@ -3,17 +3,18 @@
 # dan@bayareawebpro.com
 # CheatSheet: https://devhints.io/bash
 
-# Globals
+# Service Loader (Directory of app)
 
-# Paths & Aliases
 APP_PATH="${0%/*}"
 function app:require(){
-  #echo "Loading: $APP_PATH/$1"
   source "$APP_PATH/$1"
+  #echo "app:loaded: $1"
 }
 
-# Git Commands
+# Paths & Aliases
 app:require config.sh
+
+# Git Commands
 app:require git-branch.sh
 app:require git-ignore.sh
 app:require git-initial.sh
@@ -25,9 +26,9 @@ app:require git-setup.sh
 app:require git-sync.sh
 
 # Utilities
+app:require utility-filesystem.sh
 app:require utility-logger.sh
 app:require utility-chrome.sh
-
 
 # Make Commands
 app:require make-database.sh
