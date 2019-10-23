@@ -130,6 +130,38 @@ chrome:serve "test.local"
 chrome:serve:secure "test.local"
 ```
 
+---
+## Conditionals
+```shell script
+string:is:empty "" 
+string:not:empty "not empty"
+string:is:equal "my-string" "my-string"
+string:not:equal "my-string" "other-string"
+string:matches:regex "my-string" "*origin*"
+num:is:equal
+num:not:equal "my-string" "my-string1"
+num:less:than
+num:less:than:or:equal
+num:greater:than
+num:greater:than:or:equal 1 2
+```
+---
+## Filesystem
+```shell script
+function path:is:file $PATH
+function path:is:directory $PATH
+
+function file:exists $PATH
+function file:readable $PATH
+function file:writable $PATH
+function file:executable $PATH
+function file:is:symlink $PATH
+function file:not:empty $PATH
+function file:newer:than $PATH_A $PATH_B
+function file:older:than $PATH_A $PATH_B
+function file:equal:to $PATH_A $PATH_B
+```
+---
 ## Logger
 
 #### Input

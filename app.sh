@@ -25,6 +25,7 @@ app:require git-setup.sh
 app:require git-sync.sh
 
 # Utilities
+app:require utility-conditionals.sh
 app:require utility-filesystem.sh
 app:require utility-logger.sh
 app:require utility-chrome.sh
