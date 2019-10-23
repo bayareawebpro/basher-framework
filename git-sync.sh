@@ -19,8 +19,8 @@ function git:sync()
   logger:divider
   logger:info "Synchronizing Remote Repository"
   if git pull; then
-    logger:success "Remote Pulled to Local Successfully!"
+    logger:success "Syncronized Successfully!"
   else
-    logger:error "Remote Pull Failed!"
+    logger:error "Syncronize Failed!"
   fi
 }
