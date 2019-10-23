@@ -147,6 +147,10 @@ chrome:serve:secure "test.local"
 (num:less:than:or:equal 1 2 && logger:success "num:less:than:or:equal") || logger:error "num:less:than:or:equal"
 (num:greater:than:or:equal 3 2 && logger:success "num:greater:than:or:equal") || logger:error "num:greater:than:or:equal"
 
+```
+---
+## Filesystem
+```shell script
 path:is:file $PATH
 path:is:directory $PATH
 file:exists $PATH
@@ -158,10 +162,6 @@ file:not:empty $PATH
 file:newer:than $PATH_A $PATH_B
 file:older:than $PATH_A $PATH_B
 file:equal:to $PATH_A $PATH_B
-```
----
-## Filesystem
-```shell script
 ```
 ---
 ## Logger
