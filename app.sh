@@ -7,26 +7,27 @@
 GIT_USER=bayareawebpro
 GIT_PROJECTS_PATH="$HOME/Sites"
 
-DIR="${0%/*}"
-
 # Paths & Aliases
-source $DIR/config.sh
+APP_PATH="${0%/*}"
+function app:require(){
+  source "$APP_PATH/$1"
+}
 
 # Git Commands
-source $DIR/git-branch.sh
-source $DIR/git-ignore.sh
-source $DIR/git-initial.sh
-source $DIR/git-origin.sh
-source $DIR/git-readme.sh
-source $DIR/git-report.sh
-source $DIR/git-reset.sh
-source $DIR/git-setup.sh
-source $DIR/git-sync.sh
+app:require git-branch.sh
+app:require git-ignore.sh
+app:require git-initial.sh
+app:require git-origin.sh
+app:require git-readme.sh
+app:require git-report.sh
+app:require git-reset.sh
+app:require git-setup.sh
+app:require git-sync.sh
 
 # Make Commands
-source $DIR/make-database.sh
-source $DIR/make-project.sh
-source $DIR/make-laravel.sh
+app:require make-database.sh
+app:require make-project.sh
+app:require make-laravel.sh
 
 # Utilities
-source $DIR/utility-logger.sh
+app:require utility-logger.sh
