@@ -21,12 +21,12 @@ export GIT_PROJECTS_PATH="$HOME/Sites"
 
 ## Make Commands
 
-#### Make Project
+#### Make Project (non macro)
 ```shell script
 make:project "my-folder-name"
 ```
 
-#### Make Laravel
+#### Make Laravel (macro)
 - Uses Tailwind Css
 - Creates Database
 - Sets Env Vars
@@ -38,6 +38,12 @@ make:laravel "my-folder-name"
 ```shell script
 make:database "my_database"
 make:database:env "my_database"
+```
+---
+
+## Install Commands
+```shell script
+install:animatecss
 ```
 
 ---
