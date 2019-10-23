@@ -1,4 +1,9 @@
 # Bash Profile Framework
+- Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
+- Or, add to to: ~/.profile
+```
+source /Users/me/bash-profile/app.sh
+```
 
 ## Create Repo in CWD
 ```
@@ -52,6 +57,15 @@ git:branch:delete dev
 Revert to Head (Hard)
 ```
 git:reset
+```
+
+#### Question
+```
+if logger:question "Are you sure?"; then
+  logger:success "Completed."
+else
+  logger:error "Aborted."
+fi
 ```
 
 #### Logger

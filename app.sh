@@ -4,8 +4,6 @@
 # CheatSheet: https://devhints.io/bash
 
 # Globals
-GIT_USER=bayareawebpro
-GIT_PROJECTS_PATH="$HOME/Sites"
 
 # Paths & Aliases
 APP_PATH="${0%/*}"
@@ -14,6 +12,7 @@ function app:require(){
 }
 
 # Git Commands
+app:require config.sh
 app:require git-branch.sh
 app:require git-ignore.sh
 app:require git-initial.sh
