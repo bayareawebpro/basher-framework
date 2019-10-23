@@ -3,7 +3,7 @@ function make:laravel() {
   local PROJECT
   PROJECT="$1"
   if make:project "$PROJECT"; then
-     # Install dependancies...
+    # Install dependancies...
     logger:divider
     logger:info "Running Composer Install"
     composer create-project --prefer-dist laravel/laravel ./
@@ -11,18 +11,22 @@ function make:laravel() {
     php artisan preset tailwindcss-auth
 
     # Configure & Create Database
-    make:database "$PROJECT" || exit 0
-    php artisan migrate
+    if make:database "$PROJECT" && php artisan migrate; then
+      logger:success "Database created & configured."
+    else
+      logger:warning "Database may already exist and was not migrated."
+    fi
 
     # Install & Compile Assets
     logger:divider
     logger:info "Running NPM Install"
     npm install
     npm run dev
-    return 0;
+    phpstorm:open "$PWD"
+    chrome:serve "http://127.0.0.1:8000"
+  else
+    logger:error "Failed to Create $PROJECT"
   fi
-  logger:error "Failed to Create $PROJECT"
-  return 1;
 }
 
 

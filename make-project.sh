@@ -3,8 +3,10 @@ function switch:project() {
    if string:is:empty "$1"; then
     logger:error "Project Name Required." && return 1
   fi
-  if path:is:directory "$GIT_PROJECTS_PATH/$1"; then
-    cd "$GIT_PROJECTS_PATH/$1" || logger:success "$1 @ $GIT_PROJECTS_PATH/$1"
+  local DIR; DIR="$GIT_PROJECTS_PATH/$1"
+  if path:is:directory "$DIR" && directory:change "$DIR"; then
+    logger:success "Project $1 @ $DIR"
+    phpstorm:open "$PWD"
   else
     logger:error "Switching To Project $1 Failed." && return 1
   fi
