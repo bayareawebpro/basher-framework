@@ -28,7 +28,9 @@ app:require git-sync.sh
 app:require utility-conditionals.sh
 app:require utility-filesystem.sh
 app:require utility-logger.sh
-app:require utility-chrome.sh
+
+app:require services-phpstorm.sh
+app:require services-chrome.sh
 
 # Make Commands
 app:require make-database.sh

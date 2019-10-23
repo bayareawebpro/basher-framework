@@ -4,8 +4,7 @@ function chrome:serve(){
   if [ -n "$1" ]; then
     DOMAIN="https://$1"
   else
-    logger:input "Domain Name or IP?" "ANSWER"
-    DOMAIN="https://$ANSWER"
+    DOMAIN="https://127.0.0.1:8000"
   fi
   logger:success "Launching Chrome..."
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "$DOMAIN" --user-data-dir=/tmp/foo
@@ -17,8 +16,7 @@ function chrome:secure(){
   if [ -n "$1" ]; then
     DOMAIN="https://$1"
   else
-    logger:input "Domain Name or IP?" "ANSWER"
-    DOMAIN="https://$ANSWER"
+    DOMAIN="https://127.0.0.1:8000"
   fi
   logger:success "Launching Chrome Fake Secure..."
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "$DOMAIN" --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure="$DOMAIN:443"

@@ -130,6 +130,17 @@ chrome:serve "test.local"
 chrome:serve:secure "test.local"
 ```
 
+## PhpStorm
+
+Launch PhpStorm
+```shell script
+phpstorm:launch
+```
+
+Open Project
+```shell script
+phpstorm:open $PWD
+```
 ---
 ## Conditionals
 ```shell script
