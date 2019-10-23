@@ -7,19 +7,6 @@ source /Users/me/bash-profile/app.sh
 ```
 ---
 
-
-## Chrome Commands
-No argument for 127.0.0.1
-```shell script
-chrome:serve
-chrome:serve:secure
-```
-Or using an argument
-```shell script
-chrome:serve "test.local"
-chrome:serve:secure "test.local"
-```
-
 ## Make Commands
 
 #### Make Project
@@ -74,7 +61,6 @@ git:save (uses "wip" when no argument specified)
 git:sync
 ```
 
-
 ## Branch
 Full
 ```shell script
@@ -99,14 +85,18 @@ Revert to Head (Hard)
 git:reset
 ```
 
-#### Confirmation
+## Chrome Commands
+No argument for 127.0.0.1
 ```shell script
-if logger:confirm "Are you sure?"; then
-  logger:success "Completed."
-else
-  logger:error "Aborted."
-fi
+chrome:serve
+chrome:serve:secure
 ```
+Or using an argument
+```shell script
+chrome:serve "test.local"
+chrome:serve:secure "test.local"
+```
+
 
 #### Logger
 
@@ -114,6 +104,15 @@ Input
 ```shell script
 logger:input "Where to?" "ANSWER"
 logger:success "Result: $ANSWER."
+```
+
+Confirmation
+```shell script
+if logger:confirm "Are you sure?"; then
+  logger:success "Completed."
+else
+  logger:error "Aborted."
+fi
 ```
 
 Divider
