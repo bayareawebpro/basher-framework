@@ -7,7 +7,8 @@ source /Users/me/bash-profile/app.sh
 ```
 ---
 
-## Configuration
+## Config
+
 See config.sh
 ```shell script
 # GIT Environment Vars
@@ -19,7 +20,7 @@ export GIT_USER="coolguy"
 export GIT_PROJECTS_PATH="$HOME/Sites"
 ```
 
-## Make Commands
+## Project
 
 #### Make Project (non macro)
 ```shell script
@@ -27,14 +28,17 @@ make:project "my-folder-name"
 ```
 
 #### Make Laravel (macro)
-- Uses Tailwind Css
+- Makes Project
+- Installs Tailwind Preset
 - Creates Database
 - Sets Env Vars
+- Ready to rock with a sigle command.
+
 ```shell script
 make:laravel "my-folder-name"
 ```
 
-#### Make Database
+#### Database Commands
 ```shell script
 make:database "my_database"
 make:database:env "my_database"
@@ -45,14 +49,14 @@ fi
 ```
 ---
 
-## Install Commands
+#### Installers
 ```shell script
 install:animatecss
 ```
 
 ---
 
-## GIT Commands
+## GIT
 
 #### Create Repo in CWD
 ```shell script
@@ -60,30 +64,30 @@ git:setup
 ```
 
 #### Set Origin to Master
-CWD name must match repo name
+CWD name must match repo name.
 ```shell script
 git:connect
 ```
 
-## Ignore & ReadMe
+#### Ignore & ReadMe
 Created if doesn't exist.
 ```shell script
 git:ignore
 git:readme
 ```
 
-## Save (push)
+#### Save (push)
 ```shell script
 git:save "custom message"
 git:save (uses "wip" when no argument specified)
 ```
 
-## Sync (pull)
+#### Sync (pull)
 ```shell script
 git:sync
 ```
 
-## Branch
+#### Branch
 Full
 ```shell script
 git:branch dev
@@ -101,34 +105,36 @@ Deleting
 git:branch:delete dev
 ```
 
-## Reset
+#### Reset
 Revert to Head (Hard)
 ```shell script
 git:reset
 ```
 
-## Chrome Commands
+## Chrome
 No argument for 127.0.0.1
+
 ```shell script
 chrome:serve
 chrome:serve:secure
 ```
+
 Or using an argument
+
 ```shell script
 chrome:serve "test.local"
 chrome:serve:secure "test.local"
 ```
 
+## Logger
 
-#### Logger
-
-Input
+#### Input
 ```shell script
 logger:input "Where to?" "ANSWER"
 logger:success "Result: $ANSWER."
 ```
 
-Confirmation
+#### Confirmation
 ```shell script
 if logger:confirm "Are you sure?"; then
   logger:success "Completed."
@@ -137,44 +143,44 @@ else
 fi
 ```
 
-Divider
+#### Divider
 ```shell script
 logger:divider
 ===================================================================================================
 ```
 
-Success: ✅ Cool! (green text)
+#### Success: ✅ Cool! (green text)
 ```shell script
 logger:success "Cool!"
 ```
 
-Info: 🤖 Testing ready to start. (blue text)
+#### Info: 🤖 Testing ready to start. (blue text)
 ```shell script
 logger:info "Testing ready to start."
 
 ```
 
-Warning: ⚠️ Tests failing... (yellow text)
+#### Warning: ⚠️ Tests failing... (yellow text)
 ```shell script
 logger:warning "Tests failing..."
 ```
 
-Error: 🤬 Testing failed! (red text)
+#### Error: 🤬 Testing failed! (red text)
 ```shell script
 logger:error "Testing failed!"
 ```
 
-Debug: Hmmm... (grey text)
+#### Debug: Hmmm... (grey text)
 ```shell script
 logger:debug "Hmmm..."
 ```
 
-Blank Line
+#### Blank Line
 ```shell script
 logger:blank
 ```
 
-#### Git Output
+#### Git Commands Test Output
 ```
 ➜ 🤖 Initializing Local Repository...
 Initialized empty Git repository in /Users/builder/Desktop/git-test-output/.git/
@@ -298,10 +304,12 @@ To github.com:bayareawebpro/git-test-output.git
 ```
 
 
-#### Make Laravel Project & Database + GIT
+## Make Commands Test Output
+- Make Laravel 
+- Project & Database
+- GIT
+
 ```
-...
-===================================================================================================
 ➜ 🤖 Making Project...
 ➜ 🤖 Verifying Project Directory: /Users/builder/Sites/git-test-output
 ➜ ✅  git-test-output @ /Users/builder/Sites/git-test-output
