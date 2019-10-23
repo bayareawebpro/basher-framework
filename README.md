@@ -7,6 +7,18 @@ source /Users/me/bash-profile/app.sh
 ```
 ---
 
+## Configuration
+See config.sh
+```
+# GIT Environment Vars
+export GIT_AUTHOR_NAME="Your Name"
+export GIT_AUTHOR_EMAIL="you@site.com"
+
+# APP Environment Vars
+export GIT_USER="coolguy"
+export GIT_PROJECTS_PATH="$HOME/Sites"
+```
+
 ## Make Commands
 
 #### Make Project
