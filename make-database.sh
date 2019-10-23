@@ -27,25 +27,30 @@ make:database() {
     return 0
   fi
   if echo "CREATE DATABASE $DATABASE;" | mysql; then
-    #echo "CREATE USER $DB_USER@localhost IDENTIFIED BY '$DB_PASSWORD';" | mysql -v
-    #echo "GRANT ALL PRIVILEGES ON $1.* to $1@localhost;" | mysql -v
+    #echo "CREATE USER $DB_USERNAME@localhost IDENTIFIED BY '$DB_PASSWORD';" | mysql -v
+    #echo "GRANT ALL PRIVILEGES ON $DATABASE.* to $DB_USERNAME@localhost;" | mysql -v
     #echo "FLUSH PRIVILEGES;" | mysql
     make:database:env "$DATABASE"
     logger:success "Database created successfully."
   else
-    logger:error "Database Name: $DATABASE failed to be created." && return 1
+    logger:error "Database Name: $DATABASE failed to be created."
+    return 1
   fi
 }
 
 drop:database() {
   local DATABASE
   DATABASE="${1//-/_}"
-  if [ -z "$DATABASE" ]; then
-    logger:error "Database Name not defined." && exit 1
-  elif echo "DROP DATABASE $DATABASE;" | mysql; then
-    logger:success "Database dropped successfully."
+  if string:not:empty "$1"; then
+    local DB_DATABASE; DB_DATABASE=$1
+  elif string:is:empty "$DB_DATABASE"; then
+    logger:input "Enter DB_DATABASE:" "DB_DATABASE"
+  fi
+  if echo "DROP DATABASE $DB_DATABASE;" | mysql; then
+    logger:success "Database $DB_DATABASE dropped successfully."
   else
-    logger:error "Database Name: $DATABASE failed to be dropped." && exit 1
+    logger:error "Database Name: $DB_DATABASE failed to be dropped."
+    exit 1
   fi
 }
 
