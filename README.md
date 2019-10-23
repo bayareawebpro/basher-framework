@@ -173,6 +173,9 @@ file:not:empty $PATH
 file:newer:than $PATH_A $PATH_B
 file:older:than $PATH_A $PATH_B
 file:equal:to $PATH_A $PATH_B
+directory:make $PATH_A
+directory:change $PATH_A
+directory:remove $PATH_A
 ```
 ---
 ## Logger

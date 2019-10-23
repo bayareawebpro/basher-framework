@@ -41,3 +41,6 @@ function directory:make(){
 function directory:change(){
   cd "$1" || return 1;
 }
+function directory:remove(){
+  rm -r "$1" || return 1;
+}
