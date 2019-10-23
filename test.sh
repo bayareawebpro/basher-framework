@@ -2,7 +2,7 @@
 source /Users/builder/bash-profile/app.sh
 
 # Setup
-TEST_DIR="$HOME/Desktop/git-test-output"
+TEST_DIR="$HOME/Sites/git-test-output"
 rm -rf "$TEST_DIR" || exit 1
 mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
@@ -19,17 +19,18 @@ clear
 
 #logger:input "Project Name?" "ANSWER"
 #logger:success "$ANSWER.";
+if has:database "git_test_output"; then
+  drop:database "git_test_output"
+fi
 
-
-exit;
 make:laravel "git-test-output"
-install:animatecss
 git:ignore
 git:readme
 echo "Master v1.0" >> "$TEST_DIR/README.md"
 git:setup
 git:connect
 git:save
+artisan serve
 chrome:serve
 
 

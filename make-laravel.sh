@@ -5,6 +5,8 @@ function make:laravel() {
   make:project "$PROJECT"
 
   # Install dependancies...
+  logger:divider
+  logger:info "Running Composer Install"
   composer create-project laravel/laravel .
   composer require laravel-frontend-presets/tailwindcss --dev
 
@@ -15,9 +17,10 @@ function make:laravel() {
   # Install & Compile Assets
   #php artisan preset tailwindcss
   php artisan preset tailwindcss-auth
+
+  logger:info "Running NPM Install"
   npm install
   npm run dev
-
   # Serve the project.
 }
 

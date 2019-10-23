@@ -22,6 +22,21 @@ make:database() {
     logger:error "Database Name: $DATABASE failed to be created." && exit 1
   fi
 }
+has:database(){
+  [[ -n $(echo "SHOW DATABASES LIKE '$1';" | mysql) ]]
+}
+
+drop:database() {
+  local DATABASE
+  DATABASE="${1//-/_}"
+  if [ -z "$DATABASE" ]; then
+    logger:error "Database Name not defined." && exit 1
+  elif echo "DROP DATABASE $DATABASE;" | mysql; then
+    logger:success "Database dropped successfully."
+  else
+    logger:error "Database Name: $DATABASE failed to be dropped." && exit 1
+  fi
+}
 
 make:database:env() {
   if [ -z "$1" ]; then
