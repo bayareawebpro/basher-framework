@@ -2,6 +2,9 @@
 string:is:empty(){
   [[ -z "$1" ]]
 }
+string:is:numeric(){
+  [[ $1 =~ ^[0-9]+$ ]]
+}
 string:not:empty(){
   [[ -n "$1" ]]
 }
@@ -12,7 +15,7 @@ string:not:equal(){
   [[ "$1" != "$2" ]]
 }
 string:matches:regex(){
-  [[ "$1" =~ $2 ]]
+  [[ $1 =~ $2 ]];
 }
 num:is:equal(){
   [[ $1 -eq $2 ]]

@@ -8,6 +8,20 @@ mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
 clear
 
+#(string:is:empty "" && logger:success "string:is:empty") || logger:error  "string:is:empty"
+#(string:not:empty "not empty" && logger:success "string:not:empty") || logger:error "string:not:empty"
+#(string:is:equal "my-string" "my-string" && logger:success "string:is:equal") || logger:error  "string:is:equal"
+#(string:not:equal "my-string" "other-string" && logger:success "string:not:equal") || logger:error "string:not:equal"
+#(string:matches:regex "123" '^[0-9]+$' && logger:success "string:matches:regex true") || logger:error  "string:matches:regex true"
+#(string:matches:regex "asd" '^[0-9]+$' || logger:success "string:matches:regex false") || logger:error "string:matches:regex false"
+#
+#(num:is:equal 1 1 && logger:success "num:is:equal") || logger:error "num:is:equal"
+#(num:not:equal 1 2 && logger:success "num:not:equal") || logger:error "num:not:equal"
+#(num:less:than 0 1 && logger:success "num:less:than") || logger:error "num:less:than"
+#(num:greater:than 3 2 && logger:success "num:greater:than") || logger:error "num:greater:than"
+#(num:less:than:or:equal 1 2 && logger:success "num:less:than:or:equal") || logger:error "num:less:than:or:equal"
+#(num:greater:than:or:equal 3 2 && logger:success "num:greater:than:or:equal") || logger:error "num:greater:than:or:equal"
+
 #logger:info "Hello."
 #if logger:confirm "Testing App... Are you sure?"; then
 #  logger:success "Completed."
