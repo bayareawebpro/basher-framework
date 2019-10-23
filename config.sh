@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
-
 # Paths
 export PATH=/Applications/MAMP/bin/php/php7.3.7/bin:$PATH
 export PATH=/Applications/MAMP/Library/bin:$PATH
-export PATH=/usr/local/bin:$PATH
-
-# Java / Elastic Search If Needed
-#export JAVA_HOME=/usr/bin/java
-#export ES_HOME=/usr/local/bin/elasticsearch
-#export PATH=$ES_HOME/bin:$JAVA_HOME/bin:$PATH
 
 # PHP Alias
 #alias php='/Applications/MAMP/bin/php/php7.3.7/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.3.7.ini"'
@@ -29,3 +22,6 @@ export GIT_AUTHOR_EMAIL="dan@bayareawebpro.com"
 
 export GIT_USER="bayareawebpro"
 export GIT_PROJECTS_PATH="$HOME/Sites"
+
+export DB_USERNAME="root"
+export DB_PASSWORD="root"
