@@ -59,13 +59,19 @@ Revert to Head (Hard)
 git:reset
 ```
 
-#### Question
+#### Confirmation
 ```
-if logger:question "Are you sure?"; then
+if logger:confirm "Are you sure?"; then
   logger:success "Completed."
 else
   logger:error "Aborted."
 fi
+```
+
+#### Input
+```
+logger:input "Where to?" "ANSWER"
+logger:success "Result: $ANSWER."
 ```
 
 #### Logger

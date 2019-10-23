@@ -30,3 +30,9 @@ app:require make-laravel.sh
 
 # Utilities
 app:require utility-logger.sh
+
+logger:input "Where to?" "ANSWER"
+logger:success "$ANSWER."
+
+
+

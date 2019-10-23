@@ -6,6 +6,12 @@ function logger:question()
   [[ "$ans" == "y" ]]
 }
 
+function logger:input()
+{
+  logger:info "$1"
+  read -r "$2"
+}
+
 function logger:blank()
 {
   printf "\n"
