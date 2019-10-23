@@ -8,6 +8,8 @@
 #logger:info
 function git:origin()
 {
+  local REPO
+  local ORIGIN
   REPO=$(basename "$PWD")
   ORIGIN="git@github.com:$GIT_USER/$REPO.git"
   echo "$ORIGIN"
@@ -24,12 +26,14 @@ function git:connect()
   if git:has:origin; then
     logger:success "📡 Git Remote is origin."
   else
-    logger:info "📡 Git Remote Connecting to $ORIGIN..."
+    local ORIGIN
     ORIGIN=$(git:origin)
-
+    logger:info "Git Remote 📡 Connecting to $ORIGIN..."
     if git remote add origin "$ORIGIN" && git pull origin master; then
       logger:success "Git Remote is set to origin and syncronized: $ORIGIN."
+      logger:info "Setting Remote Upstream to origin master..."
       git push --set-upstream origin master
+      logger:success "Git Remote Upstream is set to origin master and syncronized: $ORIGIN."
     else
       logger:warning "Git Remote failed to be set to origin: $ORIGIN."
     fi

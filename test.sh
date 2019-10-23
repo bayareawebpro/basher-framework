@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source git.sh
+source app.sh
 
 # Setup
 TEST_DIR="$HOME/Desktop/git-test-output"
@@ -8,21 +8,31 @@ mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
 clear
 
-git:setup
-git:connect
-git:ignore
-git:readme
-echo "Master v1.0" >> "$TEST_DIR/README.md"
-git:save
+#git:setup
+#git:connect
+if logger:question "Are you sure?"; then
+  logger:success "Completed."
+else
+  logger:error "Aborted."
+fi
 
-git:branch gh-pages fresh
-echo "Docs v1.0" >> "$TEST_DIR/README.md"
-git:save
+exit 0;
+make:laravel "git-test-output"
+install:animatecss
+#git:ignore
+#git:readme
 
-git:branch dev
-echo "Dev v1.0" >> "$TEST_DIR/README.md"
-git:save
+#echo "Master v1.0" >> "$TEST_DIR/README.md"
+#git:save
 
-git:switch master
-git:branch:delete dev
-git:branch:delete gh-pages
+#git:branch gh-pages fresh
+#echo "Docs v1.0" >> "$TEST_DIR/README.md"
+#git:save
+
+#git:branch dev
+#echo "Dev v1.0" >> "$TEST_DIR/README.md"
+#git:save
+
+#git:switch master
+#git:branch:delete dev
+#git:branch:delete gh-pages

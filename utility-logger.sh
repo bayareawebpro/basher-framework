@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+function logger:question()
+{
+  logger:warning "$1 [y/n]: "
+  read -r ans
+  [[ "$ans" == "y" ]]
+}
+
 function logger:blank()
 {
   printf "\n"
@@ -18,7 +25,7 @@ function logger:warning()
 
 function logger:error()
 {
-  compiled=$(printf "%s\r""➜ 🤬 $1")
+  compiled=$(printf "%s\r""➜ 🥵 $1")
   colors:red "$compiled"
 }
 
