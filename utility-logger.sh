@@ -56,9 +56,10 @@ function logger:text()
 
 function logger:divider()
 {
+  local JOT
   for i in {1..50}; do
-    repeat=$(jot -s "=" -b "=" $((i)))
-    printf "%s\r""$repeat"
+    JOT=$(jot -s "=" -b "=" $((i)))
+    printf "%s\r""$JOT"
     sleep 0.001
   done
   logger:blank
