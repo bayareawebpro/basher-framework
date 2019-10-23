@@ -6,6 +6,9 @@ https://imgur.com/a/GNsxOb5
 ```shell script
 source /Users/me/bash-profile/app.sh
 ```
+
+🤖 BashApp Loaded & Ready To Build 😎
+
 ---
 
 ## Config
