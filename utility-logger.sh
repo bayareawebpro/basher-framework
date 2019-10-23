@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-function logger:question()
+function logger:confirm()
 {
   logger:warning "$1 [y/n]: "
-  read -r ans
-  [[ "$ans" == "y" ]]
+  local ANSWER
+  read -r ANSWER
+  [[ "$ANSWER" == "y" ]]
 }
 
 function logger:input()
