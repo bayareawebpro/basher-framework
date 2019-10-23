@@ -116,7 +116,7 @@ git:reset
 ```
 
 ## Chrome
-No argument for 127.0.0.1
+No argument for 127.0.0.1:8000
 
 ```shell script
 chrome:serve
