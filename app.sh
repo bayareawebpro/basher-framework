@@ -4,7 +4,6 @@
 # CheatSheet: https://devhints.io/bash
 
 # Service Loader (Directory of app)
-
 APP_PATH="${0%/*}"
 function app:require(){
   source "$APP_PATH/$1"
