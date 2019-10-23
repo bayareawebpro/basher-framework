@@ -9,14 +9,15 @@ source /Users/me/bash-profile/app.sh
 
 
 ## Chrome Commands
+No argument for 127.0.0.1
 ```shell script
 chrome:serve
 chrome:serve:secure
 ```
 Or using an argument
 ```shell script
-chrome:serve 127.0.0.1
-chrome:serve:secure 127.0.0.1
+chrome:serve "test.local"
+chrome:serve:secure "test.local"
 ```
 
 ## Make Commands
