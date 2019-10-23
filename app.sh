@@ -8,6 +8,7 @@
 # Paths & Aliases
 APP_PATH="${0%/*}"
 function app:require(){
+  #echo "Loading: $APP_PATH/$1"
   source "$APP_PATH/$1"
 }
 
@@ -30,9 +31,8 @@ app:require make-laravel.sh
 
 # Utilities
 app:require utility-logger.sh
+app:require utility-chrome.sh
 
-logger:input "Where to?" "ANSWER"
-logger:success "$ANSWER."
 
 
 

@@ -15,11 +15,8 @@ function git:ignore()
   else
     {
       echo "/.idea"
-      echo "/*.lock"
       echo "/.phpunit.result.cache"
-      echo "/node_modules"
-      echo "/public/hot"
-      echo "/vendor"
+      echo "/*.lock"
     } >>.gitignore
     logger:success ".gitignore Created!"
   fi

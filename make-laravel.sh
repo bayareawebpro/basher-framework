@@ -9,8 +9,7 @@ function make:laravel() {
   composer require laravel-frontend-presets/tailwindcss --dev
 
   # Configure & Create Database
-  database:create "$PROJECT"
-  database:env "$PROJECT"
+  make:database "$PROJECT"
   php artisan migrate
 
   # Install & Compile Assets
@@ -20,7 +19,6 @@ function make:laravel() {
   npm run dev
 
   # Serve the project.
-  php artisan serve
 }
 
 

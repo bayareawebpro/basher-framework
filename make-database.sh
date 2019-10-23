@@ -7,18 +7,23 @@
 #logger:debug
 #logger:info
 
-database:create() {
-  if [ -z "$1" ]; then
-    logger:error "Database Name: $1 not defined." && exit 1
-  else
-    echo "CREATE DATABASE $1;" | $(which mysql)
+make:database() {
+  local DATABASE
+  DATABASE="${1//-/_}"
+  if [ -z "$DATABASE" ]; then
+    logger:error "Database Name not defined." && exit 1
+  elif echo "CREATE DATABASE $DATABASE;" | mysql; then
     #echo "CREATE USER $1@localhost IDENTIFIED BY '$1';" | mysql -v
     #echo "GRANT ALL PRIVILEGES ON $1.* to $1@localhost;" | mysql -v
     #echo "FLUSH PRIVILEGES;" | mysql
+    make:database:env "$DATABASE"
+    logger:success "Database created successfully."
+  else
+    logger:error "Database Name: $DATABASE failed to be created." && exit 1
   fi
 }
 
-database:env() {
+make:database:env() {
   if [ -z "$1" ]; then
     logger:error "Database Name: $1 not defined." && exit 1
   else

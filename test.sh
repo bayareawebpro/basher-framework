@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source app.sh
+source /Users/builder/bash-profile/app.sh
 
 # Setup
 TEST_DIR="$HOME/Desktop/git-test-output"
@@ -10,20 +10,29 @@ clear
 
 #git:setup
 #git:connect
-if logger:question "Are you sure?"; then
-  logger:success "Completed."
-else
-  logger:error "Aborted."
-fi
 
-exit 0;
+#if logger:confirm "Testing App... Are you sure?"; then
+#  logger:success "Completed."
+#else
+#  logger:error "Aborted."
+#fi
+
+#logger:input "Project Name?" "ANSWER"
+#logger:success "$ANSWER.";
+
+
+exit;
 make:laravel "git-test-output"
 install:animatecss
-#git:ignore
-#git:readme
+git:ignore
+git:readme
+echo "Master v1.0" >> "$TEST_DIR/README.md"
+git:setup
+git:connect
+git:save
+chrome:serve
 
-#echo "Master v1.0" >> "$TEST_DIR/README.md"
-#git:save
+
 
 #git:branch gh-pages fresh
 #echo "Docs v1.0" >> "$TEST_DIR/README.md"
@@ -36,3 +45,6 @@ install:animatecss
 #git:switch master
 #git:branch:delete dev
 #git:branch:delete gh-pages
+
+# Converted to underscores instead of hypens
+#make:database git-test-output
