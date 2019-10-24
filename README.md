@@ -21,15 +21,32 @@ source /Users/me/bash-profile/app.sh
 
 ## Config
 
-See config.sh
+See env.default.sh
 ```shell script
-# GIT Environment Vars
-export GIT_AUTHOR_NAME="Your Name"
-export GIT_AUTHOR_EMAIL="you@site.com"
+#!/usr/bin/env bash
+# Comment Out to Hide Basher Banner
+export BASHER_BANNER=true
 
-# APP Environment Vars
-export BASHER_GIT_USER="coolguy"
+# Add Command Aliases
+alias artisan='php artisan'
+
+# GIT Environment Vars
+export GIT_AUTHOR_NAME="Dan Alvidrez"
+export GIT_AUTHOR_EMAIL="dan@bayareawebpro.com"
+
+# BASHER Environment Vars
+export BASHER_GIT_USER="bayareawebpro"
 export BASHER_PROJECTS="$HOME/Sites"
+
+# Will destroy the previously created project when new one is created.
+export BASHER_TESTING=true
+
+# Launch Chrome Using Faux HTTP
+export BASHER_CHROME_SECURE=true
+
+# Define Database Auth or you will be prompted.
+export BASHER_DB_USER="root"
+export BASHER_DB_PASS="root"
 ```
 
 ## Project
@@ -41,10 +58,9 @@ make:project "my-folder-name"
 
 #### Make Laravel (macro)
 - Makes Project
-- Installs Tailwind Preset
 - Creates Database
 - Sets Env Vars
-- Ready to rock with a sigle command.
+- Ready to rock with a single command.
 
 ```shell script
 make:laravel "my-folder-name"
@@ -64,6 +80,7 @@ fi
 #### Installers
 ```shell script
 install:animatecss
+install:tailwindcss
 ```
 
 ---
