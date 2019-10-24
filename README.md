@@ -154,7 +154,7 @@ Or using an argument
 ```shell script
 chrome:serve "test.local"
 ```
-
+---
 ## PhpStorm
 
 Launch PhpStorm
