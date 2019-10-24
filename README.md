@@ -120,7 +120,6 @@ Revert to Head (Hard)
 git:reset
 ```
 
-#### Branch
 Full Branch
 ```shell script
 git:branch dev
