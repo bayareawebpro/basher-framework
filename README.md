@@ -88,57 +88,54 @@ install:vuejs
 
 ## GIT
 
-#### Create Repo in CWD
+Create Repo in CWD
 ```shell script
 git:setup
 ```
 
-#### Set Origin to Master
-CWD name must match repo name.
+Set Origin to Master / CWD name must match repo name.
 ```shell script
 git:connect
 ```
 
-#### Ignore & ReadMe
+Ignore & ReadMe
 Created if doesn't exist.
 ```shell script
 git:ignore
 git:readme
 ```
 
-#### Save (push)
+Save (push)
 ```shell script
 git:save "custom message"
 git:save (uses "wip" when no argument specified)
 ```
 
-#### Sync (pull)
+Sync (pull)
 ```shell script
 git:sync
 ```
-
-#### Branch
-Full
-```shell script
-git:branch dev
-```
-Fresh
-```shell script
-git:branch gh-pages fresh
-```
-Switching
-```shell script
-git:switch master
-```
-Deleting
-```shell script
-git:branch:delete dev
-```
-
-#### Reset
 Revert to Head (Hard)
 ```shell script
 git:reset
+```
+
+#### Branch
+Full Branch
+```shell script
+git:branch dev
+```
+Fresh Branch
+```shell script
+git:branch gh-pages fresh
+```
+Switching Branches
+```shell script
+git:switch master
+```
+Deleting Branches
+```shell script
+git:branch:delete dev
 ```
 
 ## Chrome
