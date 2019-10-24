@@ -64,10 +64,11 @@ function logger:text() {
 }
 
 function logger:divider() {
-  for i in {1..50}; do
-    OUTPUT=$(jot -s "=" -b "=" $((i)))
-    printf "%s\r""$OUTPUT"
-    sleep 0.001
+  SIZE=$(($COLUMNS / 2))
+  SIZE="$(seq 0 1 $SIZE)"
+  for ((i = 1 ; i <= 87 ; i++)); do
+    printf "%s\r""$(jot -s "=" -b "=" $((i)))"
+    sleep 0.0001
   done
   logger:blank
 }

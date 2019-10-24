@@ -61,7 +61,7 @@ if string:not:empty "$BASHER_BANNER"; then
   colors:green  '|_____] |_____| |______ |_____| |______ |_____/'
   colors:blue   '|_____] |     | ______| |     | |______ |    \_'
   colors:white  'Version 1.x'
-  logger:divider
   logger:info "Basher Loaded & Ready."
+  logger:divider
 fi
 
