@@ -21,6 +21,11 @@ function app:require() {
   fi
 }
 
+# Require Remote Command
+function app:require:remote() {
+  curl -s "$1" | bash -s "$2"
+}
+
 # Utilities
 app:require utility-conditionals.sh
 app:require utility-filesystem.sh
