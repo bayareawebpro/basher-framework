@@ -1,4 +1,12 @@
-# Bash Profile Framework
+# Basher Framework
+
+```
+______  _______ _______ _     _ _______  ______
+|_____] |_____| |______ |_____| |______ |_____/
+|_____] |     | ______| |     | |______ |    \_
+Version 1.x
+```
+
 https://imgur.com/a/GNsxOb5
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
