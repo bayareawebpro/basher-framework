@@ -4,7 +4,7 @@ function install:vuejs(){
     if file:exists package.json; then
       logger:info "Using NPM..."
       npm install vue
-      logger:failed "Failed to install Vue.js"
+      logger:success "Installed Vue.js Successfully"
     else
       logger:failed "Failed to install Vue.js"
     fi

@@ -81,6 +81,7 @@ fi
 ```shell script
 install:animatecss
 install:tailwindcss
+install:vuejs
 ```
 
 ---
