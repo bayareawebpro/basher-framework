@@ -49,6 +49,97 @@ export BASHER_DB_USER="root"
 export BASHER_DB_PASS="root"
 ```
 
+## Conditionals
+```shell script
+string:is:empty ""
+string:not:empty "not empty"
+string:is:equal "my-string" "my-string"
+string:not:equal "my-string" "other-string"
+string:matches:regex "123" '^[0-9]+$'
+string:matches:regex "asd" '^[0-9]+$'
+
+num:is:equal 1 1
+num:not:equal 1 2
+num:less:than 0 1
+num:greater:than 3 2
+num:less:than:or:equal 1 2
+num:greater:than:or:equal 3 2
+
+func:exists "my:method"
+```
+
+## Filesystem
+```shell script
+path:is:file $PATH
+path:is:directory $PATH
+file:exists $PATH
+file:readable $PATH
+file:writable $PATH
+file:executable $PATH
+file:is:symlink $PATH
+file:not:empty $PATH
+file:newer:than $PATH_A $PATH_B
+file:older:than $PATH_A $PATH_B
+file:equal:to $PATH_A $PATH_B
+directory:make $PATH_A
+directory:change $PATH_A
+directory:remove $PATH_A
+```
+---
+## Logger
+```shell script
+logger:divider
+logger:blank
+logger:debug "Hmmm..."
+logger:text "ok..."
+logger:info "ready."
+logger:success "Cool!"
+logger:celebrate "ok..."
+logger:warning "failing..."
+logger:failed "failed!"
+logger:error "error!"
+logger:alert "security!"
+logger:denied "darn."
+```
+
+#### Input
+```shell script
+logger:input "Where to?" "ANSWER"
+logger:success "Result: $ANSWER."
+```
+
+#### Confirmation
+```shell script
+if logger:confirm "Are you sure?"; then
+  logger:success "Completed."
+else
+  logger:failed "Aborted."
+fi
+```
+
+#### Colors
+```shell script
+colors:black "im black"
+colors:blackb "im blackb"
+colors:white "im white"
+colors:whiteb "im whiteb"
+
+colors:red "im red"
+colors:redb "im redb"
+colors:green "im green"
+colors:greenb "im greenb"
+colors:yellow "im yellow"
+colors:yellowb "im yellowb"
+
+colors:blue "im blue"
+colors:blueb "im blueb"
+colors:purple "im purple"
+colors:purpleb "im purpleb"
+colors:lightblue "im lightblue"
+colors:lightblueb "im lightblueb"
+```
+
+
 ## Project
 
 #### Make Project (non macro)
@@ -163,93 +254,3 @@ Open Project
 phpstorm:open $PWD
 ```
 ---
-
-## Conditionals
-```shell script
-string:is:empty ""
-string:not:empty "not empty"
-string:is:equal "my-string" "my-string"
-string:not:equal "my-string" "other-string"
-string:matches:regex "123" '^[0-9]+$'
-string:matches:regex "asd" '^[0-9]+$'
-
-num:is:equal 1 1
-num:not:equal 1 2
-num:less:than 0 1
-num:greater:than 3 2
-num:less:than:or:equal 1 2
-num:greater:than:or:equal 3 2
-
-func:exists "my:method"
-```
-
-## Filesystem
-```shell script
-path:is:file $PATH
-path:is:directory $PATH
-file:exists $PATH
-file:readable $PATH
-file:writable $PATH
-file:executable $PATH
-file:is:symlink $PATH
-file:not:empty $PATH
-file:newer:than $PATH_A $PATH_B
-file:older:than $PATH_A $PATH_B
-file:equal:to $PATH_A $PATH_B
-directory:make $PATH_A
-directory:change $PATH_A
-directory:remove $PATH_A
-```
----
-## Logger
-```shell script
-logger:divider
-logger:blank
-logger:debug "Hmmm..."
-logger:text "ok..."
-logger:info "ready."
-logger:success "Cool!"
-logger:celebrate "ok..."
-logger:warning "failing..."
-logger:failed "failed!"
-logger:error "error!"
-logger:alert "security!"
-logger:denied "darn."
-```
-
-#### Input
-```shell script
-logger:input "Where to?" "ANSWER"
-logger:success "Result: $ANSWER."
-```
-
-#### Confirmation
-```shell script
-if logger:confirm "Are you sure?"; then
-  logger:success "Completed."
-else
-  logger:failed "Aborted."
-fi
-```
-
-#### Colors
-```
-colors:black "im black"
-colors:blackb "im blackb"
-colors:white "im white"
-colors:whiteb "im whiteb"
-
-colors:red "im red"
-colors:redb "im redb"
-colors:green "im green"
-colors:greenb "im greenb"
-colors:yellow "im yellow"
-colors:yellowb "im yellowb"
-
-colors:blue "im blue"
-colors:blueb "im blueb"
-colors:purple "im purple"
-colors:purpleb "im purpleb"
-colors:lightblue "im lightblue"
-colors:lightblueb "im lightblueb"
-```
