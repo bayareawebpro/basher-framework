@@ -229,18 +229,13 @@ git:branch:delete dev
 ```
 
 ## Chrome
-No argument for 127.0.0.1:8000
+No argument for 127.0.0.1
 
 ```shell script
 chrome:serve
-chrome:serve:secure
-```
-
-Or using an argument
-
-```shell script
 chrome:serve "test.local"
 ```
+
 ---
 ## PhpStorm
 
