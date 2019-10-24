@@ -1,24 +1,13 @@
 #!/usr/bin/env bash
 function chrome:serve(){
-  local DOMAIN
-  if [ -n "$1" ]; then
-    DOMAIN="https://$1"
-  else
-    DOMAIN="https://127.0.0.1:8000"
+  logger:divider && logger:info "Launching $DOMAIN with Chrome..."
+  local DOMAIN="$1"
+  if string:is:empty "$DOMAIN"; then
+    DOMAIN="127.0.0.1"
   fi
-  logger:success "Launching Chrome..."
-  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "$DOMAIN" --user-data-dir=/tmp/foo
-  #php artisan serve
-}
-
-function chrome:secure(){
-  local DOMAIN
-  if [ -n "$1" ]; then
-    DOMAIN="https://$1"
+  if string:not:empty "$BASHER_CHROME_SECURE"; then
+    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "https://$DOMAIN" --user-data-dir=/tmp/basher --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure="https://$DOMAIN:443"
   else
-    DOMAIN="https://127.0.0.1:8000"
+    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "http://$DOMAIN" --user-data-dir=/tmp/basher
   fi
-  logger:success "Launching Chrome Fake Secure..."
-  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome "$DOMAIN" --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure="$DOMAIN:443"
-  #php artisan serve
 }

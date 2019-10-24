@@ -3,7 +3,7 @@
 #logger:success
 #logger:info
 #logger:warning
-#logger:error
+#logger:failed
 #logger:debug
 #logger:divider
 #logger:blank

@@ -3,7 +3,7 @@
 #logger:divider
 #logger:success
 #logger:warning
-#logger:error
+#logger:failed
 #logger:debug
 #logger:info
 function git:origin()
@@ -11,7 +11,7 @@ function git:origin()
   local REPO
   local ORIGIN
   REPO=$(basename "$PWD")
-  ORIGIN="git@github.com:$GIT_USER/$REPO.git"
+  ORIGIN="git@github.com:$BASHER_GIT_USER/$REPO.git"
   echo "$ORIGIN"
 }
 

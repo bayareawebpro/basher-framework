@@ -6,7 +6,7 @@ function git:reset() {
   if git reset --hard HEAD; then
     logger:success "Repository Reverted!"
   else
-    logger:error "Reverting Repository Failed!"
+    logger:failed "Reverting Repository Failed!"
     exit 1
   fi
 }

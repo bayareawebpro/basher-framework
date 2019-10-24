@@ -9,6 +9,6 @@ install:animatecss() {
     echo "@import 'animate.sass';" >> "$PWD/resource/css/app.sass"
     logger:success "animate.css installed."
   else
-    logger:error "Failed to install animate.css."
+    logger:failed "Failed to install animate.css."
   fi
 }

@@ -1,56 +1,69 @@
 #!/usr/bin/env bash
-function logger:confirm()
-{
-  logger:warning "$1 [y/n]: "
+function logger:confirm() {
+  compiled=$(printf "%s\r""➜ ❔ $1 [y/n]")
+  colors:yellowb "$compiled"
   local ANSWER
   read -r ANSWER
   [[ "$ANSWER" == "y" ]]
 }
 
-function logger:input()
-{
-  logger:info "$1"
+function logger:input() {
+  compiled=$(printf "%s\r""➜ ❔ $1")
+  colors:yellowb "$compiled"
   read -r "$2"
 }
 
-function logger:info()
-{
+function logger:info() {
   compiled=$(printf "%s\r""➜ 🤖 $1")
-  colors:lightblue "$compiled"
+  colors:blue "$compiled"
 }
 
-function logger:warning()
-{
-  compiled=$(printf "%s\r""➜ ⚠️️$1")
+function logger:warning() {
+  compiled=$(printf "%s\r""➜ ❕ $1")
   colors:yellow "$compiled"
 }
 
-function logger:error()
-{
+function logger:error() {
   compiled=$(printf "%s\r""➜ 🥵 $1")
   colors:red "$compiled"
 }
 
-function logger:success()
-{
+function logger:failed() {
+  compiled=$(printf "%s\r""➜ ❌  $1")
+  colors:red "$compiled"
+}
+
+function logger:denied() {
+  compiled=$(printf "%s\r""➜ 🚫 $1")
+  colors:red "$compiled"
+}
+
+function logger:alert() {
+  compiled=$(printf "%s\r""➜ 🚨 $1")
+  colors:redb "$compiled"
+}
+
+function logger:success() {
   compiled=$(printf "%s\r""➜ ✅  $1")
   colors:green "$compiled"
 }
 
-function logger:debug()
-{
+function logger:celebrate() {
+  compiled=$(printf "%s\r""➜ 🎉 $1")
+  colors:white "$compiled"
+}
+
+function logger:debug() {
   compiled=$(printf "%s\r""$1")
   colors:white "$compiled"
 }
 
-function logger:text()
-{
-  compiled=$(printf "%s\r""➜ ❔  $1")
+function logger:text() {
+  compiled=$(printf "%s\r""➜ $1")
   colors:whiteb "$compiled"
 }
 
-function logger:divider()
-{
+function logger:divider() {
   for i in {1..50}; do
     OUTPUT=$(jot -s "=" -b "=" $((i)))
     printf "%s\r""$OUTPUT"
@@ -59,8 +72,7 @@ function logger:divider()
   logger:blank
 }
 
-function logger:blank()
-{
+function logger:blank() {
   printf "\n"
 }
 
@@ -83,8 +95,7 @@ purpleb="\033[1;35m"
 lightblue="\033[0;36m"
 lightblueb="\033[1;36m"
 
-function colors:show()
-{
+function colors:show() {
   black "black"
   blackb "blackb"
   white "white"
@@ -103,83 +114,67 @@ function colors:show()
   lightblueb "lightblueb"
 }
 
-function colors:black()
-{
+function colors:black() {
   echo -e "${black}${1}${end}"
 }
 
-function colors:blackb()
-{
+function colors:blackb() {
   echo -e "${blackb}${1}${end}"
 }
 
-function colors:white()
-{
+function colors:white() {
   echo -e "${white}${1}${end}"
 }
 
-function colors:whiteb()
-{
+function colors:whiteb() {
   echo -e "${whiteb}${1}${end}"
 }
 
-function colors:red()
-{
+function colors:red() {
   echo -e "${red}${1}${end}"
 }
 
-function colors:redb()
-{
+function colors:redb() {
   echo -e "${redb}${1}${end}"
 }
 
-function colors:green()
-{
+function colors:green() {
   echo -e "${green}${1}${end}"
 }
 
-function colors:greenb()
-{
+function colors:greenb() {
   echo -e "${greenb}${1}${end}"
 }
 
-function colors:yellow()
-{
+function colors:yellow() {
   echo -e "${yellow}${1}${end}"
 }
 
-function colors:yellowb()
-{
+function colors:yellowb() {
   echo -e "${yellowb}${1}${end}"
 }
 
-function colors:blue()
-{
+function colors:blue() {
   echo -e "${blue}${1}${end}"
 }
 
-function colors:blueb()
-{
+function colors:blueb() {
   echo -e "${blueb}${1}${end}"
 }
 
-function colors:purple()
-{
+function colors:purple() {
   echo -e "${purple}${1}${end}"
 }
 
-function colors:purpleb()
-{
+function colors:purpleb() {
   echo -e "${purpleb}${1}${end}"
 }
 
-function colors:lightblue()
-{
+function colors:lightblue() {
   echo -e "${lightblue}${1}${end}"
 }
 
-function colors:lightblueb()
-{
+function colors:lightblueb() {
   echo -e "${lightblueb}${1}${end}"
 
 }

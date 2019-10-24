@@ -3,7 +3,7 @@
 #logger:divider
 #logger:success
 #logger:warning
-#logger:error
+#logger:failed
 #logger:debug
 #logger:info
 function git:ignore()

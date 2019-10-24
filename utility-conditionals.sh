@@ -1,37 +1,41 @@
 #!/usr/bin/env bash
-string:is:empty(){
+function func:exists() {
+    declare -f -F "$1" > /dev/null
+    return $?
+}
+function string:is:empty(){
   [[ -z "$1" ]]
 }
-string:is:numeric(){
+function string:is:numeric(){
   [[ $1 =~ ^[0-9]+$ ]]
 }
-string:not:empty(){
+function string:not:empty(){
   [[ -n "$1" ]]
 }
-string:is:equal(){
+function string:is:equal(){
   [[ "$1" == "$2" ]]
 }
-string:not:equal(){
+function string:not:equal(){
   [[ "$1" != "$2" ]]
 }
-string:matches:regex(){
+function string:matches:regex(){
   [[ $1 =~ $2 ]];
 }
-num:is:equal(){
+function num:is:equal(){
   [[ $1 -eq $2 ]]
 }
-num:not:equal(){
+function num:not:equal(){
   [[ $1 -ne $2 ]]
 }
-num:less:than(){
+function num:less:than(){
   [[ $1 -lt $2 ]]
 }
-num:less:than:or:equal(){
+function num:less:than:or:equal(){
   [[ $1 -le $2 ]]
 }
-num:greater:than(){
+function num:greater:than(){
   [[ $1 -gt $2 ]]
 }
-num:greater:than:or:equal(){
+function num:greater:than:or:equal(){
   [[ $1 -ge $2 ]]
 }

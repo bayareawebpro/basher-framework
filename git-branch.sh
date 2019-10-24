@@ -3,7 +3,7 @@
 #logger:divider
 #logger:success
 #logger:warning
-#logger:error
+#logger:failed
 #logger:debug
 #logger:info
 
@@ -18,13 +18,13 @@ function git:switch() {
   local EXISTS; EXISTS=$(git:branch:exists "$BRANCH")
 
   if [[ -z "$BRANCH" ]]; then
-    logger:error "Branch name not specified."
+    logger:failed "Branch name not specified."
   elif [ -n "$EXISTS" ]; then
     logger:info "Switching Branch to $BRANCH..."
     git checkout "$BRANCH"
     logger:success "Switched to $BRANCH successfully."
   else
-    logger:error "Failed to Switch to branch $BRANCH."
+    logger:failed "Failed to Switch to branch $BRANCH."
     logger:debug "Create new: git:branch $BRANCH."
   fi
 }
@@ -37,7 +37,7 @@ function git:branch:delete() {
   if git:branch:exists "$BRANCH" && git push origin --delete "$BRANCH"; then
     logger:success "Branch Deleted Successfully!"
   else
-    logger:error "Failed to Delete Branch."
+    logger:failed "Failed to Delete Branch."
   fi
 }
 
@@ -51,7 +51,7 @@ function git:branch() {
   logger:info "Branching..."
 
   if [[ -z "$BRANCH" ]]; then
-    logger:error "Branch name not specified." && exit 1
+    logger:failed "Branch name not specified." && exit 1
   fi
 
   logger:info "Creating Branch $BRANCH..."
@@ -59,7 +59,7 @@ function git:branch() {
     logger:success "Branch $BRANCH created successfully."
   else
     logger:success "Branch $BRANCH exists, checking out $BRANCH."
-    git checkout "$BRANCH" || (logger:error "Branch name not specified." && exit 1)
+    git checkout "$BRANCH" || (logger:failed "Branch name not specified." && exit 1)
   fi
 
   if [[ "$FRESH" == "fresh" ]]; then
@@ -78,6 +78,6 @@ function git:branch() {
   if git push --set-upstream origin "$BRANCH"; then
     logger:success "Git Remote Upstream is set to origin $BRANCH and syncronized."
   else
-    logger:error "Git Remote Upstream Failed." && exit 1
+    logger:failed "Git Remote Upstream Failed." && exit 1
   fi
 }

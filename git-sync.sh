@@ -11,7 +11,7 @@ function git:save()
   if git add . && git commit -m "${MESSAGE}" && git push; then
     logger:success "Local Pushed to Remote Successfully!"
   else
-    logger:error "Failed to push to remote!"
+    logger:failed "Failed to push to remote!"
   fi
 }
 function git:sync()
@@ -21,6 +21,6 @@ function git:sync()
   if git pull; then
     logger:success "Syncronized Successfully!"
   else
-    logger:error "Syncronize Failed!"
+    logger:failed "Syncronize Failed!"
   fi
 }

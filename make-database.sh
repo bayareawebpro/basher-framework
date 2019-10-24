@@ -3,81 +3,84 @@
 #logger:divider
 #logger:success
 #logger:warning
-#logger:error
+#logger:failed
 #logger:debug
 #logger:info
 
-has:database(){
+function has:database() {
   [[ -n $(echo "SHOW DATABASES LIKE '$1';" | mysql) ]]
 }
 
-make:database() {
-  local DATABASE
-  DATABASE="${1//-/_}"
+function make:database() {
+  local DATABASE="${1//-/_}"
+
   logger:divider
   logger:info "Creating Database..."
 
   if string:is:empty "$DATABASE"; then
-    logger:error "Database Name not defined."
-    return 1
+    logger:warning "Database Name not defined."
+    logger:input "Enter DATABASE:" "DATABASE"
   fi
+
   if has:database "$DATABASE"; then
     logger:warning "Database Name: $DATABASE already exists."
-    make:database:env "$DATABASE"
-    return 0
-  fi
-  if echo "CREATE DATABASE $DATABASE;" | mysql; then
-    #echo "CREATE USER $DB_USERNAME@localhost IDENTIFIED BY '$DB_PASSWORD';" | mysql -v
-    #echo "GRANT ALL PRIVILEGES ON $DATABASE.* to $DB_USERNAME@localhost;" | mysql -v
-    #echo "FLUSH PRIVILEGES;" | mysql
-    make:database:env "$DATABASE"
+    if logger:confirm "Would you like to configure the environment file instead?"; then
+      make:database:env "$DATABASE"
+    fi
+  elif echo "CREATE DATABASE $DATABASE;" | mysql; then
+    if logger:confirm "Would you like to configure the environment file?"; then
+      make:database:env "$DATABASE"
+    fi
     logger:success "Database created successfully."
+    if func:exists "on:database:created"; then
+      on:database:created "$DATABASE"
+    fi
   else
-    logger:error "Database Name: $DATABASE failed to be created."
+    logger:failed "Database Name: $DATABASE failed to be created."
     return 1
   fi
 }
 
-drop:database() {
-  local DATABASE
-  DATABASE="${1//-/_}"
-  if string:not:empty "$1"; then
-    local DB_DATABASE; DB_DATABASE=$1
-  elif string:is:empty "$DB_DATABASE"; then
-    logger:input "Enter DB_DATABASE:" "DB_DATABASE"
+function drop:database() {
+  local DATABASE="${1//-/_}"
+  if string:is:empty "$DATABASE"; then
+    logger:input "Enter DATABASE:" "DATABASE"
   fi
-  if echo "DROP DATABASE $DB_DATABASE;" | mysql; then
-    logger:success "Database $DB_DATABASE dropped successfully."
+  if (echo "DROP DATABASE $DATABASE;" | mysql); then
+    logger:success "Database $DATABASE dropped successfully."
+    if func:exists "on:database:dropped"; then
+      on:database:dropped "$DATABASE"
+    fi
   else
-    logger:error "Database Name: $DB_DATABASE failed to be dropped."
-    exit 1
+    logger:failed "Database $DATABASE failed to be dropped."
+    return 1
   fi
 }
 
-make:database:env() {
+function make:database:env() {
   if string:not:empty "$1"; then
-    local DB_DATABASE; DB_DATABASE=$1
-  elif string:is:empty "$DB_DATABASE"; then
-    logger:input "Enter DB_DATABASE:" "DB_DATABASE"
+    local BASHER_DATABASE=$1
+  elif string:is:empty "$BASHER_DATABASE"; then
+    logger:input "Enter DB_DATABASE:" "DATABASE"
   fi
 
   if string:not:empty "$2"; then
-    local DB_USERNAME; DB_USERNAME=$2
-  elif string:is:empty "$DB_USERNAME"; then
-    logger:input "Enter DB_USERNAME:" "DB_USERNAME"
+    local BASHER_DB_USER=$2
+  elif string:is:empty "$BASHER_DB_USER"; then
+    logger:input "Enter DB_USERNAME:" "BASHER_DB_USER"
   fi
 
   if string:not:empty "$3"; then
-    local DB_PASSWORD; DB_PASSWORD=$3
-  elif string:is:empty "$DB_PASSWORD"; then
-    logger:input "Enter DB_PASSWORD:" "DB_PASSWORD"
+    local BASHER_DB_PASS=$3
+  elif string:is:empty "$BASHER_DB_PASS"; then
+    logger:input "Enter DB_PASSWORD:" "BASHER_DB_PASS"
   fi
 
   if path:is:file ".env"; then
-    sed -i '' "s/DB_DATABASE=laravel$/DB_DATABASE=$DB_DATABASE/" .env
-    sed -i '' "s/DB_USERNAME=root$/DB_USERNAME=$DB_USERNAME/" .env
-    sed -i '' "s/DB_PASSWORD=$/DB_PASSWORD=$DB_PASSWORD/" .env
-    logger:success ".env file configured to use $DB_DATABASE, $DB_USERNAME, $DB_PASSWORD."
+    sed -i '' "s/DB_DATABASE=.*/DB_DATABASE=$BASHER_DATABASE/" .env
+    sed -i '' "s/DB_USERNAME=.*$/DB_USERNAME=$BASHER_DB_USER/" .env
+    sed -i '' "s/DB_PASSWORD=.*$/DB_PASSWORD=$BASHER_DB_PASS/" .env
+    logger:success ".env file configured to use $BASHER_DATABASE, $BASHER_DB_USER, $BASHER_DB_PASS."
   else
     logger:warning ".env file not found you'll need to set it up youself."
   fi

@@ -3,7 +3,7 @@
 #logger:divider
 #logger:success
 #logger:warning
-#logger:error
+#logger:failed
 #logger:debug
 #logger:info
 
@@ -13,6 +13,6 @@ function git:initial()
   if git add . && git commit -m "Initial Commit"; then
     logger:success "Initial Commit Created Successfully!"
   else
-    logger:error "Failed to Create Initial Commit."
+    logger:failed "Failed to Create Initial Commit."
   fi
 }

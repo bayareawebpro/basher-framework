@@ -20,8 +20,8 @@ export GIT_AUTHOR_NAME="Your Name"
 export GIT_AUTHOR_EMAIL="you@site.com"
 
 # APP Environment Vars
-export GIT_USER="coolguy"
-export GIT_PROJECTS_PATH="$HOME/Sites"
+export BASHER_GIT_USER="coolguy"
+export BASHER_PROJECTS="$HOME/Sites"
 ```
 
 ## Project
@@ -144,19 +144,19 @@ phpstorm:open $PWD
 ---
 ## Conditionals
 ```shell script
-(string:is:empty "" && logger:success "string:is:empty") || logger:error "string:is:empty"
-(string:not:empty "not empty" && logger:success "string:not:empty") || logger:error "string:not:empty"
-(string:is:equal "my-string" "my-string" && logger:success "string:is:equal") || logger:error  "string:is:equal"
-(string:not:equal "my-string" "other-string" && logger:success "string:not:equal") || logger:error "string:not:equal"
-(string:matches:regex "123" '^[0-9]+$' && logger:success "string:matches:regex true") || logger:error  "string:matches:regex true"
-(string:matches:regex "asd" '^[0-9]+$' || logger:success "string:matches:regex false") || logger:error "string:matches:regex false"
+(string:is:empty "" && logger:success "string:is:empty") || logger:failed "string:is:empty"
+(string:not:empty "not empty" && logger:success "string:not:empty") || logger:failed "string:not:empty"
+(string:is:equal "my-string" "my-string" && logger:success "string:is:equal") || logger:failed  "string:is:equal"
+(string:not:equal "my-string" "other-string" && logger:success "string:not:equal") || logger:failed "string:not:equal"
+(string:matches:regex "123" '^[0-9]+$' && logger:success "string:matches:regex true") || logger:failed  "string:matches:regex true"
+(string:matches:regex "asd" '^[0-9]+$' || logger:success "string:matches:regex false") || logger:failed "string:matches:regex false"
 
-(num:is:equal 1 1 && logger:success "num:is:equal") || logger:error "num:is:equal"
-(num:not:equal 1 2 && logger:success "num:not:equal") || logger:error "num:not:equal"
-(num:less:than 0 1 && logger:success "num:less:than") || logger:error "num:less:than"
-(num:greater:than 3 2 && logger:success "num:greater:than") || logger:error "num:greater:than"
-(num:less:than:or:equal 1 2 && logger:success "num:less:than:or:equal") || logger:error "num:less:than:or:equal"
-(num:greater:than:or:equal 3 2 && logger:success "num:greater:than:or:equal") || logger:error "num:greater:than:or:equal"
+(num:is:equal 1 1 && logger:success "num:is:equal") || logger:failed "num:is:equal"
+(num:not:equal 1 2 && logger:success "num:not:equal") || logger:failed "num:not:equal"
+(num:less:than 0 1 && logger:success "num:less:than") || logger:failed "num:less:than"
+(num:greater:than 3 2 && logger:success "num:greater:than") || logger:failed "num:greater:than"
+(num:less:than:or:equal 1 2 && logger:success "num:less:than:or:equal") || logger:failed "num:less:than:or:equal"
+(num:greater:than:or:equal 3 2 && logger:success "num:greater:than:or:equal") || logger:failed "num:greater:than:or:equal"
 
 ```
 ---
@@ -191,7 +191,7 @@ logger:success "Result: $ANSWER."
 if logger:confirm "Are you sure?"; then
   logger:success "Completed."
 else
-  logger:error "Aborted."
+  logger:failed "Aborted."
 fi
 ```
 
@@ -219,7 +219,7 @@ logger:warning "Tests failing..."
 
 #### Error: 🤬 Testing failed! (red text)
 ```shell script
-logger:error "Testing failed!"
+logger:failed "Testing failed!"
 ```
 
 #### Debug: Hmmm... (grey text)

@@ -1,42 +1,54 @@
 #!/bin/bash
 function switch:project() {
-   if string:is:empty "$1"; then
-    logger:error "Project Name Required." && return 1
+  logger:divider && logger:info "Switching Project..."
+  if string:not:empty "$1"; then
+    local PROJECT="$1"
+  else
+    logger:input "Enter PROJECT folder name:" "PROJECT"
   fi
-  local DIR; DIR="$GIT_PROJECTS_PATH/$1"
+
+  local DIR="$BASHER_PROJECTS/$PROJECT"
   if path:is:directory "$DIR" && directory:change "$DIR"; then
     logger:success "Project $1 @ $DIR"
     phpstorm:open "$PWD"
   else
-    logger:error "Switching To Project $1 Failed." && return 1
+    logger:failed "Switching To Project $1 @ $DIR Failed." && return 1
   fi
 }
 
 function make:project() {
-  logger:info "Making Project..."
-  logger:divider
+  logger:divider && logger:info "Making Project..."
 
-  local PROJECT; PROJECT="$1"
+  if string:is:empty "$BASHER_PROJECTS"; then
+    logger:failed "BASHER_PROJECTS must be defined and directory must exist."
+    return 1
+  fi
+
+  if string:not:empty "$1"; then
+    local PROJECT="$1"
+  else
+    logger:input "Enter PROJECT folder name:" "PROJECT"
+  fi
+
   if string:is:empty "$PROJECT"; then
-    logger:error "Project name required."
-    return 1
-  fi
-  if string:is:empty "$GIT_PROJECTS_PATH"; then
-    logger:error "GIT_PROJECTS_PATH directory must exist."
+    logger:failed "Project name required."
     return 1
   fi
 
-  local DIR; DIR="$GIT_PROJECTS_PATH/$PROJECT"
+  local DIR="$BASHER_PROJECTS/$PROJECT"
   logger:info "Verifying Project Directory: $DIR"
-  rm -rf "$DIR"
-  if path:is:directory "$DIR"; then
-    logger:error "Project Directory already exists: $DIR"
-    return 1
+
+  if string:not:empty "$BASHER_TESTING"; then
+    logger:warning "Cleaning test run..." && rm -rf "$DIR"
   fi
-  if directory:make "$DIR" && directory:change "$DIR"; then
+
+  if path:is:directory "$DIR"; then
+    logger:failed "Project Directory already exists: $DIR"
+    return 1
+  elif directory:make "$DIR" && directory:change "$DIR"; then
     logger:success "$PROJECT @ $DIR"
   else
-    logger:error "Failed Making: $PROJECT @ $DIR"
+    logger:failed "Failed Making: $PROJECT @ $DIR"
     return 1
   fi
 }
