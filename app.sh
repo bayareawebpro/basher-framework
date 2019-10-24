@@ -52,7 +52,7 @@ app:require make-laravel.sh
 
 # Environment Overrides
 app:require env.default.sh
-app:require env1.sh
+app:require env.sh
 
 # Application Banner
 if string:not:empty "$BASHER_BANNER"; then
