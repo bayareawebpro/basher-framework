@@ -49,6 +49,12 @@ export BASHER_DB_USER="root"
 export BASHER_DB_PASS="root"
 ```
 
+## Lazy-load
+Require scripts from the app directory.
+```
+app:require "service.sh"
+```
+
 ## Conditionals
 ```shell script
 string:is:empty ""
