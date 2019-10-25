@@ -1,21 +1,33 @@
 #!/usr/bin/env bash
 
-# ==== Bootstrap Require ====
+# ==== Require / AutoLoader ====
 function app:require() {
-  # shellcheck source=$BASHER_PATH/app/$1
-  if [[ -f "$BASHER_PATH/app/$1" ]]; then
-    source "$BASHER_PATH/app/$1"
-  else
-    echo "app:require: $BASHER_PATH/app/$1 does not exist."
+  local DIR="$BASHER_PATH/app/$1"
+  if [[ -f "$DIR" ]]; then
+    # shellcheck source="$DIR"
+    source "$DIR"
   fi
+}
+function app:require:all() {
+  local DIR="$BASHER_PATH/app/$1"
+  if [[ ! -d "$DIR" ]]; then
+    echo "[app:require:all] $1 doesn't exist." && return 1
+  fi
+  local DIR=("$DIR"/*)
+  for ((i=0; i<${#DIR[@]}; i++)); do
+    if [[ -f "${DIR[$i]}" ]]; then
+      # shellcheck source="${DIR[$i]}"
+      source "${DIR[$i]}"
+    fi
+  done
 }
 
 # ==== The Following Functions Depend on Core Utilities ====
 
 # Source Remote Script
 function app:require:remote() {
-  if func:exists "curl"; then
-    curl -s "$1" | bash -s "$2"
+  if func:exists "curl" && string:not:empty "$1"; then
+    curl -s "$1" | bash -s $*
   else
     logger:failed "Curl is not installed."
   fi

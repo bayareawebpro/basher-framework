@@ -188,7 +188,7 @@ directory:folders .
 
 ```
 for FILE in $(directory:files "."); do
-  logger:text "$FILE loaded"
+  logger:text "$FILE"
 done
 ```
 ---
