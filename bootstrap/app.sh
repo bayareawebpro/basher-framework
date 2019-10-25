@@ -10,7 +10,7 @@ function app:require() {
   fi
   # shellcheck source="$FILE"
   source "$FILE"
-  echo "$FILE"
+  #echo "$FILE"
 }
 
 # Require files in directory.
@@ -25,7 +25,7 @@ function app:require:all() {
     if [[ -f "${DIR[$i]}" ]]; then
       # shellcheck source="${DIR[$i]}"
       source "${DIR[$i]}"
-      echo "${DIR[$i]}"
+      #echo "${DIR[$i]}"
     fi
   done
 }
