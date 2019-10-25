@@ -66,7 +66,7 @@ has:database git_test_output
 drop:database git_test_output
 make:database my_database
 make:database:env my_database
-#make:database:myconf "my_database" (WIP)
+make:database:myconf
 ```
 ---
 
@@ -124,8 +124,8 @@ php:dusk
 ## Require
 Require scripts from the app directory.
 ```shell script
-app:require "service.sh"
-app:require:all "folder_in_services"
+app:require "services/service.sh"
+app:require:all "my_dir"
 ```
 
 ### Remote
