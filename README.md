@@ -255,3 +255,20 @@ Open Project
 phpstorm:open $PWD
 ```
 ---
+## Code Quality
+
+```shell script
+php:quality
+php:lint
+php:test
+php:dusk
+```
+
+---
+
+## Process
+```shell script
+process:start
+process:stop my-script.sh
+process:running my-script.sh
+```
