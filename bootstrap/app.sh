@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # ==== Core Bootstrap Methods ====
 
 # Require file from directory.
@@ -60,11 +59,9 @@ function app:test() {
 function app:banner() {
   if $BASHER_BANNER; then
     logger:divider
-    colors:red    '______  _______ _______ _     _ _______  ______'
-    colors:green  '|_____] |_____| |______ |_____| |______ |_____/'
-    colors:blue   '|_____] |     | ______| |     | |______ |    \_'
-    colors:white  'Version 1.x'
-    logger:info "Loaded & Ready for Commands."
+    colors:red   '______  _______ _______ _     _ _______  ______'
+    colors:green '|_____] |_____| |______ |_____| |______ |_____/'
+    colors:blue  '|_____] |     | ______| |     | |______ |    \_ Version 1.x'
     logger:divider
   fi
 }
