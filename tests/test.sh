@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-source /Users/builder/bash-profile/app.sh
 
-# Setup
-TEST_DIR="$HOME/Sites/git-test-output"
-rm -rf "$TEST_DIR" || exit 1
-mkdir "$TEST_DIR" || exit 1
-cd "$TEST_DIR" || exit 1
-clear
 
 #(string:is:empty "" && logger:success "string:is:empty") || logger:failed  "string:is:empty"
 #(string:not:empty "not empty" && logger:success "string:not:empty") || logger:failed "string:not:empty"

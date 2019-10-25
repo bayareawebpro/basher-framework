@@ -22,6 +22,7 @@ function app:require:remote() {
 
 # Reboot Command
 function app:reboot() {
+  clear
   source "$BASHER_PATH/app.sh"
   logger:success "Reloaded!"
 }
@@ -37,6 +38,11 @@ function app:boot() {
     logger:warning "$BASHER_PATH/env.sh does not exist."
   fi
   app:banner
+}
+
+# Test Application
+function app:test() {
+    source "$BASHER_PATH/tests/setup.sh"
 }
 
 # Display Application Banner
