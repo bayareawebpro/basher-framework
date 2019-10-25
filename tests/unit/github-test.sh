@@ -5,12 +5,9 @@ mkdir "$TEST_DIR" || exit 1
 cd "$TEST_DIR" || exit 1
 clear
 
-make:laravel "git-test-output"
-git:ignore
-git:readme
-echo "Master v1.0" >> "$TEST_DIR/README.md"
 git:setup
 git:connect
+echo "Master v1.0" >> "$TEST_DIR/README.md"
 git:save
 
 ## TEST Branching

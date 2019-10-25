@@ -40,9 +40,16 @@ function make:project() {
   logger:info "Verifying Project Directory: $DIR"
 
   if path:is:directory "$DIR"; then
-    logger:failed "Project Directory already exists: $DIR"
-    return 1
-  elif directory:make "$DIR" && directory:change "$DIR"; then
+    logger:warning "Project Directory already exists: $DIR"
+    if ! logger:confirm "Delete $DIR?"; then
+      return 1
+    else
+      directory:remove "$DIR"
+      logger:success "Removed $DIR."
+    fi
+  fi
+
+  if directory:make "$DIR" && directory:change "$DIR"; then
     logger:success "$PROJECT @ $DIR"
   else
     logger:failed "Failed Making: $PROJECT @ $DIR"
