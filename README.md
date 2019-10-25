@@ -153,6 +153,10 @@ if process:running my-script.sh; then
   process:log my-script.sh
 fi
 ```
+Cron Command
+```shell script
+process:watch my-script.sh
+```
 
 ## Conditionals
 ```shell script

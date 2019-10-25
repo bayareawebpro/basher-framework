@@ -23,7 +23,6 @@ function process:status() {
 }
 
 # Start Process
-# param $1 (string) File Path
 function process:start() {
   logger:divider && logger:info "Starting Process..."
 
@@ -35,7 +34,6 @@ function process:start() {
   if process:running "$1"; then
     logger:warning "Killing sibling process..."
     process:stop "$1"
-    return 1
   fi
 
   if ! file:executable "$1" && ! file:make:executable "$1"; then
@@ -61,6 +59,13 @@ function process:log(){
   logger:divider
   logger:info "Reading Process Log $(basename "$1")..."
   file:read "$1.log"
+}
+
+# Restart Process if Stopped
+function process:watch() {
+  if ! process:running "$1"; then
+    process:start "$1"
+  fi
 }
 
 # Stop Running Process
