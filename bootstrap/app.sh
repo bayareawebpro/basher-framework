@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-# ==== Require / AutoLoader ====
-function app:require:remote() {
-  curl -s "$1" | bash -s "$*"
-}
+# ==== Core Bootstrap Methods ====
+
 # Require file from directory.
 function app:require() {
   local FILE="$BASHER_PATH/app/$1"
@@ -13,6 +11,7 @@ function app:require() {
   # shellcheck source="$FILE"
   source "$FILE"
 }
+
 # Require files in directory.
 function app:require:all() {
   local DIR="$BASHER_PATH/app/$1"
@@ -29,7 +28,12 @@ function app:require:all() {
   done
 }
 
-# ==== The Following Functions Depend on Core Utilities ====
+# Require Remote Script.
+function app:require:remote() {
+  curl -s "$1" | bash /dev/stdin $* || return 1
+}
+
+# ==== Methods that Depend on Core Utilities ====
 
 # Reboot Command
 function app:reboot() {

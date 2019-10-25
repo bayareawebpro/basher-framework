@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-app:reboot
+source "$BASHER_PATH/app.sh"
 
 # Setup
 TEST_DIR="$HOME/Sites/git-test-output"

@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 source "$BASHER_PATH/tests/setup.sh"
 
-app:require:remote 'https://raw.githubusercontent.com/bayareawebpro/basher-framework/master/tests/remote.sh' test
+app:require:remote https://raw.githubusercontent.com/bayareawebpro/basher-framework/master/tests/remote.sh test
 
 #(string:is:empty "" && logger:success "string:is:empty") || logger:failed  "string:is:empty"
 #(string:not:empty "not empty" && logger:success "string:not:empty") || logger:failed "string:not:empty"
