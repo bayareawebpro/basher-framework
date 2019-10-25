@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck source="$BASHER_PATH/bootstrap/tests.sh"
-source "$BASHER_PATH/bootstrap/tests.sh"
-
 (num:is:equal 1 1 && logger:success "num:is:equal") || logger:failed "num:is:equal"
 (num:not:equal 1 2 && logger:success "num:not:equal") || logger:failed "num:not:equal"
 (num:less:than 0 1 && logger:success "num:less:than") || logger:failed "num:less:than"

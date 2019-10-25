@@ -66,8 +66,8 @@ function app:boot() {
 
 # Test Application
 function app:test() {
-    # shellcheck source="$BASHER_PATH/bootstrap/tests.sh"
-    source "$BASHER_PATH/bootstrap/tests.sh"
+    # shellcheck source="$BASHER_PATH/tests/setup.sh"
+    source "$BASHER_PATH/tests/setup.sh"
 }
 
 # Display Application Banner

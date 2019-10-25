@@ -2,15 +2,12 @@
 # shellcheck source="$BASHER_PATH/bootstrap/tests.sh"
 source "$BASHER_PATH/bootstrap/tests.sh"
 
-#logger:info "Hello."
-#if logger:confirm "Testing App... Are you sure?"; then
-#  logger:success "Completed."
-#else
-#  logger:failed "Aborted."
-#fi
-
-#logger:input "Project Name?" "ANSWER"
-#logger:success "$ANSWER.";
+# Setup
+#TEST_DIR="$HOME/Sites/git-test-output"
+#rm -rf "$TEST_DIR" || exit 1
+#mkdir "$TEST_DIR" || exit 1
+#cd "$TEST_DIR" || exit 1
+#clear
 
 #make:laravel "git-test-output"
 #git:ignore
@@ -34,10 +31,3 @@ source "$BASHER_PATH/bootstrap/tests.sh"
 #git:switch master
 #git:branch:delete dev
 #git:branch:delete gh-pages
-
-### TEST Database
-#if has:database "git_test_output"; then
-#  drop:database "git_test_output"
-#fi
-#make:database git-test-output
-#has:database "git_test_output" || logger:failed "Database Not Found."
