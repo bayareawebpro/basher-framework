@@ -3,6 +3,9 @@ function func:exists() {
     declare -f -F "$1" > /dev/null
     return $?
 }
+function process:is:running() {
+  [[ -n "$(ps -p "$(cat "$1")" -o pid=)" ]]
+}
 function string:is:empty(){
   [[ -z "$1" ]]
 }

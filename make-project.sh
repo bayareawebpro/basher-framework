@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 function switch:project() {
   logger:divider && logger:info "Switching Project..."
   if string:not:empty "$1"; then
