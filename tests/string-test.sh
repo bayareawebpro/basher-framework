@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# shellcheck source="$BASHER_PATH/tests/setup.sh"
-source "$BASHER_PATH/tests/setup.sh"
+# shellcheck source="$BASHER_PATH/bootstrap/tests.sh"
+source "$BASHER_PATH/bootstrap/tests.sh"
 
 (string:is:empty "" && logger:success "string:is:empty") || logger:failed  "string:is:empty"
 (string:not:empty "not empty" && logger:success "string:not:empty") || logger:failed "string:not:empty"
