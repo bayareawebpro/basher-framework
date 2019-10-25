@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck source="$BASHER_PATH/app.sh"
 source "$BASHER_PATH/app.sh"
 
 # Setup
