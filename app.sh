@@ -14,14 +14,14 @@ export BASHER_PATH="${0%/*}"
 source "$BASHER_PATH/bootstrap/app.sh"
 
 # Utilities
+app:require:all installers
 app:require:all utilities
 app:require:all services
 app:require:all commands
-app:require:all installers
 
 # Boot the Application
 app:boot
-#ping -c 1 google.com
+
 # Declare Database Created Callback
 #function on:database:created() {
 #  local DB_NAME="$1";

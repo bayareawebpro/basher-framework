@@ -10,6 +10,7 @@ function app:require() {
   fi
   # shellcheck source="$FILE"
   source "$FILE"
+  echo "$FILE"
 }
 
 # Require files in directory.
@@ -24,13 +25,9 @@ function app:require:all() {
     if [[ -f "${DIR[$i]}" ]]; then
       # shellcheck source="${DIR[$i]}"
       source "${DIR[$i]}"
+      echo "${DIR[$i]}"
     fi
   done
-}
-
-# Require Remote Script.
-function app:require:remote() {
-  curl -s "$1" | bash /dev/stdin $* || return 1
 }
 
 # ==== Methods that Depend on Core Utilities ====
@@ -69,8 +66,8 @@ function app:boot() {
 
 # Test Application
 function app:test() {
-    # shellcheck source=$BASHER_PATH/tests/setup.sh
-    source "$BASHER_PATH/tests/setup.sh"
+    # shellcheck source="$BASHER_PATH/bootstrap/tests.sh"
+    source "$BASHER_PATH/bootstrap/tests.sh"
 }
 
 # Display Application Banner

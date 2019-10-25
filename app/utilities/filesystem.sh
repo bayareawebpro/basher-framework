@@ -30,11 +30,20 @@ function directory:change(){
 function directory:remove(){
   rm -r "$1" || return 1
 }
+
 function path:is:file(){
   [[ -f "$1" ]]
 }
 function path:is:directory(){
   [[ -d "$1" ]]
+}
+function file:read(){
+  while read -r line; do
+    echo "$line"
+  done < "$1"
+}
+function file:copy(){
+  cp "$1" "$2" || return 1
 }
 function file:exists(){
   [[ -e "$1" ]]
@@ -63,7 +72,3 @@ function file:older:than(){
 function file:equal:to(){
   [[ "$1" -ef "$2" ]]
 }
-function file:copy(){
-  cp "$1" "$2" || return 1
-}
-
