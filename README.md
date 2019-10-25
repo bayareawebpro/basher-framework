@@ -13,7 +13,7 @@ https://imgur.com/a/GNsxOb5
 - Or, add to to: ~/.profile
 
 ```shell script
-source /Users/me/bash-profile/app.sh
+source /Users/me/basher-framework/app.sh
 ```
 
 ---
