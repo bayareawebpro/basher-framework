@@ -36,6 +36,7 @@ app:require utility-logger.sh
 app:require install-animatecss.sh
 
 # Services
+app:require services-codequality.sh
 app:require services-phpstorm.sh
 app:require services-chrome.sh
 
