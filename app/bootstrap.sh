@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-# ==== Bootstrap Functions ====
-
-# Require Command
+# ==== Bootstrap Require ====
 function app:require() {
+  # shellcheck source=$BASHER_PATH/app/$1
   if [[ -f "$BASHER_PATH/app/$1" ]]; then
     source "$BASHER_PATH/app/$1"
   else
     echo "app:require: $BASHER_PATH/app/$1 does not exist."
   fi
 }
+
+# ==== The Following Functions Depend on Core Utilities ====
 
 # Source Remote Script
 function app:require:remote() {
@@ -22,17 +23,29 @@ function app:require:remote() {
 
 # Reboot Command
 function app:reboot() {
-  clear
-  source "$BASHER_PATH/app.sh"
+  # shellcheck source=$BASHER_PATH/app.sh
+  clear && source "$BASHER_PATH/app.sh"
   logger:success "Reloaded!"
 }
 
-# ==== The Following Functions Depend on Core Utilities ====
+# Publish Resource
+function app:publish() {
+  if path:is:file "$2"; then
+    logger:info "$2 already exists."
+  elif file:exists "$BASHER_PATH/$1" && file:copy "$BASHER_PATH/$1" "$2"; then
+    logger:success "Published $BASHER_PATH/$1 => $2 completed."
+  else
+    logger:failed "Publishing $BASHER_PATH/$1 => $2 failed."
+    return 1
+  fi
+}
 
 # Boot Application
 function app:boot() {
+  # shellcheck source=$BASHER_PATH/env.default.sh
   source "$BASHER_PATH/env.default.sh"
   if file:exists "$BASHER_PATH/env.sh"; then
+    # shellcheck source=$BASHER_PATH/env.sh
     source "$BASHER_PATH/env.sh"
   else
     logger:warning "$BASHER_PATH/env.sh does not exist."
@@ -42,6 +55,7 @@ function app:boot() {
 
 # Test Application
 function app:test() {
+    # shellcheck source=$BASHER_PATH/tests/setup.sh
     source "$BASHER_PATH/tests/setup.sh"
 }
 

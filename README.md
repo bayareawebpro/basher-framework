@@ -49,13 +49,107 @@ export BASHER_DB_USER="root"
 export BASHER_DB_PASS="root"
 ```
 
+#### Make Project (non macro)
+```shell script
+make:project my-folder-name
+```
+
+#### Make Laravel (macro)
+- Makes Project
+- Creates Database
+- Sets Env Vars
+- Ready to rock with a single command.
+
+```shell script
+make:laravel my-folder-name
+```
+
+#### Database Commands
+```shell script
+has:database git_test_output
+drop:database git_test_output
+make:database my_database
+make:database:env my_database
+#make:database:myconf "my_database" (WIP)
+```
+---
+
+#### Installers
+```shell script
+install:animatecss
+install:tailwindcss
+install:vuejs
+```
+---
+
+## GIT
+Create Repo in CWD
+```shell script
+git:setup
+git:connect
+git:ignore
+git:readme
+git:save
+git:save "custom message"
+git:sync
+git:reset
+git:branch dev
+git:branch gh-pages fresh
+git:branch:delete dev
+git:switch master
+```
+---
+
+## Chrome
+> No argument for 127.0.0.1
+```shell script
+chrome:serve
+chrome:serve "test.local"
+```
+---
+
+## PhpStorm
+Launch PhpStorm
+```shell script
+phpstorm:launch
+phpstorm:open $PWD
+```
+---
+
+## Code Quality
+```shell script
+php:quality
+php:lint
+php:test
+php:dusk
+```
+---
+
 ## Lazy-load
 Require scripts from the app directory.
-```
+```shell script
 app:require "service.sh"
+app:require:remote "http://some.app/script.sh"
+```
+
+```shell script
+app:boot
+app:reboot
+app:test
+```
+
+## Process
+```shell script
+process:start
+process:stop my-script.sh
+process:running my-script.sh
 ```
 
 ## Conditionals
+```shell script
+func:exists "my:method"
+```
+
 ```shell script
 string:is:empty ""
 string:not:empty "not empty"
@@ -63,15 +157,15 @@ string:is:equal "my-string" "my-string"
 string:not:equal "my-string" "other-string"
 string:matches:regex "123" '^[0-9]+$'
 string:matches:regex "asd" '^[0-9]+$'
+```
 
+```shell script
 num:is:equal 1 1
 num:not:equal 1 2
 num:less:than 0 1
 num:greater:than 3 2
 num:less:than:or:equal 1 2
 num:greater:than:or:equal 3 2
-
-func:exists "my:method"
 ```
 
 ## Filesystem
@@ -92,6 +186,7 @@ directory:change $PATH_A
 directory:remove $PATH_A
 ```
 ---
+
 ## Logger
 ```shell script
 logger:divider
@@ -108,13 +203,13 @@ logger:alert "security!"
 logger:denied "darn."
 ```
 
-#### Input
+## Input
 ```shell script
 logger:input "Where to?" "ANSWER"
 logger:success "Result: $ANSWER."
 ```
 
-#### Confirmation
+## Confirmation
 ```shell script
 if logger:confirm "Are you sure?"; then
   logger:success "Completed."
@@ -123,7 +218,7 @@ else
 fi
 ```
 
-#### Colors
+## Colors
 ```shell script
 colors:black "im black"
 colors:blackb "im blackb"
@@ -143,132 +238,4 @@ colors:purple "im purple"
 colors:purpleb "im purpleb"
 colors:lightblue "im lightblue"
 colors:lightblueb "im lightblueb"
-```
-
-
-## Project
-
-#### Make Project (non macro)
-```shell script
-make:project "my-folder-name"
-```
-
-#### Make Laravel (macro)
-- Makes Project
-- Creates Database
-- Sets Env Vars
-- Ready to rock with a single command.
-
-```shell script
-make:laravel "my-folder-name"
-```
-
-#### Database Commands
-```shell script
-make:database "my_database"
-make:database:env "my_database"
-
-if has:database "git_test_output"; then
-  drop:database "git_test_output"
-fi
-```
----
-
-#### Installers
-```shell script
-install:animatecss
-install:tailwindcss
-install:vuejs
-```
-
----
-
-## GIT
-
-Create Repo in CWD
-```shell script
-git:setup
-```
-
-Set Origin to Master / CWD name must match repo name.
-```shell script
-git:connect
-```
-
-Ignore & ReadMe
-Created if doesn't exist.
-```shell script
-git:ignore
-git:readme
-```
-
-Save (push)
-```shell script
-git:save "custom message"
-git:save (uses "wip" when no argument specified)
-```
-
-Sync (pull)
-```shell script
-git:sync
-```
-Revert to Head (Hard)
-```shell script
-git:reset
-```
-
-Full Branch
-```shell script
-git:branch dev
-```
-Fresh Branch
-```shell script
-git:branch gh-pages fresh
-```
-Switching Branches
-```shell script
-git:switch master
-```
-Deleting Branches
-```shell script
-git:branch:delete dev
-```
-
-## Chrome
-No argument for 127.0.0.1
-
-```shell script
-chrome:serve
-chrome:serve "test.local"
-```
-
----
-## PhpStorm
-
-Launch PhpStorm
-```shell script
-phpstorm:launch
-```
-
-Open Project
-```shell script
-phpstorm:open $PWD
-```
----
-## Code Quality
-
-```shell script
-php:quality
-php:lint
-php:test
-php:dusk
-```
-
----
-
-## Process
-```shell script
-process:start
-process:stop my-script.sh
-process:running my-script.sh
 ```
