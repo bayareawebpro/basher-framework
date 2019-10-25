@@ -11,6 +11,7 @@ https://imgur.com/a/GNsxOb5
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
 - Or, add to to: ~/.profile
+
 ```shell script
 source /Users/me/bash-profile/app.sh
 ```
