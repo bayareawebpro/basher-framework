@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+#source "$BASHER_PATH/app.sh";
 while true; do
-  sleep 5;
-  echo "Sleeping...";
+  echo "Working...";
+  sleep 0.5;
 done
 

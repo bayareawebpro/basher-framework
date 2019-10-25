@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck source="$BASHER_PATH/bootstrap/tests.sh"
-source "$BASHER_PATH/bootstrap/tests.sh"
-
 (string:is:empty "" && logger:success "string:is:empty") || logger:failed  "string:is:empty"
 (string:not:empty "not empty" && logger:success "string:not:empty") || logger:failed "string:not:empty"
 (string:is:equal "my-string" "my-string" && logger:success "string:is:equal") || logger:failed  "string:is:equal"

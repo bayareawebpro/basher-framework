@@ -1,23 +1,20 @@
 #!/usr/bin/env bash
 function directory:list() {
-  local DIR=("$1"/*)
-  for ((i=0; i<${#DIR[@]}; i++)); do
-    echo "${DIR[$i]}";
+  for ENTRY in "$1"/*; do
+    echo "$ENTRY";
   done
 }
 function directory:files() {
-  local DIR=("$1"/*)
-  for ((i=0; i<${#DIR[@]}; i++)); do
-    if path:is:file "${DIR[$i]}"; then
-      echo "${DIR[$i]}";
+  for ENTRY in "$1"/*; do
+    if path:is:file "$ENTRY"; then
+      echo "$ENTRY";
     fi
   done
 }
 function directory:folders() {
-  local DIR=("$1"/*)
-  for ((i=0; i<${#DIR[@]}; i++)); do
-    if path:is:directory "${DIR[$i]}"; then
-      echo "${DIR[$i]}";
+  for ENTRY in "$1"/*; do
+    if path:is:directory "$ENTRY"; then
+      echo "$ENTRY";
     fi
   done
 }
@@ -56,6 +53,9 @@ function file:writable(){
 }
 function file:executable(){
   [[ -x "$1" ]]
+}
+function file:make:executable(){
+  chmod u+x "$1" || return 1
 }
 function file:is:symlink(){
   [[ -h "$1" ]]

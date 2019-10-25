@@ -12,7 +12,8 @@ function switch:project() {
     logger:success "Project $1 @ $DIR"
     phpstorm:open "$PWD"
   else
-    logger:failed "Switching To Project $1 @ $DIR Failed." && return 1
+    logger:failed "Switching To Project $1 @ $DIR Failed."
+    return 1
   fi
 }
 
@@ -37,10 +38,6 @@ function make:project() {
 
   local DIR="$BASHER_PROJECTS/$PROJECT"
   logger:info "Verifying Project Directory: $DIR"
-
-  if string:not:empty "$BASHER_TESTING"; then
-    logger:warning "Cleaning test run..." && rm -rf "$DIR"
-  fi
 
   if path:is:directory "$DIR"; then
     logger:failed "Project Directory already exists: $DIR"

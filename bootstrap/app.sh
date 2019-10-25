@@ -4,29 +4,15 @@
 
 # Require file from directory.
 function app:require() {
-  local FILE="$BASHER_PATH/app/$1"
-  if [[ ! -f "$FILE" ]]; then
-    echo "[app:require] $1 doesn't exist." && return 1
-  fi
-  # shellcheck source="$FILE"
-  source "$FILE"
-  #echo "$FILE"
+  # shellcheck source==$BASHER_PATH/app/$1
+  source "$BASHER_PATH/app/$1"
 }
 
 # Require files in directory.
 function app:require:all() {
-  local DIR="$BASHER_PATH/app/$1"
-  if [[ ! -d "$DIR" ]]; then
-    echo "[app:require:all] $1 doesn't exist."
-    return 1
-  fi
-  local DIR=("$DIR"/*)
-  for ((i=0; i<${#DIR[@]}; i++)); do
-    if [[ -f "${DIR[$i]}" ]]; then
-      # shellcheck source="${DIR[$i]}"
-      source "${DIR[$i]}"
-      #echo "${DIR[$i]}"
-    fi
+  for ENTRY in "$BASHER_PATH/app/$1"/*.sh; do
+    # shellcheck source="$ENTRY"
+    source "$ENTRY"
   done
 }
 
@@ -67,12 +53,12 @@ function app:boot() {
 # Test Application
 function app:test() {
     # shellcheck source="$BASHER_PATH/tests/setup.sh"
-    source "$BASHER_PATH/tests/setup.sh"
+    clear && source "$BASHER_PATH/tests/setup.sh"
 }
 
 # Display Application Banner
 function app:banner() {
-  if string:not:empty "$BASHER_BANNER"; then
+  if $BASHER_BANNER; then
     logger:divider
     colors:red    '______  _______ _______ _     _ _______  ______'
     colors:green  '|_____] |_____| |______ |_____| |______ |_____/'

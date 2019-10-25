@@ -15,7 +15,7 @@ function logger:input() {
 
 function logger:info() {
   compiled=$(printf "%s\r""➜ 🤖 $1")
-  colors:blue "$compiled"
+  colors:lightblue "$compiled"
 }
 
 function logger:warning() {
@@ -64,9 +64,7 @@ function logger:text() {
 }
 
 function logger:divider() {
-  SIZE=$(($COLUMNS / 2))
-  SIZE="$(seq 0 1 $SIZE)"
-  for ((i = 1 ; i <= 87 ; i++)); do
+  for ((i = 1 ; i <= (COLUMNS / 2); i++)); do
     printf "%s\r""$(jot -s "=" -b "=" $((i)))"
     sleep 0.0001
   done

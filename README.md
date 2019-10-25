@@ -122,24 +122,37 @@ php:dusk
 ```
 ---
 
-## Lazy-load
+## Require
 Require scripts from the app directory.
 ```shell script
 app:require "service.sh"
-app:require:remote "http://some.app/script.sh"
+app:require:all "folder_in_services"
 ```
 
+### Remote
+```shell script
+remote:require "http://some.app/script.sh"
+remote:ping "http://some.app"
+```
+
+## App
 ```shell script
 app:boot
 app:reboot
 app:test
 ```
 
-## Process
+## Processes
 ```shell script
 process:start my-script.sh
-process:running my-script.sh
+process:status my-script.sh
+process:log my-script.sh
 process:stop my-script.sh
+```
+```shell script
+if process:running my-script.sh; then
+  process:log my-script.sh
+fi
 ```
 
 ## Conditionals
@@ -186,9 +199,12 @@ directory:files .
 directory:folders .
 ```
 
-```
+```shell script
 for FILE in $(directory:files "."); do
   logger:text "$FILE"
+done
+for FOLDER in $(directory:folders "."); do
+  logger:text "$FOLDER"
 done
 ```
 ---

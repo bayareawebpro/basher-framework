@@ -1,56 +1,84 @@
 #!/usr/bin/env bash
-
-# Get Running Process Status
-# param $1 (number) PID
 function process:running() {
-  [[ -n "$(ps -p "$(cat "$1")" -o pid=)" ]]
+  if string:is:empty "$1"; then
+    logger:denied "Argument 1 (Executable Path) not specified."
+    return 1
+  fi
+  pgrep -f "$1" >/dev/null
 }
 
-# Process Status
-# param $1 (number) PID
 function process:status() {
+  if string:is:empty "$1"; then
+    logger:denied "Argument 1 (Executable Path) not specified."
+  fi
   if process:running "$1"; then
-    logger:success "Process ID $1 is running."
+    logger:info "Process ID $(basename "$1") is running."
+    for pid in $(process:running "$1"); do
+      echo "$pid"
+    done
     return 0
   fi
-  logger:warning "Process ID $1 not running."
+  logger:info "Process ID $(basename "$1") not running."
   return 1
 }
 
-# Stop Running Process
-# param $1 (number) PID
+# Start Process
+# param $1 (string) File Path
 function process:start() {
-    logger:warning "Starting Process $1 @ $2."
+  logger:divider && logger:info "Starting Process..."
 
-    if string:is:empty "$1"; then
-      logger:denied "Argument 1 (Executable Path) not specified."
-    fi
+  if string:is:empty "$1"; then
+    logger:denied "Argument 1 (Executable Path) not specified."
+    return 1
+  fi
 
-    if string:is:empty "$2"; then
-      logger:denied "Argument 2 (PID Path) not specified."
-    fi
+  if process:running "$1"; then
+    logger:warning "Killing sibling process..."
+    process:stop "$1"
+    return 1
+  fi
 
-    if $1 > /dev/null 2>&1 & echo $! > "$2" & chmod 644 "$2"; then
-      logger:success "Process $1 @ $2 started."
-    else
-      logger:error "Process $1 @ $2 failed to start."
-    fi
+  if ! file:executable "$1" && ! file:make:executable "$1"; then
+    logger:warning "File $1 is not Executable."
+    return 1
+  fi
+
+  local FILE=$(basename "$1")
+  logger:warning "Starting Process $FILE..."
+  if ($1 >"$1.log" 2>&1 & echo $! > "$1.lock" & chmod 644 "$1.lock"); then
+    logger:success "Process $FILE launched."
+  else
+    logger:error "Process $FILE failed to launch."
+  fi
+}
+
+# Display Process Log
+function process:log(){
+  if string:is:empty "$1"; then
+    logger:denied "Argument 1 (Executable Path) not specified."
+    return 1
+  fi
+  logger:divider
+  logger:info "Reading Process Log $(basename "$1")..."
+  file:read "$1.log"
 }
 
 # Stop Running Process
-# param $1 (number) PID
 function process:stop() {
-    if string:is:empty "$1"; then
-      logger:denied "Argument 1 (PID) not specified."
-    fi
-    if string:is:empty "$2"; then
-      logger:denied "Argument 2 (PID Path) not specified."
-    fi
-
-    logger:warning "Killing Process $1 @ $2."
-    if kill -9 "$1" && rm -f "$2"; then
-      logger:success "Process $1 @ $2 stopped."
+  local FILE="$(basename "$1")"
+  logger:warning "Stopping Process $FILE..."
+  if pkill -F "$1.lock" && rm -f "$1.lock"; then
+    logger:success "Stopped $FILE.lock..."
+  else
+    logger:failed "Failed to stop PID $pid"
+    return 1
+  fi
+  for pid in $(pgrep -f "$1"); do
+    if kill -9 "$pid"; then
+      logger:success "Stopped Sibling PID $pid..."
     else
-      logger:error "Process $1 @ $2 failed to be stopped."
+      logger:failed "Failed to stop PID $pid"
+      return 1
     fi
+  done
 }

@@ -5,5 +5,4 @@
 /public/hot
 /test
 .env
-.env
 .env.default

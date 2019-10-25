@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-file:read "$BASHER_PATH/README.md"
+directory:list "$BASHER_PATH"
+directory:folders "$BASHER_PATH"
+file:read "$BASHER_PATH/.env"
