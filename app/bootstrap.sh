@@ -43,12 +43,12 @@ function app:publish() {
 # Boot Application
 function app:boot() {
   # shellcheck source=$BASHER_PATH/env.default.sh
-  source "$BASHER_PATH/env.default.sh"
-  if file:exists "$BASHER_PATH/env.sh"; then
-    # shellcheck source=$BASHER_PATH/env.sh
-    source "$BASHER_PATH/env.sh"
+  source "$BASHER_PATH/.env.default"
+  if file:exists "$BASHER_PATH/.env"; then
+    # shellcheck source=$BASHER_PATH/.env
+    source "$BASHER_PATH/.env"
   else
-    logger:warning "$BASHER_PATH/env.sh does not exist."
+    logger:warning "$BASHER_PATH/.env does not exist."
   fi
   app:banner
 }

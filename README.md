@@ -38,10 +38,7 @@ export GIT_AUTHOR_EMAIL="dan@bayareawebpro.com"
 export BASHER_GIT_USER="bayareawebpro"
 export BASHER_PROJECTS="$HOME/Sites"
 
-# Will destroy the previously created project when new one is created.
-export BASHER_TESTING=true
-
-# Launch Chrome Using Faux HTTP
+# Launch Chrome Using Faux HTTPS
 export BASHER_CHROME_SECURE=true
 
 # Define Database Auth or you will be prompted.
@@ -140,14 +137,14 @@ app:test
 
 ## Process
 ```shell script
-process:start
-process:stop my-script.sh
+process:start my-script.sh
 process:running my-script.sh
+process:stop my-script.sh
 ```
 
 ## Conditionals
 ```shell script
-func:exists "my:method"
+func:exists "curl"
 ```
 
 ```shell script
@@ -184,6 +181,15 @@ file:equal:to $PATH_A $PATH_B
 directory:make $PATH_A
 directory:change $PATH_A
 directory:remove $PATH_A
+directory:list .
+directory:files .
+directory:folders .
+```
+
+```
+for FILE in $(directory:files "."); do
+  logger:text "$FILE loaded"
+done
 ```
 ---
 

@@ -1,4 +1,35 @@
 #!/usr/bin/env bash
+function directory:list() {
+  local DIR=("$1"/*)
+  for ((i=0; i<${#DIR[@]}; i++)); do
+    echo "${DIR[$i]}";
+  done
+}
+function directory:files() {
+  local DIR=("$1"/*)
+  for ((i=0; i<${#DIR[@]}; i++)); do
+    if path:is:file "${DIR[$i]}"; then
+      echo "${DIR[$i]}";
+    fi
+  done
+}
+function directory:folders() {
+  local DIR=("$1"/*)
+  for ((i=0; i<${#DIR[@]}; i++)); do
+    if path:is:directory "${DIR[$i]}"; then
+      echo "${DIR[$i]}";
+    fi
+  done
+}
+function directory:make(){
+  mkdir "$1" || return 1
+}
+function directory:change(){
+  cd "$1" || return 1
+}
+function directory:remove(){
+  rm -r "$1" || return 1
+}
 function path:is:file(){
   [[ -f "$1" ]]
 }
@@ -30,17 +61,9 @@ function file:older:than(){
   [[ "$1" -ot "$2" ]]
 }
 function file:equal:to(){
-  [[ "$1" -ef  "$2" ]]
+  [[ "$1" -ef "$2" ]]
 }
 function file:copy(){
-  cp "$1" "$2"
+  cp "$1" "$2" || return 1
 }
-function directory:make(){
-  mkdir "$1" || return 1;
-}
-function directory:change(){
-  cd "$1" || return 1;
-}
-function directory:remove(){
-  rm -r "$1" || return 1;
-}
+

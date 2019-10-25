@@ -35,3 +35,31 @@ app:require installers/vuejs.sh
 # Boot the Application
 app:boot
 
+# Add Command Aliases
+alias artisan='php artisan'
+
+for FILE in $(directory:files "."); do
+  logger:text "$FILE loaded"
+done
+# Database Created Callback
+#function on:database:created() {
+#  local DB_NAME="$1";
+#  logger:debug "on:database:created $DB_NAME (define function to use hook)"
+#}
+
+# Laravel Installation Callback
+#function on:laravel:install() {
+#  local PROJECT="$1";
+#  logger:text "Another Laravel Eh? Good choice!"
+#  logger:debug "on:laravel:install (define function to use hook)"
+#  #composer install my/fav-packages
+#}
+
+# Laravel Created Callback
+#function on:laravel:created() {
+#  logger:celebrate "The web needs more apps like $1. Cool!"
+#  logger:debug "on:laravel:created (define function to use hook)"
+#  #local PROJECT="$1";
+#  #local PROJECT="$(sudo valet tld)"
+#  #chrome:serve "$PROJECT.local"
+#}
