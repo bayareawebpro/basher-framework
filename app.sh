@@ -10,7 +10,8 @@ alias artisan='php artisan'
 export BASHER_PATH="${0%/*}"
 
 # Bootstrap
-source "$BASHER_PATH/app/bootstrap.sh"
+# shellcheck source="$BASHER_PATH/bootstrap/app.sh"
+source "$BASHER_PATH/bootstrap/app.sh"
 
 # Utilities
 app:require:all utilities
@@ -20,7 +21,7 @@ app:require:all installers
 
 # Boot the Application
 app:boot
-
+#ping -c 1 google.com
 # Declare Database Created Callback
 #function on:database:created() {
 #  local DB_NAME="$1";

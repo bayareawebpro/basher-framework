@@ -1,17 +1,24 @@
 #!/usr/bin/env bash
 
 # ==== Require / AutoLoader ====
-function app:require() {
-  local DIR="$BASHER_PATH/app/$1"
-  if [[ -f "$DIR" ]]; then
-    # shellcheck source="$DIR"
-    source "$DIR"
-  fi
+function app:require:remote() {
+  curl -s "$1" | bash -s "$*"
 }
+# Require file from directory.
+function app:require() {
+  local FILE="$BASHER_PATH/app/$1"
+  if [[ ! -f "$FILE" ]]; then
+    echo "[app:require] $1 doesn't exist." && return 1
+  fi
+  # shellcheck source="$FILE"
+  source "$FILE"
+}
+# Require files in directory.
 function app:require:all() {
   local DIR="$BASHER_PATH/app/$1"
   if [[ ! -d "$DIR" ]]; then
-    echo "[app:require:all] $1 doesn't exist." && return 1
+    echo "[app:require:all] $1 doesn't exist."
+    return 1
   fi
   local DIR=("$DIR"/*)
   for ((i=0; i<${#DIR[@]}; i++)); do
@@ -23,15 +30,6 @@ function app:require:all() {
 }
 
 # ==== The Following Functions Depend on Core Utilities ====
-
-# Source Remote Script
-function app:require:remote() {
-  if func:exists "curl" && string:not:empty "$1"; then
-    curl -s "$1" | bash -s $*
-  else
-    logger:failed "Curl is not installed."
-  fi
-}
 
 # Reboot Command
 function app:reboot() {
