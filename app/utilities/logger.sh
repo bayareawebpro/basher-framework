@@ -3,7 +3,7 @@ function logger:confirm() {
   colors:yellowb "$(printf "%s\r""➜ ❔ $1 [y/n]")"
   local ANSWER
   read -r ANSWER
-  [[ "$ANSWER" == "y" ]]
+  [[ "$ANSWER" != "n" ]]
 }
 
 function logger:input() {

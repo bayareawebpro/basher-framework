@@ -183,8 +183,9 @@ str:lower "TEST"
 ```
 
 ## Collections
+Collection state is global.
 ```shell script
-collect:make
+collect:make # Empty
 collect:count
 collect:push "Apple"
 collect:push "Banana"
