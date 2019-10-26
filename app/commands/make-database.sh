@@ -11,7 +11,7 @@ function make:database:myconf() {
   if path:is:file "$HOME/.my.cnf"; then
     logger:warning "$HOME/.my.cnf is already configured."
   else
-    file:copy "$BASHER_PATH/res/.my.cnf" "$HOME/.my.cnf"
+    file:copy "$BASHER_PATH/resources/.my.cnf" "$HOME/.my.cnf"
     logger:warning "Installed .my.cnf because it did not exist."
   fi
 }
