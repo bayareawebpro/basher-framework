@@ -26,7 +26,7 @@ function make:database() {
   logger:divider
   logger:info "Creating Database..."
 
-  if string:is:empty "$DATABASE"; then
+  if str:empty "$DATABASE"; then
     logger:warning "Database Name not defined."
     logger:input "Enter DATABASE:" "DATABASE"
   fi
@@ -40,7 +40,7 @@ function make:database() {
   if echo "CREATE DATABASE $DATABASE;" | mysql; then
     logger:success "Database $DATABASE created successfully."
 
-    if string:is:empty "$2" && logger:confirm "Would you like to configure the environment file?"; then
+    if str:empty "$2" && logger:confirm "Would you like to configure the environment file?"; then
       make:database:env "$DATABASE"
     fi
     if func:exists "on:database:created"; then
@@ -60,7 +60,7 @@ function drop:database() {
   logger:divider
   logger:info "Dropping Database..."
 
-  if string:is:empty "$DATABASE"; then
+  if str:empty "$DATABASE"; then
     logger:input "Enter DATABASE:" "DATABASE"
   fi
 
@@ -85,21 +85,21 @@ function make:database:env() {
   logger:divider
   logger:info "Configuring Database Environment File..."
 
-  if string:not:empty "$1"; then
+  if str:filled "$1"; then
     local BASHER_DATABASE=$1
-  elif string:is:empty "$BASHER_DATABASE"; then
+  elif str:empty "$BASHER_DATABASE"; then
     logger:input "Enter DB_DATABASE:" "DATABASE"
   fi
 
-  if string:not:empty "$2"; then
+  if str:filled "$2"; then
     local BASHER_DB_USER=$2
-  elif string:is:empty "$BASHER_DB_USER"; then
+  elif str:empty "$BASHER_DB_USER"; then
     logger:input "Enter DB_USERNAME:" "BASHER_DB_USER"
   fi
 
-  if string:not:empty "$3"; then
+  if str:filled "$3"; then
     local BASHER_DB_PASS=$3
-  elif string:is:empty "$BASHER_DB_PASS"; then
+  elif str:empty "$BASHER_DB_PASS"; then
     logger:input "Enter DB_PASSWORD:" "BASHER_DB_PASS"
   fi
 

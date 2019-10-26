@@ -13,22 +13,22 @@ function func:failed() {
 }
 
 # === String Conditions ================================================================================================
-function string:is:empty(){
+function str:empty(){
   [[ -z "$1" ]]
 }
-function string:is:numeric(){
+function str:is:numeric(){
   [[ $1 =~ ^[0-9]+$ ]]
 }
-function string:not:empty(){
+function str:filled(){
   [[ -n "$1" ]]
 }
-function string:is:equal(){
+function str:is:equal(){
   [[ "$1" == "$2" ]]
 }
-function string:not:equal(){
+function str:not:equal(){
   [[ "$1" != "$2" ]]
 }
-function string:matches:regex(){
+function str:matches:regex(){
   [[ $1 =~ $2 ]];
 }
 
@@ -42,12 +42,12 @@ function num:not:equal(){
 function num:less:than(){
   [[ $1 -lt $2 ]]
 }
-function num:less:than:or:equal(){
+function num:less:or:equal(){
   [[ $1 -le $2 ]]
 }
 function num:greater:than(){
   [[ $1 -gt $2 ]]
 }
-function num:greater:than:or:equal(){
+function num:greater:or:equal(){
   [[ $1 -ge $2 ]]
 }

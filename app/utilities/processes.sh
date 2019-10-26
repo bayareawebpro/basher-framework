@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 function process:running() {
-  if string:is:empty "$1"; then
+  if str:empty "$1"; then
     logger:denied "Argument 1 (Executable Path) not specified."
     return 1
   fi
@@ -8,7 +8,7 @@ function process:running() {
 }
 
 function process:status() {
-  if string:is:empty "$1"; then
+  if str:empty "$1"; then
     logger:denied "Argument 1 (Executable Path) not specified."
   fi
   if process:running "$1"; then
@@ -26,7 +26,7 @@ function process:status() {
 function process:start() {
   logger:divider && logger:info "Starting Process..."
 
-  if string:is:empty "$1"; then
+  if str:empty "$1"; then
     logger:denied "Argument 1 (Executable Path) not specified."
     return 1
   fi
@@ -52,7 +52,7 @@ function process:start() {
 
 # Display Process Log
 function process:log(){
-  if string:is:empty "$1"; then
+  if str:empty "$1"; then
     logger:denied "Argument 1 (Executable Path) not specified."
     return 1
   fi

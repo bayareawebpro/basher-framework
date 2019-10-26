@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-echo "Remote Script Executing: $1"
-echo "Args: $2 $3"
+echo "Remote Script Argument Recieved: $1"
+echo "Remote Script Executing as $(whoami)"

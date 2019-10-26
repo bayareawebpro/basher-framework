@@ -1,7 +1,7 @@
 #!/bin/env bash
 function switch:project() {
   logger:divider && logger:info "Switching Project..."
-  if string:not:empty "$1"; then
+  if str:filled "$1"; then
     local PROJECT="$1"
   else
     logger:input "Enter PROJECT folder name:" "PROJECT"
@@ -20,18 +20,18 @@ function switch:project() {
 function make:project() {
   logger:divider && logger:info "Making Project..."
 
-  if string:is:empty "$BASHER_PROJECTS"; then
+  if str:empty "$BASHER_PROJECTS"; then
     logger:failed "BASHER_PROJECTS must be defined and directory must exist."
     return 1
   fi
 
-  if string:not:empty "$1"; then
+  if str:filled "$1"; then
     local PROJECT="$1"
   else
     logger:input "Enter PROJECT folder name:" "PROJECT"
   fi
 
-  if string:is:empty "$PROJECT"; then
+  if str:empty "$PROJECT"; then
     logger:failed "Project name required."
     return 1
   fi

@@ -7,6 +7,15 @@ function path:is:file(){
 function path:is:directory(){
   [[ -d "$1" ]]
 }
+function path:filename(){
+  echo "${1##*/}"
+}
+function path:extension(){
+  echo "${1##*.}"
+}
+function path:base(){
+  echo "${1%${1##*/}}"
+}
 
 # ====== Directory Operations ==============
 function directory:list() {

@@ -4,7 +4,6 @@
 ______  _______ _______ _     _ _______  ______
 |_____] |_____| |______ |_____| |______ |_____/
 |_____] |     | ______| |     | |______ |    \_
-Version 1.x
 ```
 
 https://imgur.com/a/GNsxOb5
@@ -154,12 +153,19 @@ func:failed
 ```
 
 ```shell script
-string:is:empty ""
-string:not:empty "not empty"
-string:is:equal "my-string" "my-string"
-string:not:equal "my-string" "other-string"
-string:matches:regex "123" '^[0-9]+$'
-string:matches:regex "asd" '^[0-9]+$'
+str:empty ""
+str:filled "not empty"
+str:is:equal "my-string" "my-string"
+str:not:equal "my-string" "other-string"
+str:matches:regex "123" '^[0-9]+$'
+str:matches:regex "asd" '^[0-9]+$'
+
+str:slice $TEXT 0 3
+str:replace:first $TEXT $FIND $REPLACE
+str:replace:all $TEXT $FIND $REPLACE
+
+str:prefix "text.txt" ".txt" # text
+str:suffix "text.txt" "text" # .txt
 ```
 
 ```shell script
@@ -167,8 +173,8 @@ num:is:equal 1 1
 num:not:equal 1 2
 num:less:than 0 1
 num:greater:than 3 2
-num:less:than:or:equal 1 2
-num:greater:than:or:equal 3 2
+num:less:or:equal 1 2
+num:greater:or:equal 3 2
 ```
 
 ## Filesystem
@@ -185,6 +191,9 @@ done
 ```shell script
 path:is:file $PATH
 path:is:directory $PATH
+path:base $PATH
+path:filename $PATH
+path:extension $PATH
 ```
 
 ```shell script
