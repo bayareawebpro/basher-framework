@@ -17,3 +17,9 @@ function str:prefix(){
 function str:length(){
   echo "${#1}"
 }
+function str:upper(){
+  echo "$1" | tr "[:lower:]" "[:upper:]"
+}
+function str:lower(){
+  echo "$1" | tr "[:upper:]" "[:lower:]"
+}

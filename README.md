@@ -167,6 +167,9 @@ str:length $TEXT
 
 str:prefix "text-file.txt" "text-" # file.txt
 str:suffix "text-file.txt" ".txt" # text-file
+
+str:upper "test"
+str:lower "TEST"
 ```
 
 ```shell script

@@ -35,3 +35,9 @@ assert:truthy "str:prefix"
 
 str:is:equal "$(str:suffix "text-file.txt" ".txt")" "text-file"
 assert:truthy "str:suffix"
+
+str:is:equal "$(str:upper "test")" "TEST"
+assert:truthy "str:upper"
+
+str:is:equal "$(str:lower "TEST")" "test"
+assert:truthy "str:lower"
