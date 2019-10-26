@@ -43,6 +43,9 @@ function directory:make(){
 function directory:change(){
   cd "$1" || return 1
 }
+function directory:previous(){
+  cd - || return 1
+}
 function directory:remove(){
   rm -r "$1" || return 1
 }
@@ -53,8 +56,17 @@ function file:read(){
     echo "$line"
   done < "$1"
 }
+function file:get(){
+  cat "$1"
+}
+function file:put(){
+  echo "$1" > "$2"
+}
+function file:append(){
+  echo "$1" >> "$2"
+}
 function file:copy(){
-  cp "$1" "$2" || return 1
+  cp "$1" "$2"
 }
 function file:exists(){
   [[ -e "$1" ]]

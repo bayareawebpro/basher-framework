@@ -142,36 +142,15 @@ remote:require "http://some.app/script.sh"
 remote:ping "http://some.app"
 ```
 
-## Conditionals
+## Functions
 ```shell script
-func:exists "curl"
+func:exists "my:func"
+func:inspect "my:func"
+func:success # Last Command Succeeded
+func:failed # Last Command Failed
 ```
 
-```shell script
-func:success
-func:failed
-```
-
-```shell script
-str:empty ""
-str:filled "not empty"
-str:is:equal "my-string" "my-string"
-str:not:equal "my-string" "other-string"
-str:matches:regex "123" '^[0-9]+$'
-str:matches:regex "asd" '^[0-9]+$'
-
-str:slice $TEXT 0 3
-str:replace:first $TEXT $FIND $REPLACE
-str:replace:all $TEXT $FIND $REPLACE
-str:length $TEXT
-
-str:prefix "text-file.txt" "text-" # file.txt
-str:suffix "text-file.txt" ".txt" # text-file
-
-str:upper "test"
-str:lower "TEST"
-```
-
+## Numbers
 ```shell script
 num:is:equal 1 1
 num:not:equal 1 2
@@ -181,7 +160,80 @@ num:less:or:equal 1 2
 num:greater:or:equal 3 2
 ```
 
+## Strings
+```shell script
+str:empty ""
+str:filled "not empty"
+str:is:equal "my-string" "my-string"
+str:not:equal "my-string" "other-string"
+str:matches:regex "123" '^[0-9]+$'
+str:matches:regex "asd" '^[0-9]+$'
+
+str:replace:first $TEXT $FIND $REPLACE
+str:replace:all $TEXT $FIND $REPLACE
+
+str:length $TEXT
+str:slice $TEXT 0 3
+
+str:prefix "text-file.txt" "text-" # file.txt
+str:suffix "text-file.txt" ".txt" # text-file
+
+str:upper "test"
+str:lower "TEST"
+```
+
+## Collections
+```shell script
+collect:make
+collect:count
+collect:push "Apple"
+collect:push "Banana"
+collect:push "Orange"
+collect:all
+
+collect:set 1 "Pizza"
+collect:all
+
+for val in $(collect:filter "Pizza"); do
+  echo "Collection Has $val"
+done
+```
+
 ## Filesystem
+
+```shell script
+path:base $PATH
+path:filename $PATH
+path:extension $PATH
+path:is:file $PATH
+path:is:directory $PATH
+```
+
+```shell script
+file:read $PATH
+file:exists $PATH
+file:writable $PATH
+file:readable $PATH
+file:executable $PATH
+file:is:symlink $PATH
+file:not:empty $PATH
+file:newer:than $PATH_A $PATH_B
+file:older:than $PATH_A $PATH_B
+file:equal:to $PATH_A $PATH_B
+file:get $PATH
+file:put $CONTENT $PATH
+file:append $CONTENT $PATH
+```
+
+```shell script
+directory:make $PATH_A
+directory:remove $PATH_A
+directory:change $PATH_A
+directory:previous
+directory:list .
+directory:files .
+directory:folders .
+```
 
 ```shell script
 for FILE in $(directory:files "."); do
@@ -191,53 +243,20 @@ for FOLDER in $(directory:folders "."); do
   logger:text "$FOLDER"
 done
 ```
-
-```shell script
-path:is:file $PATH
-path:is:directory $PATH
-path:base $PATH
-path:filename $PATH
-path:extension $PATH
-```
-
-```shell script
-file:exists $PATH
-file:readable $PATH
-file:read $PATH
-file:writable $PATH
-file:executable $PATH
-file:is:symlink $PATH
-file:not:empty $PATH
-file:newer:than $PATH_A $PATH_B
-file:older:than $PATH_A $PATH_B
-file:equal:to $PATH_A $PATH_B
-```
-
-```shell script
-directory:make $PATH_A
-directory:change $PATH_A
-directory:remove $PATH_A
-directory:list .
-directory:files .
-directory:folders .
-```
 ---
 
 ## Processes
 ```shell script
-process:start my-script.sh
 process:status my-script.sh
-process:log my-script.sh
-process:stop my-script.sh
+process:watch my-script.sh # start if not running
+process:start my-script.sh # create my-script.sh.lock
+process:stop my-script.sh # remove my-script.sh.lock
+process:log my-script.sh # read my-script.sh.log
 ```
 ```shell script
 if process:running my-script.sh; then
-  process:log my-script.sh
+  process:log my-script.sh 
 fi
-```
-Cron Command
-```shell script
-process:watch my-script.sh
 ```
 ---
 
@@ -248,13 +267,13 @@ logger:blank
 logger:debug "Hmmm..."
 logger:text "ok..."
 logger:info "ready."
+logger:error "Error!"
+logger:alert "Security!"
+logger:failed "Failed!"
+logger:denied "Darn."
+logger:warning "Failing..."
 logger:success "Cool!"
-logger:celebrate "ok..."
-logger:warning "failing..."
-logger:failed "failed!"
-logger:error "error!"
-logger:alert "security!"
-logger:denied "darn."
+logger:celebrate "Awesome!"
 ```
 
 Input
