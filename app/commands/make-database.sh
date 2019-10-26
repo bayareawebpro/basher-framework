@@ -1,25 +1,23 @@
 #!/usr/bin/env bash
-#logger:blank
-#logger:divider
-#logger:success
-#logger:warning
-#logger:failed
-#logger:debug
-#logger:info
 
+# Publish MySql Config
 function make:database:myconf() {
   if path:is:file "$HOME/.my.cnf"; then
     logger:warning "$HOME/.my.cnf is already configured."
+  elif ! path:is:file "$BASHER_PATH/resources/template-mysql.cnf"; then
+    logger:failed "$BASHER_PATH/resources/template-mysql.cnf does not exist."
   else
-    file:copy "$BASHER_PATH/resources/.my.cnf" "$HOME/.my.cnf"
-    logger:warning "Installed .my.cnf because it did not exist."
+    file:copy "$BASHER_PATH/resources/template-mysql.cnf" "$HOME/.my.cnf"
+    logger:success "Installed .my.cnf because it did not exist."
   fi
 }
 
+# Has Database?
 function has:database() {
   [[ -n $(echo "SHOW DATABASES LIKE '$1';" | mysql) ]]
 }
 
+# Make New Database
 function make:database() {
   local DATABASE="${1//-/_}"
 
@@ -37,11 +35,13 @@ function make:database() {
       make:database:env "$DATABASE"
     fi
   elif echo "CREATE DATABASE $DATABASE;" | mysql; then
+    logger:success "Database $DATABASE created successfully."
+
     if logger:confirm "Would you like to configure the environment file?"; then
       make:database:env "$DATABASE"
     fi
-    logger:success "Database created successfully."
     if func:exists "on:database:created"; then
+      logger:debug "Deferring to on:database:created callback."
       on:database:created "$DATABASE"
     fi
   else
@@ -50,22 +50,34 @@ function make:database() {
   fi
 }
 
+# Drop Existing Database
 function drop:database() {
   local DATABASE="${1//-/_}"
+
+  logger:divider
+  logger:info "Dropping Database..."
+
   if string:is:empty "$DATABASE"; then
     logger:input "Enter DATABASE:" "DATABASE"
   fi
-  if (echo "DROP DATABASE $DATABASE;" | mysql); then
-    logger:success "Database $DATABASE dropped successfully."
-    if func:exists "on:database:dropped"; then
-      on:database:dropped "$DATABASE"
-    fi
-  else
-    logger:failed "Database $DATABASE failed to be dropped."
-    return 1
+
+  if ! has:database "$DATABASE"; then
+      logger:failed "Database $DATABASE does not exist."
   fi
+
+  if echo "DROP DATABASE $DATABASE;" | mysql; then
+      logger:success "Database $DATABASE dropped successfully."
+      if func:exists "on:database:dropped"; then
+        logger:debug "Deferring to on:database:dropped callback."
+        on:database:dropped "$DATABASE"
+      fi
+    else
+      logger:failed "Database $DATABASE failed to be dropped."
+      return 1
+    fi
 }
 
+# Make Database Environment
 function make:database:env() {
   if string:not:empty "$1"; then
     local BASHER_DATABASE=$1
