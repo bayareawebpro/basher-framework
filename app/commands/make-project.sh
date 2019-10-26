@@ -41,11 +41,11 @@ function make:project() {
 
   if path:is:directory "$DIR"; then
     logger:warning "Project Directory already exists: $DIR"
-    if ! logger:confirm "Delete $DIR?"; then
-      return 1
-    else
+    if logger:confirm "Delete $DIR?"; then
       directory:remove "$DIR"
       logger:success "Removed $DIR."
+    else
+      return 1
     fi
   fi
 

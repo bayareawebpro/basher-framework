@@ -44,9 +44,10 @@ export BASHER_DB_USER="root"
 export BASHER_DB_PASS="root"
 ```
 
-#### Make Project (non macro)
+#### Projects
 ```shell script
 make:project my-folder-name
+switch:project my-folder-name
 ```
 
 #### Make Laravel (macro)
