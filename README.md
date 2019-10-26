@@ -146,6 +146,9 @@ remote:ping "http://some.app"
 ## Conditionals
 ```shell script
 func:exists "curl"
+```
+
+```shell script
 func:success
 func:failed
 ```

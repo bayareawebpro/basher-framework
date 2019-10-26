@@ -6,10 +6,10 @@ function func:exists() {
     return $?
 }
 function func:success() {
-    [[ $? -ne 1 ]]
+    [[ $? -gt 0 ]]
 }
 function func:failed() {
-    [[ $? -eq 1 ]]
+    [[ $? -gt 1 ]]
 }
 
 # === String Conditions ================================================================================================
