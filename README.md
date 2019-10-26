@@ -121,6 +121,13 @@ php:dusk
 ```
 ---
 
+## App
+```shell script
+app:boot
+app:reboot
+app:test
+```
+
 ## Require
 Require scripts from the app directory.
 ```shell script
@@ -132,30 +139,6 @@ app:require:all "my_dir"
 ```shell script
 remote:require "http://some.app/script.sh"
 remote:ping "http://some.app"
-```
-
-## App
-```shell script
-app:boot
-app:reboot
-app:test
-```
-
-## Processes
-```shell script
-process:start my-script.sh
-process:status my-script.sh
-process:log my-script.sh
-process:stop my-script.sh
-```
-```shell script
-if process:running my-script.sh; then
-  process:log my-script.sh
-fi
-```
-Cron Command
-```shell script
-process:watch my-script.sh
 ```
 
 ## Conditionals
@@ -182,25 +165,6 @@ num:greater:than:or:equal 3 2
 ```
 
 ## Filesystem
-```shell script
-path:is:file $PATH
-path:is:directory $PATH
-file:exists $PATH
-file:readable $PATH
-file:writable $PATH
-file:executable $PATH
-file:is:symlink $PATH
-file:not:empty $PATH
-file:newer:than $PATH_A $PATH_B
-file:older:than $PATH_A $PATH_B
-file:equal:to $PATH_A $PATH_B
-directory:make $PATH_A
-directory:change $PATH_A
-directory:remove $PATH_A
-directory:list .
-directory:files .
-directory:folders .
-```
 
 ```shell script
 for FILE in $(directory:files "."); do
@@ -209,6 +173,51 @@ done
 for FOLDER in $(directory:folders "."); do
   logger:text "$FOLDER"
 done
+```
+
+```shell script
+path:is:file $PATH
+path:is:directory $PATH
+```
+
+```shell script
+file:exists $PATH
+file:readable $PATH
+file:read $PATH
+file:writable $PATH
+file:executable $PATH
+file:is:symlink $PATH
+file:not:empty $PATH
+file:newer:than $PATH_A $PATH_B
+file:older:than $PATH_A $PATH_B
+file:equal:to $PATH_A $PATH_B
+```
+
+```shell script
+directory:make $PATH_A
+directory:change $PATH_A
+directory:remove $PATH_A
+directory:list .
+directory:files .
+directory:folders .
+```
+---
+
+## Processes
+```shell script
+process:start my-script.sh
+process:status my-script.sh
+process:log my-script.sh
+process:stop my-script.sh
+```
+```shell script
+if process:running my-script.sh; then
+  process:log my-script.sh
+fi
+```
+Cron Command
+```shell script
+process:watch my-script.sh
 ```
 ---
 
@@ -228,13 +237,13 @@ logger:alert "security!"
 logger:denied "darn."
 ```
 
-## Input
+Input
 ```shell script
 logger:input "Where to?" "ANSWER"
 logger:success "Result: $ANSWER."
 ```
 
-## Confirmation
+Confirmation
 ```shell script
 if logger:confirm "Are you sure?"; then
   logger:success "Completed."
@@ -243,7 +252,7 @@ else
 fi
 ```
 
-## Colors
+Colors
 ```shell script
 colors:black "im black"
 colors:blackb "im blackb"
