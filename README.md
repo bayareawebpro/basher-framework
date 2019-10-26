@@ -163,9 +163,10 @@ str:matches:regex "asd" '^[0-9]+$'
 str:slice $TEXT 0 3
 str:replace:first $TEXT $FIND $REPLACE
 str:replace:all $TEXT $FIND $REPLACE
+str:length $TEXT
 
-str:prefix "text.txt" ".txt" # text
-str:suffix "text.txt" "text" # .txt
+str:prefix "text-file.txt" "text-" # file.txt
+str:suffix "text-file.txt" ".txt" # text-file
 ```
 
 ```shell script

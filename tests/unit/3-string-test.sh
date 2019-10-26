@@ -18,6 +18,9 @@ assert:truthy "str:matches:regex"
 str:matches:regex "asd" "^[0-9]+$"
 assert:falsy "str:matches:regex"
 
+str:is:equal "$(str:length "abc")" "3"
+assert:truthy "str:length"
+
 str:is:equal "$(str:slice "Artisan" 0 3)" "Art"
 assert:truthy "str:slice"
 
@@ -32,5 +35,3 @@ assert:truthy "str:prefix"
 
 str:is:equal "$(str:suffix "text-file.txt" ".txt")" "text-file"
 assert:truthy "str:suffix"
-
-

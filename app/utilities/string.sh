@@ -14,3 +14,6 @@ function str:suffix(){
 function str:prefix(){
   echo "${1#$2}"
 }
+function str:length(){
+  echo "${#1}"
+}
