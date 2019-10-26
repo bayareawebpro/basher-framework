@@ -115,7 +115,7 @@ phpstorm:open $PWD
 
 ## Code Quality
 ```shell script
-php:quality
+php:quality # php:lint && php:test
 php:lint
 php:test
 php:dusk
