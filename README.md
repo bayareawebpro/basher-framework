@@ -62,8 +62,8 @@ make:laravel my-folder-name
 
 #### Database Commands
 ```shell script
-make:database:myconf
 make:database:env my_database
+make:myconf
 ```
 ```shell script
 has:database my_database

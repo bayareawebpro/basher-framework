@@ -1,65 +1,56 @@
 #!/usr/bin/env bash
 function logger:confirm() {
-  compiled=$(printf "%s\r""➜ ❔ $1 [y/n]")
-  colors:yellowb "$compiled"
+  colors:yellowb "$(printf "%s\r""➜ ❔ $1 [y/n]")"
   local ANSWER
   read -r ANSWER
   [[ "$ANSWER" == "y" ]]
 }
 
 function logger:input() {
-  compiled=$(printf "%s\r""➜ ❔ $1")
-  colors:yellowb "$compiled"
+  colors:yellowb "$(printf "%s\r""➜ ❔ $1")"
   read -r "$2"
 }
 
 function logger:info() {
-  compiled=$(printf "%s\r""➜ 🤖 $1")
-  colors:lightblue "$compiled"
+  colors:lightblue "$(printf "%s\r""➜ 🤖 $1")"
 }
 
 function logger:warning() {
-  compiled=$(printf "%s\r""➜ ❕ $1")
-  colors:yellow "$compiled"
+  colors:yellow "$(printf "%s\r""➜ ❕ $1")"
 }
 
 function logger:error() {
-  compiled=$(printf "%s\r""➜ 🥵 $1")
-  colors:red "$compiled"
+  colors:red "$(printf "%s\r""➜ 🥵 $1")"
 }
 
 function logger:failed() {
-  compiled=$(printf "%s\r""➜ ❌  $1")
-  colors:red "$compiled"
+  colors:red "$(printf "%s\r""➜ ❌  $1")"
 }
 
 function logger:denied() {
-  compiled=$(printf "%s\r""➜ 🚫 $1")
-  colors:red "$compiled"
+  colors:red "$(printf "%s\r""➜ 🚫 $1")"
 }
 
 function logger:alert() {
-  compiled=$(printf "%s\r""➜ 🚨 $1")
-  colors:redb "$compiled"
+  colors:redb "$(printf "%s\r""➜ 🚨 $1")"
 }
 
 function logger:success() {
-  compiled=$(printf "%s\r""➜ ✅  $1")
-  colors:green "$compiled"
+  colors:green "$(printf "%s\r""➜ ✅  $1")"
 }
 
 function logger:celebrate() {
-  compiled=$(printf "%s\r""➜ 🎉 $1")
+  local compiled=$(printf "%s\r""➜ 🎉 $1")
   colors:white "$compiled"
 }
 
 function logger:debug() {
-  compiled=$(printf "%s\r""$1")
+  local compiled=$(printf "%s\r""$1")
   colors:white "$compiled"
 }
 
 function logger:text() {
-  compiled=$(printf "%s\r""➜ $1")
+  local compiled=$(printf "%s\r""➜ $1")
   colors:whiteb "$compiled"
 }
 

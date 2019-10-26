@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+
+# ====== Path Operations ================
+function path:is:file(){
+  [[ -f "$1" ]]
+}
+function path:is:directory(){
+  [[ -d "$1" ]]
+}
+
+# ====== Directory Operations ==============
 function directory:list() {
   for ENTRY in "$1"/*; do
     echo "$ENTRY";
@@ -28,12 +38,7 @@ function directory:remove(){
   rm -r "$1" || return 1
 }
 
-function path:is:file(){
-  [[ -f "$1" ]]
-}
-function path:is:directory(){
-  [[ -d "$1" ]]
-}
+# ====== File Operations ================
 function file:read(){
   while read -r line; do
     echo "$line"

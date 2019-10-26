@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
+
+# === Function Conditions ==============================================================================================
 function func:exists() {
     declare -f -F "$1" > /dev/null
     return $?
 }
+function func:success() {
+    [[ $? -ne 1 ]]
+}
+function func:failed() {
+    [[ $? -eq 1 ]]
+}
+
+# === String Conditions ================================================================================================
 function string:is:empty(){
   [[ -z "$1" ]]
 }
@@ -21,6 +31,8 @@ function string:not:equal(){
 function string:matches:regex(){
   [[ $1 =~ $2 ]];
 }
+
+# === Number Conditions ================================================================================================
 function num:is:equal(){
   [[ $1 -eq $2 ]]
 }

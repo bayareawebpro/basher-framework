@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-function git:setup()
-{
+# ========= Setup New Repo =========
+function git:setup() {
   logger:divider
   logger:info "Initializing Local Repository..."
   if [ -d ".git" ]; then
@@ -12,7 +12,7 @@ function git:setup()
   fi
 }
 
-# Hard Reset to HEAD
+# ========= Hard Reset to HEAD =========
 function git:reset() {
   logger:divider
   logger:info "Reverting Repository State"
@@ -24,17 +24,17 @@ function git:reset() {
   fi
 }
 
-# GIT Report
+# ========= GIT Report =========
 function git:report() {
   logger:divider
-  logger:info "Making Commit Report..."
-  git log --after='last month' --date=short --pretty=format:'%h,%an,%ad,%s' > git-commit-log.csv
+  logger:info "Generating Commit Report..."
+  echo "CommitHash,Author,Date,Comment" >git-commit-log.csv
+  git log --after='last month' --date=short --pretty=format:'%h,%an,%ad,%s' >>git-commit-log.csv
   logger:success "Commit Report Generated"
 }
 
-# GIT Origin
-function git:origin()
-{
+# ========= GIT Origin =========
+function git:origin() {
   local REPO
   local ORIGIN
   REPO=$(basename "$PWD")
@@ -42,15 +42,18 @@ function git:origin()
   echo "$ORIGIN"
 }
 
-# GIT Has Origin
-function git:has:origin()
-{
+# ========= GIT Has Origin =========
+function git:has:origin() {
   [[ "$(git remote)" == "*origin*" ]]
 }
 
-# GIT Connect
-function git:connect()
-{
+# ========= GIT Status =========
+function git:status() {
+  git status
+}
+
+# ========= GIT Connect =========
+function git:connect() {
   logger:divider
   if git:has:origin; then
     logger:success "📡 Git Remote is origin."
@@ -69,9 +72,8 @@ function git:connect()
   fi
 }
 
-# Git Initial
-function git:initial()
-{
+# ========= Git Initial =========
+function git:initial() {
   logger:divider
   if git add . && git commit -m "Initial Commit"; then
     logger:success "Initial Commit Created Successfully!"
@@ -80,9 +82,8 @@ function git:initial()
   fi
 }
 
-# GIT Ignore
-function git:ignore()
-{
+# ========= GIT Ignore =========
+function git:ignore() {
   logger:divider
   logger:info "Creating .gitignore..."
   if [ -f .gitignore ]; then
@@ -97,7 +98,7 @@ function git:ignore()
   fi
 }
 
-# GIT ReadMe
+# ========= GIT ReadMe =========
 function git:readme() {
   logger:info "Creating README.md..."
   if [ -f "README.md" ]; then
@@ -114,17 +115,46 @@ function git:readme() {
   fi
 }
 
-# GIT Branch Exists
+# ========= GIT Save (push) =========
+function git:save() {
+  if [ -z "$1" ]; then
+    MESSAGE="WIP"
+  else
+    MESSAGE="$1"
+  fi
+  logger:divider
+  logger:info "Saving... ${MESSAGE}"
+  if git add . && git commit -m "${MESSAGE}" && git push; then
+    logger:success "Local Pushed to Remote Successfully!"
+  else
+    logger:failed "Failed to push to remote!"
+  fi
+}
+
+# ========= GIT Sync (pull) =========
+function git:sync() {
+  logger:divider
+  logger:info "Synchronizing Remote Repository"
+  if git pull; then
+    logger:success "Syncronized Successfully!"
+  else
+    logger:failed "Syncronize Failed!"
+  fi
+}
+
+# ========= GIT Branch Exists =========
 function git:branch:exists() {
   git show-ref "refs/heads/$1"
 }
 
-# Switch to GIT Branch
+# ========= Switch to GIT Branch =========
 function git:switch() {
   logger:divider
 
-  local BRANCH; BRANCH="$1"
-  local EXISTS; EXISTS=$(git:branch:exists "$BRANCH")
+  local BRANCH
+  BRANCH="$1"
+  local EXISTS
+  EXISTS=$(git:branch:exists "$BRANCH")
 
   if [[ -z "$BRANCH" ]]; then
     logger:failed "Branch name not specified."
@@ -138,7 +168,7 @@ function git:switch() {
   fi
 }
 
-# Delete GIT Branch
+# ========= Delete GIT Branch =========
 function git:branch:delete() {
   local BRANCH
   BRANCH="$1"
@@ -151,7 +181,7 @@ function git:branch:delete() {
   fi
 }
 
-# Create GIT Branch
+# ========= Create GIT Branch =========
 function git:branch() {
   local BRANCH
   local FRESH
@@ -190,34 +220,5 @@ function git:branch() {
     logger:success "Git Remote Upstream is set to origin $BRANCH and syncronized."
   else
     logger:failed "Git Remote Upstream Failed." && exit 1
-  fi
-}
-
-# GIT Save (push)
-function git:save()
-{
-  if [ -z "$1" ]; then
-    MESSAGE="WIP"
-  else
-    MESSAGE="$1"
-  fi
-  logger:divider
-  logger:info "Saving... ${MESSAGE}"
-  if git add . && git commit -m "${MESSAGE}" && git push; then
-    logger:success "Local Pushed to Remote Successfully!"
-  else
-    logger:failed "Failed to push to remote!"
-  fi
-}
-
-# GIT Sync (pull)
-function git:sync()
-{
-  logger:divider
-  logger:info "Synchronizing Remote Repository"
-  if git pull; then
-    logger:success "Syncronized Successfully!"
-  else
-    logger:failed "Syncronize Failed!"
   fi
 }

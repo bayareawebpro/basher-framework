@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
 # Publish MySql Config
-function make:database:myconf() {
+function make:myconf() {
   if path:is:file "$HOME/.my.cnf"; then
     logger:warning "$HOME/.my.cnf is already configured."
+    return 1
   elif ! path:is:file "$BASHER_PATH/resources/template-mysql.cnf"; then
     logger:failed "$BASHER_PATH/resources/template-mysql.cnf does not exist."
+    return 1
   else
     file:copy "$BASHER_PATH/resources/template-mysql.cnf" "$HOME/.my.cnf"
     logger:success "Installed .my.cnf because it did not exist."
@@ -31,17 +33,18 @@ function make:database() {
 
   if has:database "$DATABASE"; then
     logger:warning "Database Name: $DATABASE already exists."
-    if logger:confirm "Would you like to configure the environment file instead?"; then
-      make:database:env "$DATABASE"
-    fi
-  elif echo "CREATE DATABASE $DATABASE;" | mysql; then
+    make:database:env
+    return 1
+  fi
+
+  if echo "CREATE DATABASE $DATABASE;" | mysql; then
     logger:success "Database $DATABASE created successfully."
 
-    if logger:confirm "Would you like to configure the environment file?"; then
+    if string:is:empty "$2" && logger:confirm "Would you like to configure the environment file?"; then
       make:database:env "$DATABASE"
     fi
     if func:exists "on:database:created"; then
-      logger:debug "Deferring to on:database:created callback."
+      logger:debug "Calling on:database:created callback..."
       on:database:created "$DATABASE"
     fi
   else
@@ -68,7 +71,7 @@ function drop:database() {
   if echo "DROP DATABASE $DATABASE;" | mysql; then
       logger:success "Database $DATABASE dropped successfully."
       if func:exists "on:database:dropped"; then
-        logger:debug "Deferring to on:database:dropped callback."
+        logger:debug "Calling on:database:dropped callback..."
         on:database:dropped "$DATABASE"
       fi
     else
@@ -79,6 +82,9 @@ function drop:database() {
 
 # Make Database Environment
 function make:database:env() {
+  logger:divider
+  logger:info "Configuring Database Environment File..."
+
   if string:not:empty "$1"; then
     local BASHER_DATABASE=$1
   elif string:is:empty "$BASHER_DATABASE"; then

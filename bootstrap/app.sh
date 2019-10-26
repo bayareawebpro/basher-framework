@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ==== Core Bootstrap Methods ====
+# ==== Core Bootstrap Methods ==========================================================================================
 
 # Require file from directory.
 function app:require() {
@@ -15,28 +15,9 @@ function app:require:all() {
   done
 }
 
-# ==== Methods that Depend on Core Utilities ====
+# ==== Methods that Depend on Core Utilities ===========================================================================
 
-# Reboot Command
-function app:reboot() {
-  # shellcheck source=$BASHER_PATH/app.sh
-  clear && source "$BASHER_PATH/app.sh"
-  logger:success "Reloaded!"
-}
-
-# Publish Resource
-function app:publish() {
-  if path:is:file "$2"; then
-    logger:info "$2 already exists."
-  elif file:exists "$BASHER_PATH/$1" && file:copy "$BASHER_PATH/$1" "$2"; then
-    logger:success "Published $BASHER_PATH/$1 => $2 completed."
-  else
-    logger:failed "Publishing $BASHER_PATH/$1 => $2 failed."
-    return 1
-  fi
-}
-
-# Boot Application
+# ==== Boot Application ====
 function app:boot() {
   # shellcheck source=$BASHER_PATH/env.default.sh
   source "$BASHER_PATH/.env.default"
@@ -49,13 +30,20 @@ function app:boot() {
   app:banner
 }
 
-# Test Application
+# ==== Reboot Command ====
+function app:reboot() {
+  # shellcheck source=$BASHER_PATH/app.sh
+  clear && source "$BASHER_PATH/app.sh"
+  logger:success "Reloaded!"
+}
+
+# ==== Test Application ====
 function app:test() {
     # shellcheck source="$BASHER_PATH/tests/setup.sh"
     clear && source "$BASHER_PATH/tests/setup.sh"
 }
 
-# Display Application Banner
+# ==== Display Application Banner ====
 function app:banner() {
   if $BASHER_BANNER; then
     logger:divider
