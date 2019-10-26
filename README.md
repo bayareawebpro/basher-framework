@@ -62,11 +62,13 @@ make:laravel my-folder-name
 
 #### Database Commands
 ```shell script
-has:database git_test_output
-drop:database git_test_output
-make:database my_database
-make:database:env my_database
 make:database:myconf
+make:database:env my_database
+```
+```shell script
+has:database my_database
+drop:database my_database
+make:database my_database
 ```
 ---
 
