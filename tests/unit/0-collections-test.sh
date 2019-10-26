@@ -1,13 +1,27 @@
 #!/usr/bin/env bash
 collect:make
-collect:count
+
+num:is:equal "$(collect:count)" 0
+assert:truthy "collect:count 0"
+
 collect:push "Apple"
 collect:push "Banana"
 collect:push "Orange"
-collect:all
+num:is:equal "$(collect:count)" 3
+assert:truthy "collect:pushed 3"
+
+str:is:equal "$(collect:all)" "Apple Banana Orange"
+assert:truthy "collect:all Apple Banana Orange"
+
 collect:set 1 "Pizza"
-collect:all
-collect:filter "Pizza"
-for val in $(collect:all); do
-  echo "Collection Has $val"
+
+str:is:equal "$(collect:all)" "Pizza Banana Orange"
+assert:truthy "collect:set Pizza"
+
+str:is:equal "$(collect:filter "Pizza")" "Banana Orange"
+assert:truthy "collect:filter not has Pizza"
+
+
+for item in $(collect:all); do
+echo "$item"
 done

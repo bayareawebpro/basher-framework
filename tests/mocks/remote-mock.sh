@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-echo "Remote Script Argument Recieved: $1"
-echo "Remote Script Executing as $(whoami)"
+echo "Script Detected Self: $(basename "$1")"
+echo "Script Executing as $(whoami)"
+echo "Script Argument Recieved: $2"
