@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-clear
 MOCKED="$BASHER_PATH/tests/mocks/cron-mock.sh"
-source "$BASHER_PATH/tests/setup.sh"
 
 cron:list
 assert:truthy "cron:list"
