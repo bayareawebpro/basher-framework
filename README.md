@@ -71,7 +71,6 @@ database:export my_database ~/
 database:import my_database ~/backup.sql
 ```
 ---
-
 #### Installers
 ```shell script
 install:animatecss
@@ -282,6 +281,18 @@ process:log my-script.sh # read my-script.sh.log
 ```shell script
 if process:running my-script.sh; then
   process:log my-script.sh 
+fi
+```
+
+## CronTab
+```shell script
+cron:list
+cron:install my-script.sh
+cron:uninstall my-script.sh
+```
+```shell script
+if cron:has my-script.sh; then
+  logger:success "cron:has my-script.sh"
 fi
 ```
 ---

@@ -40,4 +40,4 @@ function run:test() {
 
 # Test Run
 logger:info "Test Run Ready..."
-run:test
+#run:test

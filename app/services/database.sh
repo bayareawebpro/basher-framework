@@ -18,13 +18,10 @@ function database:import() {
     logger:warning "Import path not defined."
     logger:input "Enter IMPORT_PATH:" "IMPORT_PATH"
   fi
-
   if (! file:exists "$IMPORT_PATH" || ! file:readable "$IMPORT_PATH"); then
     logger:failed "Import path ($IMPORT_PATH) is not readable or does not exist."
     return 1
   fi
-
-  IMPORT_PATH="$IMPORT_PATH/$DATABASE-latest.sql"
   if mysql -e 'SET autocommit=0; USE `'"$DATABASE"'`; source '"$IMPORT_PATH"'; COMMIT;'; then
     logger:success "Database $DATABASE imported successfully."
   else
@@ -80,24 +77,19 @@ function has:database() {
 # Make New Database
 function make:database() {
   local DATABASE="${1//-/_}"
-
   logger:divider
   logger:info "Creating Database..."
-
   if str:empty "$DATABASE"; then
     logger:warning "Database Name not defined."
     logger:input "Enter DATABASE:" "DATABASE"
   fi
-
   if has:database "$DATABASE"; then
     logger:warning "Database Name: $DATABASE already exists."
     make:database:env
     return 1
   fi
-
   if echo "CREATE DATABASE $DATABASE;" | mysql; then
     logger:success "Database $DATABASE created successfully."
-
     if str:empty "$2" && logger:confirm "Would you like to configure the environment file?"; then
       make:database:env "$DATABASE"
     fi
@@ -113,18 +105,14 @@ function make:database() {
 # Drop Existing Database
 function drop:database() {
   local DATABASE="${1//-/_}"
-
   logger:divider
   logger:info "Dropping Database..."
-
   if str:empty "$DATABASE"; then
     logger:input "Enter DATABASE:" "DATABASE"
   fi
-
   if ! has:database "$DATABASE"; then
     logger:failed "Database $DATABASE does not exist."
   fi
-
   if echo "DROP DATABASE $DATABASE;" | mysql; then
     logger:success "Database $DATABASE dropped successfully."
     if func:exists "on:database:dropped"; then
@@ -140,25 +128,21 @@ function drop:database() {
 function make:database:env() {
   logger:divider
   logger:info "Configuring Database Environment File..."
-
   if str:filled "$1"; then
     local BASHER_DATABASE=$1
   elif str:empty "$BASHER_DATABASE"; then
     logger:input "Enter DB_DATABASE:" "DATABASE"
   fi
-
   if str:filled "$2"; then
     local BASHER_DB_USER=$2
   elif str:empty "$BASHER_DB_USER"; then
     logger:input "Enter DB_USERNAME:" "BASHER_DB_USER"
   fi
-
   if str:filled "$3"; then
     local BASHER_DB_PASS=$3
   elif str:empty "$BASHER_DB_PASS"; then
     logger:input "Enter DB_PASSWORD:" "BASHER_DB_PASS"
   fi
-
   if path:is:file ".env"; then
     sed -i '' "s/DB_DATABASE=.*/DB_DATABASE=$BASHER_DATABASE/" .env
     sed -i '' "s/DB_USERNAME=.*$/DB_USERNAME=$BASHER_DB_USER/" .env

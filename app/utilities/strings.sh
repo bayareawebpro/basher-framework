@@ -18,7 +18,6 @@ function str:not:equal(){
 function str:matches:regex(){
   [[ $1 =~ $2 ]];
 }
-
 function str:replace:first(){
   echo "${1/$2/$3}"
 }
