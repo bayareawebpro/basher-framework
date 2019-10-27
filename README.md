@@ -67,6 +67,8 @@ make:myconf
 has:database my_database
 drop:database my_database
 make:database my_database
+database:export my_database ~/
+database:import my_database ~/backup.sql
 ```
 ---
 
@@ -247,14 +249,16 @@ file:remove:force $FILE
 ```
 
 ```shell script
-directory:make $DIR
-directory:remove $DIR
-directory:force:remove $DIR
-directory:change $DIR
-directory:previous
 directory:list .
 directory:files .
 directory:folders .
+directory:remove $DIR
+directory:force:remove $DIR
+directory:change $DIR
+directory:make $DIR
+directory:previous
+directory:trim ~/Downloads 1 # Older than 7 days, will confirm
+directory:trim ~/Downloads 1 true # No confirmation
 ```
 
 ```shell script

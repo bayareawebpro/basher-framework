@@ -1,10 +1,61 @@
 #!/usr/bin/env bash
-
 function on:database:created() {
   logger:debug "on:database:created (define function to use hook)"
 }
 function on:database:dropped() {
   logger:debug "on:database:dropped (define function to use hook)"
+}
+
+function database:import() {
+  local DATABASE="${1//-/_}"
+  local IMPORT_PATH="$2"
+  logger:divider && logger:info "Importing Database..."
+  if str:empty "$DATABASE"; then
+    logger:warning "Database Name not defined."
+    logger:input "Enter DATABASE:" "DATABASE"
+  fi
+  if str:empty "$IMPORT_PATH"; then
+    logger:warning "Import path not defined."
+    logger:input "Enter IMPORT_PATH:" "IMPORT_PATH"
+  fi
+
+  if (! file:exists "$IMPORT_PATH" || ! file:readable "$IMPORT_PATH"); then
+    logger:failed "Import path ($IMPORT_PATH) is not readable or does not exist."
+    return 1
+  fi
+
+  IMPORT_PATH="$IMPORT_PATH/$DATABASE-latest.sql"
+  if mysql -e 'SET autocommit=0; USE `'"$DATABASE"'`; source '"$IMPORT_PATH"'; COMMIT;'; then
+    logger:success "Database $DATABASE imported successfully."
+  else
+    logger:failed "Database: $DATABASE failed to be imported."
+    return 1
+  fi
+}
+
+function database:export() {
+  local DATABASE="${1//-/_}"
+  local EXPORT_PATH="$2"
+  logger:divider && logger:info "Exporting Database..."
+  if str:empty "$DATABASE"; then
+    logger:warning "Database Name not defined."
+    logger:input "Enter DATABASE:" "DATABASE"
+  fi
+  if ! has:database "$DATABASE"; then
+    logger:failed "Database: $DATABASE does not exist or connection cannot be established."
+    return 1
+  fi
+  if str:empty "$EXPORT_PATH"; then
+    logger:warning "Database Name not defined."
+    logger:input "Enter DATABASE:" "EXPORT_PATH"
+  fi
+  EXPORT_PATH="$EXPORT_PATH/$DATABASE-latest.sql"
+  if mysqldump --single-transaction --no-create-db --quick --default-character-set=utf8mb4 "$DATABASE" >"$EXPORT_PATH"; then
+    logger:success "Database $DATABASE exported to $EXPORT_PATH."
+  else
+    logger:failed "Database: $DATABASE failed to be exported."
+    return 1
+  fi
 }
 
 # Publish MySql Config
@@ -71,18 +122,18 @@ function drop:database() {
   fi
 
   if ! has:database "$DATABASE"; then
-      logger:failed "Database $DATABASE does not exist."
+    logger:failed "Database $DATABASE does not exist."
   fi
 
   if echo "DROP DATABASE $DATABASE;" | mysql; then
-      logger:success "Database $DATABASE dropped successfully."
-      if func:exists "on:database:dropped"; then
-        on:database:dropped "$DATABASE"
-      fi
-    else
-      logger:failed "Database $DATABASE failed to be dropped."
-      return 1
+    logger:success "Database $DATABASE dropped successfully."
+    if func:exists "on:database:dropped"; then
+      on:database:dropped "$DATABASE"
     fi
+  else
+    logger:failed "Database $DATABASE failed to be dropped."
+    return 1
+  fi
 }
 
 # Make Database Environment

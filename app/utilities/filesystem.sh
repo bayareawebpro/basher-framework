@@ -52,7 +52,22 @@ function directory:remove(){
 function directory:force:remove(){
   rm -rf "$1" || return 1
 }
-
+function directory:trim(){
+  logger:divider && logger:info "Trimming Old Files..."
+  if path:is:directory "$1"; then
+    if str:empty "$3"; then
+      logger:text "$(find "$1" -maxdepth 1 -name "*.*" -mtime "+$2" -type f)"
+      if ! logger:confirm "Delete Files?"; then
+        return 1
+      fi
+    fi
+    if find "$1" -maxdepth 1 -name "*.*" -mtime "+$2" -type f -delete; then
+      logger:success "Old Files Trimmed Successfully."
+    fi
+  else
+    logger:failed "Trimming Old Files Failed.  Directory $1 not found."
+  fi
+}
 function make:archive(){
   zip -r "$1" "$2" || return 1
 }
