@@ -49,12 +49,21 @@ function directory:previous(){
 function directory:remove(){
   rm -r "$1" || return 1
 }
+function directory:force:remove(){
+  rm -rf "$1" || return 1
+}
 
 # ====== File Operations ================
 function file:read(){
   while read -r line; do
     echo "$line"
   done < "$1"
+}
+function file:remove(){
+  rm "$1" || return 1
+}
+function file:force:remove(){
+  rm -f "$1" || return 1
 }
 function file:get(){
   cat "$1"
@@ -71,13 +80,13 @@ function file:copy(){
 function file:exists(){
   [[ -e "$1" ]]
 }
-function file:readable(){
+function file:is:readable(){
   [[ -r "$1" ]]
 }
-function file:writable(){
+function file:is:writable(){
   [[ -w "$1" ]]
 }
-function file:executable(){
+function file:is:executable(){
   [[ -x "$1" ]]
 }
 function file:make:executable(){
@@ -89,12 +98,12 @@ function file:is:symlink(){
 function file:not:empty(){
   [[ -s "$1" ]]
 }
-function file:newer:than(){
+function file:is:newer(){
   [[ "$1" -nt "$2" ]]
 }
-function file:older:than(){
+function file:is:older(){
   [[ "$1" -ot "$2" ]]
 }
-function file:equal:to(){
+function file:equals(){
   [[ "$1" -ef "$2" ]]
 }

@@ -36,7 +36,7 @@ function process:start() {
     process:stop "$1"
   fi
 
-  if ! file:executable "$1" && ! file:make:executable "$1"; then
+  if ! file:is:executable "$1" && ! file:make:executable "$1"; then
     logger:warning "File $1 is not Executable."
     return 1
   fi

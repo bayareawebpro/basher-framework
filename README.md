@@ -125,9 +125,13 @@ php:dusk
 
 ## App
 ```shell script
+app:test
 app:boot
 app:reboot
-app:test
+```
+
+```shell script
+app:publish "resources/.myconf" "$HOME/.myconf"
 ```
 
 ## Require
@@ -147,6 +151,10 @@ remote:ping "http://some.app"
 ```shell script
 func:exists "my:func"
 func:inspect "my:func"
+```
+
+See Unit Tests
+```shell script
 func:success # Last Command Succeeded
 func:failed # Last Command Failed
 ```
@@ -204,33 +212,43 @@ done
 ## Filesystem
 
 ```shell script
-path:base $PATH
-path:filename $PATH
-path:extension $PATH
-path:is:file $PATH
-path:is:directory $PATH
+path:base $FILE
+path:filename $FILE
+path:extension $FILE
+
+path:is:file $FILE
+path:is:directory $DIR
 ```
 
 ```shell script
-file:read $PATH
-file:exists $PATH
-file:writable $PATH
-file:readable $PATH
-file:executable $PATH
-file:is:symlink $PATH
-file:not:empty $PATH
-file:newer:than $PATH_A $PATH_B
-file:older:than $PATH_A $PATH_B
-file:equal:to $PATH_A $PATH_B
-file:get $PATH
-file:put $CONTENT $PATH
-file:append $CONTENT $PATH
+file:exists $FILE
+
+file:is:executable $FILE
+file:make:executable $FILE
+
+file:is:writable $FILE
+file:is:readable $FILE
+file:is:symlink $FILE
+file:not:empty $FILE
+
+file:is:newer $FILE_A $FILE_B
+file:is:older $FILE_A $FILE_B
+file:equals $FILE_A $FILE_B
+
+file:get $FILE
+file:put $CONTENT $FILE
+file:append $CONTENT $FILE
+file:read $FILE
+
+file:remove $FILE
+file:remove:force $FILE
 ```
 
 ```shell script
-directory:make $PATH_A
-directory:remove $PATH_A
-directory:change $PATH_A
+directory:make $DIR
+directory:remove $DIR
+directory:force:remove $DIR
+directory:change $DIR
 directory:previous
 directory:list .
 directory:files .
