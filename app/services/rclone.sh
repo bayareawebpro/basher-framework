@@ -15,12 +15,12 @@ function rclone:config:edit(){
   nano "$HOME/.config/rclone/rclone.conf"
 }
 function rclone:sync:cdn(){
-  rclone sync --ignore-existing --cache-rps 180 "$1":"$2" "$3" >> "$4" 2>&1
-  open -a Console "$LOG"
+  rclone sync --progress --ignore-existing --cache-rps 180 "$1":"$2" "$3"
+   #>> "$4" 2>&1
 }
 function rclone:sync(){
-  rclone sync --progress --exclude-from "$BASHER_PATH/resources/rclone-blacklist.conf" "$1":"$2" "$3" >> "$4" 2>&1
-  open -a Console "$LOG"
+  rclone sync --progress --exclude-from "$BASHER_PATH/resources/rclone-blacklist.conf" "$1":"$2" "$3"
+ #>> "$4" 2>&1
 }
 
 # Database Snapshot Dumps
@@ -38,7 +38,7 @@ function backup:bawp(){
   local SOURCE=/home/forge
   local CONNECTION=bawp-sfprimary
   local DESTINATION=~/Backups/bawp-sfprimary
-  local LOG=~/Backups/a1autotransport.com/logs/snapshots-$(date:filename).log
+  local LOG=~/Backups/bawp-sfprimary/logs/snapshots-$(date:filename).log
   rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
 }
 
