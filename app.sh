@@ -3,9 +3,6 @@
 # dan@bayareawebpro.com
 # CheatSheet: https://devhints.io/bash
 
-# Bootstrap
-export BASHER_PATH="${0%/*}"
-
 # Require Files
 # shellcheck source="$BASHER_PATH/bootstrap/app.sh"
 source "$BASHER_PATH/bootstrap/app.sh"

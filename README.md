@@ -9,10 +9,12 @@ ______  _______ _______ _     _ _______  ______
 https://imgur.com/a/GNsxOb5
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
-- Or, add to to: ~/.profile
+- Add to to: ~/.profile
 
 ```shell script
-source /Users/me/basher-framework/app.sh
+#!/usr/bin/env bash
+# shellcheck source=$HOME/basher-framework/app.sh
+source "$HOME/basher-framework/app.sh"
 ```
 
 ---

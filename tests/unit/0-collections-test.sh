@@ -14,7 +14,7 @@ assert:truthy "collect:pushed 3"
 str:is:equal "$(collect:all)" "Apple Banana Orange"
 assert:truthy "collect:all Apple Banana Orange"
 
-collect:set 1 "Pizza"
+collect:set 0 "Pizza"
 str:is:equal "$(collect:all)" "Pizza Banana Orange"
 assert:truthy "collect:set Pizza"
 
