@@ -13,10 +13,15 @@ https://imgur.com/a/GNsxOb5
 
 ```shell script
 #!/usr/bin/env bash
-# shellcheck source=$HOME/basher-framework/app.sh
-source "$HOME/basher-framework/app.sh"
-```
+export BASHER_PATH="$HOME/basher-framework"
 
+# shellcheck source=$BASHER_PATH/app.sh
+source "$BASHER_PATH/app.sh"
+```
+Or Standalone
+```shell script
+/usr/bin/env bash ~/basher-framework/app.sh
+```
 ---
 
 ## Config

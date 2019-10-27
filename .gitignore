@@ -3,3 +3,5 @@
 vendor
 .env
 test-output
+process-mock.sh.log
+process-mock.sh.lock

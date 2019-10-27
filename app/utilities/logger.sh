@@ -52,6 +52,7 @@ function logger:text() {
 }
 
 function logger:divider() {
+  local COLUMNS=$(tput cols)
   for ((i = 1 ; i <= (COLUMNS / 2); i++)); do
     printf "%s\r""$(jot -s "=" -b "=" $((i)))"
     sleep 0.0001
