@@ -257,8 +257,8 @@ directory:force:remove $DIR
 directory:change $DIR
 directory:make $DIR
 directory:previous
-directory:trim ~/Downloads 1 # Older than 7 days, will confirm
-directory:trim ~/Downloads 1 true # No confirmation
+directory:trim ~/Downloads 1 # Older than 1 day, with confirm
+directory:trim ~/Downloads 1 true # With no confirm
 ```
 
 ```shell script
