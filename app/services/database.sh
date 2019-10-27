@@ -60,13 +60,9 @@ function make:myconf() {
   if path:is:file "$HOME/.my.cnf"; then
     logger:warning "$HOME/.my.cnf is already configured."
     return 1
-  elif ! path:is:file "$BASHER_PATH/resources/template-mysql.cnf"; then
-    logger:failed "$BASHER_PATH/resources/template-mysql.cnf does not exist."
-    return 1
-  else
-    file:copy "$BASHER_PATH/resources/template-mysql.cnf" "$HOME/.my.cnf"
-    logger:success "Installed .my.cnf because it did not exist."
   fi
+  file:copy "$BASHER_PATH/resources/mysql.conf" "$HOME/.my.cnf"
+  logger:success "Installed .my.cnf."
 }
 
 # Has Database?

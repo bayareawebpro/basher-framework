@@ -4,20 +4,40 @@ function rclone:install(){
   logger:warning "Enter Your Password..."
   curl https://rclone.org/install.sh | sudo bash
   logger:success "RClone Installed"
+  file:copy "$BASHER_PATH/resources/rclone.conf" "$HOME/.config/rclone/rclone.conf"
+  logger:success "Created: $HOME/.config/rclone/rclone.conf"
   rclone config
 }
+function rclone:config(){
+  file:read "$HOME/.config/rclone/rclone.conf"
+}
+function rclone:config:edit(){
+  nano "$HOME/.config/rclone/rclone.conf"
+}
 function rclone:sync:cdn(){
-  rclone sync --ignore-existing --cache-rps 180 "$1":"$2" "$3" >> "$(date:filename).log" 2>&1
+  rclone sync --ignore-existing --cache-rps 180 "$1":"$2" "$3" >> "$4" 2>&1
+  open -a Console "$LOG"
 }
 function rclone:sync(){
-  rclone sync -v "$1":"$2" "$3" >> "$4" 2>&1
+  rclone sync --progress --exclude-from "$BASHER_PATH/resources/rclone-blacklist.conf" "$1":"$2" "$3" >> "$4" 2>&1
+  open -a Console "$LOG"
 }
 
 # Database Snapshot Dumps
 function backup:a1auto(){
+  open -a Console
   local SOURCE=/home/forge/snapshots
   local CONNECTION=a1auto-sfprimary
-  local DESTINATION=~/Backups/a1autotransport.com/snapshots/new
+  local DESTINATION=~/Backups/a1autotransport.com/snapshots
+  local LOG=~/Backups/a1autotransport.com/logs/snapshots-$(date:filename).log
+  rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
+}
+
+# Database Snapshot Dumps
+function backup:bawp(){
+  local SOURCE=/home/forge
+  local CONNECTION=bawp-sfprimary
+  local DESTINATION=~/Backups/bawp-sfprimary
   local LOG=~/Backups/a1autotransport.com/logs/snapshots-$(date:filename).log
   rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
 }

@@ -272,8 +272,11 @@ done
 ## RClone
 ```shell script
 rclone:install
+rclone:config
+rclone:config:edit
 rclone:sync my-sftp-connection /home/forge $DESTINATION $LOG_FILE_PATH
 rclone:sync:cdn my-cdn-connection my-bucket $DESTINATION $LOG_FILE_PATH
+
 ```
 ---
 
