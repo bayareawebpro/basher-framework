@@ -228,6 +228,10 @@ path:is:directory $DIR
 ```
 
 ```shell script
+make:archive '/path/to/output.zip' $DIR
+```
+
+```shell script
 file:exists $FILE
 
 file:is:executable $FILE

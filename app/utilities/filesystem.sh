@@ -53,6 +53,10 @@ function directory:force:remove(){
   rm -rf "$1" || return 1
 }
 
+function make:archive(){
+  zip -r "$1" "$2" || return 1
+}
+
 # ====== File Operations ================
 function file:read(){
   while read -r line; do
