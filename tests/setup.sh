@@ -30,6 +30,7 @@ function run:test() {
     logger:divider
     local CASE="$(basename "$FILE")"
     if logger:confirm "Run TestCase $CASE?"; then
+      clear
       logger:info "Running TestCase $CASE..."
       # shellcheck source=$FILE
       source "$FILE"

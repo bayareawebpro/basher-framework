@@ -5,12 +5,14 @@ function php:quality() {
   if php:lint && php:test; then
     logger:celebrate "Everything Looks Good..."
   else
-    logger:error "Analysis Incomplete"
+    logger:error "Analysis Incomplete."
   fi
 }
+
 function php:lint(){
+  logger:divider
+  logger:info "Linting Sourcecode..."
   if file:exists "vendor/bin/phpstan"; then
-    logger:divider && logger:info "Linting Sourcecode..."
     if vendor/bin/phpstan analyse; then
       logger:success "Sourcecode Looks Good..."
     else
@@ -23,16 +25,17 @@ function php:lint(){
       composer install nunomaduro/larastan
       return "$(php:lint)"
     else
-      return 2
+      return 1
     fi
   fi
 }
 
 function php:test(){
+  logger:divider
+  logger:info "Running Unit Tests..."
   if file:exists "vendor/bin/phpunit"; then
-    logger:divider && logger:info "Running Unit Tests..."
     if vendor/bin/phpunit; then
-      logger:success "Running Unit Tests..."
+      logger:success "Unit Tests Passed..."
     else
       logger:failed "Unit Tests Failed!"
       return 1
@@ -43,18 +46,19 @@ function php:test(){
       composer install phpunit/phpunit
       return "$(php:test)"
     else
-      return 2
+      return 1
     fi
   fi
 }
 
 function php:dusk(){
+  logger:divider
+  logger:info "Running Browser Tests..."
   if file:exists "vendor/bin/dusk"; then
-    logger:divider && logger:info "Running Unit Tests..."
     if vendor/bin/dusk; then
-      logger:success "Running Browser Tests..."
+      logger:success "Launching Dusk..."
     else
-      logger:failed "Browser Tests Failed!"
+      logger:failed "Launching Dusk Failed!"
       return 1
     fi
   else
@@ -63,7 +67,7 @@ function php:dusk(){
       composer install laravel/dusk
       return "$(php:dusk)"
     else
-      return 2
+      return 1
     fi
   fi
 }

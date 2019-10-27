@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+function on:database:created() {
+  logger:debug "on:database:created (define function to use hook)"
+}
+function on:database:dropped() {
+  logger:debug "on:database:dropped (define function to use hook)"
+}
+
 # Publish MySql Config
 function make:myconf() {
   if path:is:file "$HOME/.my.cnf"; then
@@ -44,7 +51,6 @@ function make:database() {
       make:database:env "$DATABASE"
     fi
     if func:exists "on:database:created"; then
-      logger:debug "Calling on:database:created callback..."
       on:database:created "$DATABASE"
     fi
   else
@@ -71,7 +77,6 @@ function drop:database() {
   if echo "DROP DATABASE $DATABASE;" | mysql; then
       logger:success "Database $DATABASE dropped successfully."
       if func:exists "on:database:dropped"; then
-        logger:debug "Calling on:database:dropped callback..."
         on:database:dropped "$DATABASE"
       fi
     else

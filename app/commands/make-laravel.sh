@@ -1,11 +1,11 @@
 #!/bin/bash
 function on:laravel:install() {
-  logger:debug "on:laravel:install (define function to use hook)"
+  logger:debug "on:laravel:install"
   #install:tailwindcss
   #install:animatecss
 }
 function on:laravel:created() {
-  logger:debug "on:laravel:created (define function to use hook)"
+  logger:debug "on:laravel:created"
 }
 
 function make:laravel() {
@@ -14,7 +14,13 @@ function make:laravel() {
 
   if make:project "$PROJECT"; then
     logger:divider && logger:info "Running Composer Install..."
-    composer create-project --prefer-dist laravel/laravel ./
+
+    if composer create-project --prefer-dist laravel/laravel ./; then
+      logger:success "Composer Install Completed"
+    else
+      logger:failed "Composer Install Failed"
+      return 1
+    fi
 
     # Callback Hook
     if func:exists "on:laravel:install"; then
@@ -25,6 +31,8 @@ function make:laravel() {
     if logger:confirm "Create Database?"; then
       if make:database "$PROJECT" && php artisan migrate; then
         logger:success "Database created & configured."
+      else
+        logger:failed "Database failed to be created / migrated."
       fi
    fi
 

@@ -47,6 +47,9 @@ assert:truthy "path:is:file file.txt"
 file:is:readable "$PWD/file.txt"
 assert:truthy "file:is:readable file.txt"
 
+file:is:symlink "$PWD/file.txt"
+assert:falsy "file:is:symlink file.txt"
+
 file:is:writable "$PWD/file.txt"
 assert:truthy "file:is:writable file.txt"
 

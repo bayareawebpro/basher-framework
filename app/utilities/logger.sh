@@ -40,18 +40,15 @@ function logger:success() {
 }
 
 function logger:celebrate() {
-  local compiled=$(printf "%s\r""➜ 🎉 $1")
-  colors:white "$compiled"
+  colors:white "$(printf "%s\r""➜ 🎉 $1")"
 }
 
 function logger:debug() {
-  local compiled=$(printf "%s\r""$1")
-  colors:white "$compiled"
+  colors:white "$(printf "%s\r""$1")"
 }
 
 function logger:text() {
-  local compiled=$(printf "%s\r""➜ $1")
-  colors:whiteb "$compiled"
+  colors:white "$(printf "%s\r""➜ $1")"
 }
 
 function logger:divider() {

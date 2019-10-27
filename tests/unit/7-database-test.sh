@@ -3,11 +3,6 @@
 if has:database; then
   drop:database git_test_output > /dev/null 2>&1
 fi
-if file:exists; then
-  file:remove
-fi
-
-assert:falsy "make:myconf"
 
 has:database  git_test_output
 assert:falsy  "has:database"

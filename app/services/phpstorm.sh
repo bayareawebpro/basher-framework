@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 function phpstorm:launch(){
-  /Applications/PhpStorm.app/Contents/MacOS/phpstorm
+  logger:info "Launching PhpStorm..."
+  /Applications/PhpStorm.app/Contents/MacOS/phpstorm > /dev/null 2>&1
 }
 function phpstorm:open(){
-  /Applications/PhpStorm.app/Contents/MacOS/phpstorm "$1"
+  logger:info "Launching PhpStorm Project $(basename "$1")..."
+  /Applications/PhpStorm.app/Contents/MacOS/phpstorm "$1" > /dev/null 2>&1
 }
