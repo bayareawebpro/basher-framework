@@ -5,3 +5,4 @@ vendor
 test-output
 process-mock.sh.log
 process-mock.sh.lock
+backup.sh

@@ -56,7 +56,7 @@ function directory:trim(){
   logger:divider && logger:info "Trimming Old Files..."
   if path:is:directory "$1"; then
     if str:empty "$3"; then
-      logger:text "$(find "$1" -maxdepth 1 -name "*.*" -mtime "+$2" -type f)"
+      logger:debug "$(find "$1" -maxdepth 1 -name "*.*" -mtime "+$2" -type f)"
       if ! logger:confirm "Delete Files?"; then
         return 1
       fi

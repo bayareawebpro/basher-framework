@@ -262,10 +262,10 @@ directory:trim ~/Downloads 1 true # With no confirm
 
 ```shell script
 for FILE in $(directory:files "."); do
-  logger:text "$FILE"
+  logger:debug "$FILE"
 done
 for FOLDER in $(directory:folders "."); do
-  logger:text "$FOLDER"
+  logger:debug "$FOLDER"
 done
 ```
 
@@ -318,7 +318,7 @@ fi
 logger:divider
 logger:blank
 logger:debug "Hmmm..."
-logger:text "ok..."
+logger:debug "ok..."
 logger:info "ready."
 logger:error "Error!"
 logger:alert "Security!"

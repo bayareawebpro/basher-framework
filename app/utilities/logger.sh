@@ -1,65 +1,51 @@
 #!/usr/bin/env bash
 function logger:confirm() {
-  colors:yellowb "$(printf "%s\r""➜ ❔ $1 [y/n]")"
+  colors:yellowb "➜ ❔ $1 [y/n]"
   local ANSWER
   read -r ANSWER
   [[ "$ANSWER" == "y" ]]
 }
-
 function logger:input() {
-  colors:yellowb "$(printf "%s\r""➜ ❔ $1")"
+  colors:yellowb "➜ ❔ $1"
   read -r "$2"
 }
-
 function logger:info() {
-  colors:lightblue "$(printf "%s\r""➜ 🤖 $1")"
+  colors:lightblueb "➜ 🤖 $1"
 }
-
 function logger:warning() {
-  colors:yellow "$(printf "%s\r""➜ ❕ $1")"
+  colors:yellowb "➜ ❕ $1"
 }
-
 function logger:error() {
-  colors:red "$(printf "%s\r""➜ 🥵 $1")"
+  colors:redb "➜ 🥵 $1"
 }
-
 function logger:failed() {
-  colors:red "$(printf "%s\r""➜ ❌  $1")"
+  colors:redb "➜ ❌  $1"
 }
-
 function logger:denied() {
-  colors:red "$(printf "%s\r""➜ 🚫 $1")"
+  colors:redb "➜ 🚫 $1"
 }
-
 function logger:alert() {
-  colors:redb "$(printf "%s\r""➜ 🚨 $1")"
+  colors:redb "➜ 🚨 $1"
 }
-
 function logger:success() {
-  colors:green "$(printf "%s\r""➜ ✅  $1")"
+  colors:greenb "➜ ✅  $1"
 }
-
 function logger:celebrate() {
-  colors:white "$(printf "%s\r""➜ 🎉 $1")"
+  colors:whiteb "➜ 🎉 $1"
 }
-
 function logger:debug() {
-  colors:white "$(printf "%s\r""$1")"
+  colors:white "➜ $1\r"
 }
-
-function logger:text() {
-  colors:white "$(printf "%s\r""➜ $1")"
-}
-
 function logger:divider() {
-  local COLUMNS=$(tput cols)
-  for ((i = 1 ; i <= (COLUMNS / 2); i++)); do
-    printf "%s\r""$(jot -s "=" -b "=" $((i)))"
-    sleep 0.00001
-  done
+  if test -t 1; then
+    local COLUMNS=$(tput cols)
+    for ((i = 1 ; i <= (COLUMNS / 2); i++)); do
+      printf "%s\r""$(jot -s "=" -b "=" $((i)))"
+      sleep 0.00001
+    done
+  fi
   logger:blank
 }
-
 function logger:blank() {
   printf "\n"
 }
@@ -103,66 +89,129 @@ function colors:show() {
 }
 
 function colors:black() {
-  echo -e "${black}${1}${end}"
+  if test -t 1; then
+    echo -e "${black}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:blackb() {
-  echo -e "${blackb}${1}${end}"
+  if test -t 1; then
+    echo -e "${blackb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:white() {
-  echo -e "${white}${1}${end}"
+  if test -t 1; then
+    echo -e "${white}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:whiteb() {
-  echo -e "${whiteb}${1}${end}"
+  if test -t 1; then
+    echo -e "${whiteb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:red() {
-  echo -e "${red}${1}${end}"
+  if test -t 1; then
+    echo -e "${red}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:redb() {
-  echo -e "${redb}${1}${end}"
+  if test -t 1; then
+    echo -e "${redb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:green() {
-  echo -e "${green}${1}${end}"
+  if test -t 1; then
+    echo -e "${green}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:greenb() {
-  echo -e "${greenb}${1}${end}"
+  if test -t 1; then
+    echo -e "${greenb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:yellow() {
-  echo -e "${yellow}${1}${end}"
+  if test -t 1; then
+    echo -e "${yellow}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:yellowb() {
-  echo -e "${yellowb}${1}${end}"
+  if test -t 1; then
+    echo -e "${yellowb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:blue() {
-  echo -e "${blue}${1}${end}"
+  if test -t 1; then
+    echo -e "${blue}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:blueb() {
-  echo -e "${blueb}${1}${end}"
+  if test -t 1; then
+    echo -e "${blueb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:purple() {
-  echo -e "${purple}${1}${end}"
+  if test -t 1; then
+    echo -e "${purple}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:purpleb() {
-  echo -e "${purpleb}${1}${end}"
+  if test -t 1; then
+    echo -e "${purpleb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:lightblue() {
-  echo -e "${lightblue}${1}${end}"
+  if test -t 1; then
+    echo -e "${lightblue}${1}${end}"
+  else
+    echo "$1"
+  fi
 }
 
 function colors:lightblueb() {
-  echo -e "${lightblueb}${1}${end}"
-
+  if test -t 1; then
+    echo -e "${lightblueb}${1}${end}"
+  else
+    echo "$1"
+  fi
 }

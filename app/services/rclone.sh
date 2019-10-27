@@ -15,10 +15,8 @@ function rclone:config:edit(){
   nano "$HOME/.config/rclone/rclone.conf"
 }
 function rclone:sync:cdn(){
-  rclone sync --progress --ignore-existing --cache-rps 180 "$1":"$2" "$3"
-   #>> "$4" 2>&1
+  rclone sync --ignore-existing --cache-rps 180 "$1":"$2" "$3" >> "$4" 2>&1
 }
 function rclone:sync(){
-  rclone sync --progress --exclude-from "$BASHER_PATH/resources/rclone-blacklist.conf" "$1":"$2" "$3"
- #>> "$4" 2>&1
+  rclone sync --exclude-from "$BASHER_PATH/resources/rclone-blacklist.conf" "$1":"$2" "$3" >> "$4" 2>&1
 }
