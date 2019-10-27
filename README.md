@@ -268,6 +268,13 @@ for FOLDER in $(directory:folders "."); do
   logger:text "$FOLDER"
 done
 ```
+
+## RClone
+```shell script
+rclone:install
+rclone:sync my-sftp-connection /home/forge $DESTINATION $LOG_FILE_PATH
+rclone:sync:cdn my-cdn-connection my-bucket $DESTINATION $LOG_FILE_PATH
+```
 ---
 
 ## Processes
