@@ -55,15 +55,6 @@ export BASHER_DB_PASS="root"
 ```shell script
 make:project my-folder-name
 switch:project my-folder-name
-```
-
-#### Make Laravel (macro)
-- Makes Project
-- Creates Database
-- Sets Env Vars
-- Ready to rock with a single command.
-
-```shell script
 make:laravel my-folder-name
 ```
 
