@@ -22,31 +22,3 @@ function rclone:sync(){
   rclone sync --progress --exclude-from "$BASHER_PATH/resources/rclone-blacklist.conf" "$1":"$2" "$3"
  #>> "$4" 2>&1
 }
-
-# Database Snapshot Dumps
-function backup:a1auto(){
-  open -a Console
-  local SOURCE=/home/forge/snapshots
-  local CONNECTION=a1auto-sfprimary
-  local DESTINATION=~/Backups/a1autotransport.com/snapshots
-  local LOG=~/Backups/a1autotransport.com/logs/snapshots-$(date:filename).log
-  rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
-}
-
-# Database Snapshot Dumps
-function backup:bawp(){
-  local SOURCE=/home/forge
-  local CONNECTION=bawp-sfprimary
-  local DESTINATION=~/Backups/bawp-sfprimary
-  local LOG=~/Backups/bawp-sfprimary/logs/snapshots-$(date:filename).log
-  rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
-}
-
-# CDN Storage
-function backup:a1auto:cdn(){
-  local SOURCE=a1auto
-  local CONNECTION=a1auto-spaces
-  local DESTINATION=~/Backups/a1autotransport.com/spaces
-  local LOG=~/Backups/a1autotransport.com/logs/cdn-$(date:filename).log
-  rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
-}
