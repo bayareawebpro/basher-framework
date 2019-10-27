@@ -276,7 +276,13 @@ rclone:config
 rclone:config:edit
 rclone:sync my-sftp-connection /home/forge $DESTINATION $LOG_FILE_PATH
 rclone:sync:cdn my-cdn-connection my-bucket $DESTINATION $LOG_FILE_PATH
+```
 
+## OS
+```shell script
+os:speak "text"
+os:notify "Title" "text"
+os:confirm  "Title" "text"
 ```
 ---
 
