@@ -364,8 +364,17 @@ rclone:sync my-sftp-connection /home/forge /backups/forge /backups/server.log
 rclone:sync:cdn my-cdn-connection my-bucket /backups/cdn /backups/cdn.log
 ```
 
-Example
+Example backup.sh
+
 ```shell script
+cron:install "0 18 * * 0 ~/basher-framework/backup.sh > /dev/null 2>&1"
+```
+
+```shell script
+#!/usr/bin/env bash
+# Runs Sundays @ 6:00pm
+# cron:install "0 18 * * 0 ~/basher-framework/backup.sh > /dev/null 2>&1"
+source /Users/builder/.profile
 
 # App Backup
 function backup:app(){
@@ -383,7 +392,9 @@ function backup:cdn(){
   local SOURCE=my-bucket
   local DESTINATION=~/Backups/sfprimary-cdn
   local LOG=~/Backups/logs/cdn-$(date:filename).log
-  rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
+  rclone:sync:cdn $CONNECTION $SOURCE $DESTINATION "$LOG"
   open -a Console "$LOG"
 }
+backup:app
+backup:cdn
 ```
