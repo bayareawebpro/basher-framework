@@ -198,7 +198,6 @@ if cron:has my-script.sh; then
   logger:success "cron:has my-script.sh"
 fi
 ```
----
 
 #### Logger
 ```shell script
@@ -216,13 +215,11 @@ logger:success "Cool!"
 logger:celebrate "Awesome!"
 ```
 
-Input
 ```shell script
 logger:input "Where to?" "ANSWER"
 logger:success "Result: $ANSWER."
 ```
 
-Confirmation
 ```shell script
 if logger:confirm "Are you sure?"; then
   logger:success "Completed."
@@ -231,7 +228,7 @@ else
 fi
 ```
 
-Colors
+#### Colors
 ```shell script
 colors:black "im black"
 colors:blackb "im blackb"
