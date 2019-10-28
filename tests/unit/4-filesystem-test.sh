@@ -52,8 +52,7 @@ file:is:readable "$PWD/file.txt"
 assert:truthy "file:is:readable file.txt"
 
 if file:is:symlink "$PWD/file.txt";
-  logger:failed "Assert: file:is:symlink file.txt  false/Failed"
-  return 1
+  logger:failed "Assert: file:is:symlink file.txt false/Failed"
 then
   logger:success "Assert: file:is:symlink file.txt false/Failed"
 fi
@@ -63,7 +62,6 @@ assert:truthy "file:is:writable file.txt"
 
 if file:is:executable "$PWD/file.txt";
   logger:failed "Assert: file:is:executable file.txt false/Failed"
-  return 1
 then
   logger:success "Assert file:is:executable file.txt false/Failed"
 fi
@@ -88,7 +86,6 @@ assert:truthy "file:is:older"
 
 if file:equals "$PWD/file.txt" "$PWD/file2.txt";
   logger:failed "file:equals file.txt file2.txt (should not be true)"
-  return 1
 then
   logger:success "Assert file:equals file.txt file2.txt false/Failed"
 fi
