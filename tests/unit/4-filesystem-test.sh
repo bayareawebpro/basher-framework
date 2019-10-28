@@ -29,10 +29,11 @@ assert:truthy "directory:change test-dir"
 str:is:equal "$PWD" "$BASHER_PATH/tests/mocks/filesystem/test-dir"
 assert:truthy "PWD is $PWD"
 
-if path:is:file "$PWD/file.txt";
-  logger:failed "path:is:file file.txt"
+if file:exists "$PWD/file.txt";
+  logger:failed "Assert: file:exists file.txt  false/Failed"
+  return 1
 then
-  logger:success "path:is:file file.txt"
+  logger:success "Assert: file:exists file.txt false/Failed"
 fi
 
 file:put "test" "$PWD/file.txt"
@@ -51,20 +52,20 @@ file:is:readable "$PWD/file.txt"
 assert:truthy "file:is:readable file.txt"
 
 if file:is:symlink "$PWD/file.txt";
-  logger:failed "file:is:symlink file.txt (should not be true)"
+  logger:failed "Assert: file:is:symlink file.txt  false/Failed"
   return 1
 then
-  logger:success "file:is:symlink file.txt"
+  logger:success "Assert: file:is:symlink file.txt false/Failed"
 fi
 
 file:is:writable "$PWD/file.txt"
 assert:truthy "file:is:writable file.txt"
 
 if file:is:executable "$PWD/file.txt";
-  logger:failed "file:is:executable file.txt (should not be true)"
+  logger:failed "Assert: file:is:executable file.txt false/Failed"
   return 1
 then
-  logger:success "Assert file:is:symlink file.txt false/Failed"
+  logger:success "Assert file:is:executable file.txt false/Failed"
 fi
 
 file:make:executable "$PWD/file.txt"
