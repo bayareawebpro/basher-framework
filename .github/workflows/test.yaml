@@ -9,5 +9,6 @@ jobs:
           fetch-depth: 1
       - name: UnitTests
         run: |
-          echo $PATH && source ./tests/setup.sh
+          export BASHER_PATH="$PWD"
+          source ./tests/setup.sh
         shell: bash
