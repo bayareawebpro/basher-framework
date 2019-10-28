@@ -35,11 +35,13 @@ function git:report() {
 
 # ========= GIT Origin =========
 function git:origin() {
-  local REPO
-  local ORIGIN
-  REPO=$(basename "$PWD")
-  ORIGIN="git@github.com:$BASHER_GIT_USER/$REPO.git"
-  echo "$ORIGIN"
+  local REPO=$(basename "$PWD")
+  echo "git@github.com:$BASHER_GIT_USER/$REPO.git"
+}
+# ========= GIT URL =========
+function git:url() {
+  local REPO=$(basename "$PWD")
+  echo "https://github.com/$BASHER_GIT_USER/$REPO"
 }
 
 # ========= GIT Has Origin =========
@@ -126,8 +128,10 @@ function git:save() {
   logger:info "Saving... ${MESSAGE}"
   if git add . && git commit -m "${MESSAGE}" && git push; then
     logger:success "Local Pushed to Remote Successfully!"
+    git:url
   else
     logger:failed "Failed to push to remote!"
+    return 0
   fi
 }
 
