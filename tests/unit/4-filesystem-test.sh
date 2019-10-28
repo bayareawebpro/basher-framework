@@ -31,7 +31,6 @@ assert:truthy "PWD is $PWD"
 
 if file:exists "$PWD/file.txt";
   logger:failed "Assert: file:exists file.txt  false/Failed"
-  return 1
 then
   logger:success "Assert: file:exists file.txt false/Failed"
 fi
