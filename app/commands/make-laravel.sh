@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 function on:laravel:install() {
   logger:debug "on:laravel:install"
   #install:tailwindcss

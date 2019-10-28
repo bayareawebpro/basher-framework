@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+function boot:basher(){
+  local BASHER_PATH="${0%/*}/basher-framework"
+  # shellcheck source="$BASHER_PATH/app.sh"
+  source "$BASHER_PATH/app.sh"
+  os:notify "BasherApp" "Build Successful"
+}
+boot:basher
