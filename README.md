@@ -363,3 +363,27 @@ rclone:config:edit
 rclone:sync my-sftp-connection /home/forge /backups/forge /backups/server.log
 rclone:sync:cdn my-cdn-connection my-bucket /backups/cdn /backups/cdn.log
 ```
+
+Example
+```shell script
+
+# App Backup
+function backup:app(){
+  local CONNECTION=sfprimary
+  local SOURCE=/home/forge
+  local DESTINATION=~/Backups/sfprimary-app
+  local LOG=~/Backups/logs/app-$(date:filename).log
+  rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
+  open -a Console "$LOG"
+}
+
+# CDN Backup
+function backup:cdn(){
+  local CONNECTION=sfprimary-cdn
+  local SOURCE=my-bucket
+  local DESTINATION=~/Backups/sfprimary-cdn
+  local LOG=~/Backups/logs/cdn-$(date:filename).log
+  rclone:sync $CONNECTION $SOURCE $DESTINATION "$LOG"
+  open -a Console "$LOG"
+}
+```
