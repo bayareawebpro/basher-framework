@@ -24,6 +24,31 @@ Or Standalone
 ```shell script
 /usr/bin/env bash ~/basher-framework/app.sh
 ```
+------
+
+## Projects
+```shell script
+make:laravel my-folder-name
+make:project my-folder-name
+switch:project my-folder-name
+```
+
+#### Installers
+Use the current working directory.
+```shell script
+install:animatecss
+install:tailwindcss
+install:vuejs
+```
+
+#### Code Quality
+Use the current working directory.
+```shell script
+php:quality # php:lint && php:test
+php:lint
+php:test
+php:dusk
+```
 ---
 
 # Application
@@ -317,36 +342,11 @@ slack:warning "my-channel" "Something is strange."
 slack:failed "my-channel" "Something went wrong."
 ```
 
-#### RClone
+#### Cloud Backups
 ```shell script
 rclone:install
 rclone:config
 rclone:config:edit
-rclone:sync my-sftp-connection /home/forge $DESTINATION $LOG_FILE_PATH
-rclone:sync:cdn my-cdn-connection my-bucket $DESTINATION $LOG_FILE_PATH
-```
-------
-
-## Projects
-```shell script
-make:laravel my-folder-name
-make:project my-folder-name
-switch:project my-folder-name
-```
-
-#### Installers
-Use the current working directory.
-```shell script
-install:animatecss
-install:tailwindcss
-install:vuejs
-```
-
-#### Code Quality
-Use the current working directory.
-```shell script
-php:quality # php:lint && php:test
-php:lint
-php:test
-php:dusk
+rclone:sync my-sftp-connection /home/forge /backups/forge /backups/server.log
+rclone:sync:cdn my-cdn-connection my-bucket /backups/cdn /backups/cdn.log
 ```
