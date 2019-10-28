@@ -9,6 +9,7 @@ function assert:truthy() {
     else
     logger:failed "Assert: $1 true/Successful."
   fi
+  sleep 1
 }
 function assert:falsy() {
   if func:failed; then
@@ -16,6 +17,7 @@ function assert:falsy() {
     else
     logger:failed "Assert: $1 false/Failed."
   fi
+  sleep 1
 }
 
 #Test Loader
