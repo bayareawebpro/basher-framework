@@ -10,7 +10,7 @@ function switch:project() {
   local DIR="$BASHER_PROJECTS/$PROJECT"
   if path:is:directory "$DIR" && directory:change "$DIR"; then
     logger:success "Project $1 @ $DIR"
-    phpstorm:open "$PWD"
+    phpstorm:open "$PROJECT"
   else
     logger:failed "Switching To Project $1 @ $DIR Failed."
     return 1
