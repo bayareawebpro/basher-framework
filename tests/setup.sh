@@ -29,8 +29,14 @@ function run:test() {
   for FILE in $(directory:files "$BASHER_PATH/tests/unit"); do
     logger:divider
     local CASE="$(basename "$FILE")"
-    if str:empty "$BASHER_GIT_USER" || logger:confirm "Run TestCase $CASE?"; then
-      clear
+    clear
+    if str:filled "$BASHER_CONFIRM_TESTS"; then
+      if logger:confirm "Run TestCase $CASE?"; then
+        logger:info "Running TestCase $CASE..."
+        # shellcheck source=$FILE
+        source "$FILE"
+      fi
+    else
       logger:info "Running TestCase $CASE..."
       # shellcheck source=$FILE
       source "$FILE"

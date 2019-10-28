@@ -10,5 +10,6 @@ jobs:
       - name: UnitTests
         run: |
           export BASHER_PATH="$PWD"
+          export BASHER_CONFIRM_TESTS=false
           source ./tests/setup.sh
         shell: bash
