@@ -256,7 +256,7 @@ colors:lightblueb "im lightblueb"
 #### Database
 ```shell script
 make:database:env my_database
-make:myconfå
+make:myconf
 
 has:database my_database
 drop:database my_database
