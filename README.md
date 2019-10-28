@@ -194,6 +194,10 @@ cron:uninstall "$COMMAND"
 if cron:has "$COMMAND"; then
   logger:success "cron:has script.sh"
 fi
+
+# No argument to be prompted.
+cron:install:laravel "project-name" 
+cron:uninstall:laravel "project-name"
 ```
 
 #### Remote
