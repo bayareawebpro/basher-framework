@@ -26,16 +26,11 @@ Or Standalone
 ```
 ---
 
-## App
+# Application
 ```shell script
 app:boot
 app:reboot
 app:test
-```
-
-Build MacOS Bundle & Output to Desktop.
-```shell script
-app:build
 ```
 
 Publish Assets & Configurations
@@ -48,149 +43,21 @@ Require scripts from the app directory.
 app:require "services/service.sh"
 app:require:all "services"
 ```
----
 
-#### Projects
+Build MacOS Bundle & Output to Desktop.
 ```shell script
-make:laravel my-folder-name
-make:project my-folder-name
-switch:project my-folder-name
-```
-
-#### Database Commands
-```shell script
-make:database:env my_database
-make:myconf
-```
-```shell script
-has:database my_database
-drop:database my_database
-make:database my_database
-database:export my_database ~/
-database:import my_database ~/backup.sql
-```
----
-#### Installers
-```shell script
-install:animatecss
-install:tailwindcss
-install:vuejs
+app:build
 ```
 ---
 
-## GIT
-Create Repo in CWD
+#### Datetime
 ```shell script
-git:setup
-git:connect
-git:ignore
-git:readme
-git:save
-git:save "custom message"
-git:sync
-git:reset
-git:branch dev
-git:branch gh-pages fresh
-git:branch:delete dev
-git:switch master
-```
----
-
-## Chrome
-> No argument for 127.0.0.1
-```shell script
-chrome:serve
-chrome:serve "test.local"
-```
----
-
-## PhpStorm
-Launch PhpStorm
-```shell script
-phpstorm:launch
-phpstorm:open $PWD
-```
----
-
-## Code Quality
-```shell script
-php:quality # php:lint && php:test
-php:lint
-php:test
-php:dusk
-```
----
-
-### Remote
-```shell script
-remote:require "http://some.app/script.sh"
-remote:ping "http://some.app"
+date:timestamp # 2019-10-28 06:00:52
+date:filename  # 2019-10-28_06-01-02
+date:humanized # 10/28/2019 06:01AM
 ```
 
-## Functions
-```shell script
-func:exists "my:func"
-func:inspect "my:func"
-```
-
-See Unit Tests
-```shell script
-func:success # Last Command Succeeded
-func:failed # Last Command Failed
-```
-
-## Numbers
-```shell script
-num:is:equal 1 1
-num:not:equal 1 2
-num:less:than 0 1
-num:greater:than 3 2
-num:less:or:equal 1 2
-num:greater:or:equal 3 2
-```
-
-## Strings
-```shell script
-str:empty ""
-str:filled "not empty"
-str:is:equal "my-string" "my-string"
-str:not:equal "my-string" "other-string"
-str:matches:regex "123" '^[0-9]+$'
-str:matches:regex "asd" '^[0-9]+$'
-
-str:replace:first $TEXT $FIND $REPLACE
-str:replace:all $TEXT $FIND $REPLACE
-
-str:length $TEXT
-str:slice $TEXT 0 3
-
-str:prefix "text-file.txt" "text-" # file.txt
-str:suffix "text-file.txt" ".txt" # text-file
-
-str:upper "test"
-str:lower "TEST"
-```
-
-## Collections
-Collection state is global.
-```shell script
-collect:make # Empty
-collect:count
-collect:push "Apple"
-collect:push "Banana"
-collect:push "Orange"
-collect:all
-
-collect:set 1 "Pizza"
-collect:all
-
-for val in $(collect:filter "Pizza"); do
-  echo "Collection Has $val"
-done
-```
-
-## Filesystem
-
+#### Filesystem
 ```shell script
 path:is:directory $DIR
 path:is:file $FILE
@@ -202,24 +69,19 @@ path:base $FILE
 
 ```shell script
 file:exists $FILE
-
 file:is:executable $FILE
 file:make:executable $FILE
-
 file:is:writable $FILE
 file:is:readable $FILE
 file:is:symlink $FILE
 file:not:empty $FILE
-
 file:is:newer $FILE_A $FILE_B
 file:is:older $FILE_A $FILE_B
 file:equals $FILE_A $FILE_B
-
 file:get $FILE
 file:put $CONTENT $FILE
 file:append $CONTENT $FILE
 file:read $FILE
-
 file:remove $FILE
 file:remove:force $FILE
 ```
@@ -247,29 +109,65 @@ for FOLDER in $(directory:folders "."); do
 done
 ```
 
-## RClone
+#### Numbers
 ```shell script
-rclone:install
-rclone:config
-rclone:config:edit
-rclone:sync my-sftp-connection /home/forge $DESTINATION $LOG_FILE_PATH
-rclone:sync:cdn my-cdn-connection my-bucket $DESTINATION $LOG_FILE_PATH
+num:is:equal 1 1
+num:not:equal 1 2
+num:less:than 0 1
+num:greater:than 3 2
+num:less:or:equal 1 2
+num:greater:or:equal 3 2
 ```
 
-## Notifications
+#### Strings
 ```shell script
-os:speak "text"
-os:notify "Title" "text"
-os:confirm  "Title" "text"
+str:empty ""
+str:filled "not empty"
+str:is:equal "my-string" "my-string"
+str:not:equal "my-string" "other-string"
+str:matches:regex "123" '^[0-9]+$'
+str:matches:regex "asd" '^[0-9]+$'
 
-slack:notify "my-channel" "Yo." "#ff0000"
-slack:success "my-channel" "Something went right."
-slack:warning "my-channel" "Something is strange."
-slack:failed "my-channel" "Something went wrong."
+str:replace:first $TEXT $FIND $REPLACE
+str:replace:all $TEXT $FIND $REPLACE
+
+str:length $TEXT
+str:slice $TEXT 0 3
+
+str:prefix "text-file.txt" "text-" # file.txt
+str:suffix "text-file.txt" ".txt" # text-file
+
+str:upper "test"
+str:lower "TEST"
 ```
----
 
-## Processes
+#### Collections
+Collection state is global.
+```shell script
+collect:make # Empty
+collect:count
+collect:push "Apple"
+collect:push "Banana"
+collect:push "Orange"
+collect:all
+
+collect:set 1 "Pizza"
+collect:all
+
+for val in $(collect:filter "Pizza"); do
+  echo "Collection Has $val"
+done
+```
+
+#### Functions
+```shell script
+func:exists "my:func"
+func:inspect "my:func"
+func:success # Last Command Succeeded
+func:failed # Last Command Failed
+```
+
+#### Processes
 ```shell script
 process:status my-script.sh
 process:watch my-script.sh # start if not running
@@ -283,7 +181,13 @@ if process:running my-script.sh; then
 fi
 ```
 
-## CronTab
+#### Remote
+```shell script
+remote:require "http://some.app/script.sh"
+remote:ping "http://some.app"
+```
+
+#### CronTab
 ```shell script
 cron:list
 cron:install my-script.sh
@@ -296,7 +200,7 @@ fi
 ```
 ---
 
-## Logger
+#### Logger
 ```shell script
 logger:divider
 logger:blank
@@ -347,4 +251,97 @@ colors:purple "im purple"
 colors:purpleb "im purpleb"
 colors:lightblue "im lightblue"
 colors:lightblueb "im lightblueb"
+```
+------
+
+
+## Services
+
+#### Database
+```shell script
+make:database:env my_database
+make:myconfå
+
+has:database my_database
+drop:database my_database
+make:database my_database
+
+database:export my_database ~/
+database:import my_database ~/backup.sql
+```
+
+#### GIT
+```shell script
+git:setup
+git:connect
+git:ignore
+git:readme
+git:save
+git:save "custom message"
+git:sync
+git:reset
+git:branch dev
+git:branch gh-pages fresh
+git:branch:delete dev
+git:switch master
+```
+
+#### Chrome
+> No argument for 127.0.0.1
+```shell script
+chrome:serve
+chrome:serve "test.local"
+```
+
+#### PhpStorm
+```shell script
+phpstorm:launch
+phpstorm:open $PWD
+```
+
+#### Operating System (MacOS)
+```shell script
+os:speak "text"
+os:notify "Title" "text"
+os:confirm  "Title" "text"
+```
+
+#### Slack
+```shell script
+slack:notify "my-channel" "Yo." "#ff0000"
+slack:success "my-channel" "Something went right."
+slack:warning "my-channel" "Something is strange."
+slack:failed "my-channel" "Something went wrong."
+```
+
+#### RClone
+```shell script
+rclone:install
+rclone:config
+rclone:config:edit
+rclone:sync my-sftp-connection /home/forge $DESTINATION $LOG_FILE_PATH
+rclone:sync:cdn my-cdn-connection my-bucket $DESTINATION $LOG_FILE_PATH
+```
+------
+
+## Projects
+```shell script
+make:laravel my-folder-name
+make:project my-folder-name
+switch:project my-folder-name
+```
+
+#### Installers
+```shell script
+install:animatecss
+install:tailwindcss
+install:vuejs
+```
+
+#### Code Quality
+```shell script
+php:quality # php:lint && php:test
+php:lint
+php:test
+php:dusk
 ```
