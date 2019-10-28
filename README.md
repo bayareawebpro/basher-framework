@@ -286,11 +286,16 @@ rclone:sync my-sftp-connection /home/forge $DESTINATION $LOG_FILE_PATH
 rclone:sync:cdn my-cdn-connection my-bucket $DESTINATION $LOG_FILE_PATH
 ```
 
-## OS
+## Notifications
 ```shell script
 os:speak "text"
 os:notify "Title" "text"
 os:confirm  "Title" "text"
+
+slack:notify "my-channel" "Yo." "#ff0000"
+slack:success "my-channel" "Something went right."
+slack:warning "my-channel" "Something is strange."
+slack:failed "my-channel" "Something went wrong."
 ```
 ---
 
