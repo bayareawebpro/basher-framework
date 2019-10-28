@@ -39,5 +39,5 @@ function run:test() {
 }
 
 # Test Run
-logger:info "Test Run Ready Execute: (run:test)..."
-#run:test
+logger:info "Test Run Ready..."
+run:test
