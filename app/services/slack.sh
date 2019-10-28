@@ -7,7 +7,7 @@ function slack:warning(){
   slack:notify "$1" "$2" "warning"
 }
 
-function slack:error(){
+function slack:failed(){
   slack:notify "$1" "$2" "danger"
 }
 
