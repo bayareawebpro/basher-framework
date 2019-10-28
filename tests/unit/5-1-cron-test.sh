@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 #source "$BASHER_PATH/tests/setup.sh"
 
+if str:filled "$BASHER_CI"; then
+  logger:warning "Skipping, no crontab available..."
+  continue
+fi
+
 MOCKED="* * * * * /usr/bin/env bash $BASHER_PATH/tests/mocks/cron-mock.sh > $BASHER_PATH/tests/mocks/cron-mock.sh.log"
 
 #cron:uninstall "$MOCKED"

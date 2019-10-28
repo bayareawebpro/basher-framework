@@ -59,6 +59,8 @@ assert:truthy "file:is:executable file.txt"
 str:is:equal "test" "$(file:get "$PWD/file.txt")"
 assert:truthy "file:get file.txt equals test"
 
+sleep 1
+
 file:copy "$PWD/file.txt" "$PWD/file2.txt"
 assert:truthy "file:copy"
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-if str:empty "$BASHER_DB_USER"; then
-  logger:warning "Skipping: BASHER_DB_USER not configured."
+
+if str:filled "$BASHER_CI"; then
+  logger:warning "Skipping, no MacOS available..."
   continue
 fi
 

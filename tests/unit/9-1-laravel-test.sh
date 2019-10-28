@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-if str:empty "$BASHER_GIT_USER"; then
-  logger:warning "Skipping: BASHER_GIT_USER not configured."
+if str:filled "$BASHER_CI"; then
+  logger:warning "Skipping, no User Confirmation available..."
   continue
 fi
 
