@@ -1,10 +1,16 @@
 # Basher Framework
 
+![](https://github.com/bayareawebpro/basher-framework/workflows/ci/badge.svg)
+![](https://img.shields.io/badge/License-MIT-success.svg)
+![](https://img.shields.io/badge/Version-1.x-blue.svg)
+      
 ```
 ______  _______ _______ _     _ _______  ______
 |_____] |_____| |______ |_____| |______ |_____/
 |_____] |     | ______| |     | |______ |    \_
 ```
+
+
 
 > https://www.dropbox.com/s/w43btkvfqvu548n/Basher.mov?dl=0
 
