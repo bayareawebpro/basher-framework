@@ -127,6 +127,12 @@ php:dusk
 app:test
 app:boot
 app:reboot
+app:build # Output MacOS self contained bundle to Desktop.
+```
+
+Build MacOS Bundle & Output to Desktop.
+```shell script
+app:build
 ```
 
 ```shell script
