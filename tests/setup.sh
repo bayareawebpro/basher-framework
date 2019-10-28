@@ -27,9 +27,8 @@ function assert:falsy() {
 #Test Loader
 function run:test() {
   for FILE in $(directory:files "$BASHER_PATH/tests/unit"); do
-    logger:divider
+    #logger:divider
     local CASE="$(basename "$FILE")"
-    clear
     if str:filled "$BASHER_CONFIRM_TESTS"; then
       if logger:confirm "Run TestCase $CASE?"; then
         logger:info "Running TestCase $CASE..."
