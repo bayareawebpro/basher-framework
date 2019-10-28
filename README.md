@@ -13,6 +13,8 @@ https://imgur.com/a/GNsxOb5
 
 ```shell script
 #!/usr/bin/env bash
+
+# Incude Basher Framework
 export BASHER_PATH="$HOME/basher-framework"
 
 # shellcheck source=$BASHER_PATH/app.sh
@@ -51,11 +53,35 @@ export BASHER_DB_USER="root"
 export BASHER_DB_PASS="root"
 ```
 
+## App
+```shell script
+app:test
+app:boot
+app:reboot
+```
+
+Build MacOS Bundle & Output to Desktop.
+```shell script
+app:build
+```
+
+Publish Assets & Configurations
+```shell script
+app:publish "resources/.myconf" "$HOME/.myconf"
+```
+
+Require scripts from the app directory.
+```shell script
+app:require "services/service.sh"
+app:require:all "my_dir"
+```
+---
+
 #### Projects
 ```shell script
+make:laravel my-folder-name
 make:project my-folder-name
 switch:project my-folder-name
-make:laravel my-folder-name
 ```
 
 #### Database Commands
@@ -121,30 +147,6 @@ php:test
 php:dusk
 ```
 ---
-
-## App
-```shell script
-app:test
-app:boot
-app:reboot
-```
-
-Build MacOS Bundle & Output to Desktop.
-```shell script
-app:build
-```
-
-Publish Assets & Configurations
-```shell script
-app:publish "resources/.myconf" "$HOME/.myconf"
-```
-
-## Require
-Require scripts from the app directory.
-```shell script
-app:require "services/service.sh"
-app:require:all "my_dir"
-```
 
 ### Remote
 ```shell script
