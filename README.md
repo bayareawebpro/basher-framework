@@ -6,7 +6,7 @@ ______  _______ _______ _     _ _______  ______
 |_____] |     | ______| |     | |______ |    \_
 ```
 
-https://imgur.com/a/GNsxOb5
+> https://www.dropbox.com/s/w43btkvfqvu548n/Basher.mov?dl=0
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
 - Or, add to to: ~/.profile
