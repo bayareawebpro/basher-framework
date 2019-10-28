@@ -53,7 +53,7 @@ function directory:force:remove(){
   rm -rf "$1" || return 1
 }
 function directory:archive(){
-  zip -r "$1" "$2" || return 1
+  zip -r "$2" "$1" || return 1
 }
 function directory:trim(){
   logger:divider && logger:info "Trimming Old Files..."

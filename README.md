@@ -235,7 +235,7 @@ directory:make $DIR
 directory:previous
 directory:trim ~/Downloads 1 # Older than 1 day, with confirm
 directory:trim ~/Downloads 1 true # With no confirm
-directory:archive '/path/to/output.zip' $DIR
+directory:archive $DIR '/path/to/output.zip'
 ```
 
 ```shell script
