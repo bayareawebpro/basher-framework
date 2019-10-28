@@ -9,7 +9,7 @@ ______  _______ _______ _     _ _______  ______
 https://imgur.com/a/GNsxOb5
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
-- Add to to: ~/.profile
+- Or, add to to: ~/.profile
 
 ```shell script
 #!/usr/bin/env bash
