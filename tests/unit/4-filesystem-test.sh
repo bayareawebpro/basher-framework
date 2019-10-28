@@ -27,10 +27,13 @@ directory:change "test-dir"
 assert:truthy "directory:change test-dir"
 
 str:is:equal "$PWD" "$BASHER_PATH/tests/mocks/filesystem/test-dir"
-assert:truthy "$PWD"
+assert:truthy "PWD is $PWD"
 
-path:is:file "$PWD/file.txt"
-assert:falsy "path:is:file file.txt"
+if path:is:file "$PWD/file.txt";
+  logger:failed "path:is:file file.txt"
+then
+  logger:success "path:is:file file.txt"
+fi
 
 file:put "test" "$PWD/file.txt"
 assert:truthy "file:put file.txt"
@@ -47,14 +50,22 @@ assert:truthy "path:is:file file.txt"
 file:is:readable "$PWD/file.txt"
 assert:truthy "file:is:readable file.txt"
 
-file:is:symlink "$PWD/file.txt"
-assert:falsy "file:is:symlink file.txt"
+if file:is:symlink "$PWD/file.txt";
+  logger:failed "file:is:symlink file.txt (should not be true)"
+  return 1
+then
+  logger:success "file:is:symlink file.txt"
+fi
 
 file:is:writable "$PWD/file.txt"
 assert:truthy "file:is:writable file.txt"
 
-file:is:executable "$PWD/file.txt"
-assert:falsy "file:is:executable file.txt"
+if file:is:executable "$PWD/file.txt";
+  logger:failed "file:is:executable file.txt (should not be true)"
+  return 1
+then
+  logger:success "Assert file:is:symlink file.txt false/Failed"
+fi
 
 file:make:executable "$PWD/file.txt"
 assert:truthy "file:make:executable file.txt"
@@ -74,8 +85,12 @@ assert:truthy "file:is:newer"
 file:is:older "$PWD/file.txt" "$PWD/file2.txt"
 assert:truthy "file:is:older"
 
-file:equals "$PWD/file.txt" "$PWD/file2.txt"
-assert:falsy "file:equals"
+if file:equals "$PWD/file.txt" "$PWD/file2.txt";
+  logger:failed "file:equals file.txt file2.txt (should not be true)"
+  return 1
+then
+  logger:success "Assert file:equals file.txt file2.txt false/Failed"
+fi
 
 file:append "test2" "$PWD/file2.txt"
 assert:truthy "file:append"
