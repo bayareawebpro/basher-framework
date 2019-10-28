@@ -102,7 +102,3 @@ assert:truthy "directory:folders"
 logger:info "Filtering Files"
 directory:files "$BASHER_PATH"
 assert:truthy "directory:files"
-
-logger:info "Reading File to Line Array"
-file:read "$BASHER_PATH/.env"
-assert:truthy "file:read"
