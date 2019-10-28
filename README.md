@@ -14,7 +14,7 @@ ______  _______ _______ _     _ _______  ______
 ```shell script
 #!/usr/bin/env bash
 
-# Incude Basher Framework
+# Declare Basher Framework Path
 export BASHER_PATH="$HOME/basher-framework"
 
 # shellcheck source=$BASHER_PATH/app.sh
@@ -307,7 +307,7 @@ has:database my_database
 drop:database my_database
 make:database my_database
 
-database:export my_database ~/
+database:export my_database ~/backup.sql
 database:import my_database ~/backup.sql
 ```
 
