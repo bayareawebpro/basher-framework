@@ -30,9 +30,9 @@ function make:laravel() {
     # Configure & Create Database
     if logger:confirm "Create Database?"; then
       if make:database "$PROJECT" && php artisan migrate; then
-        logger:success "Database created & configured."
+        logger:success "Database: $PROJECT created."
       else
-        logger:failed "Database failed to be created / migrated."
+        logger:failed "Database: $PROJECT failed to be created / migrated."
       fi
    fi
 

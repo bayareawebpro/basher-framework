@@ -299,7 +299,7 @@ chrome:serve "test.local"
 #### PhpStorm
 ```shell script
 phpstorm:launch
-phpstorm:open $PWD
+phpstorm:open project-name
 ```
 
 #### Operating System (MacOS)

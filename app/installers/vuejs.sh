@@ -1,11 +1,10 @@
 #!/bin/bash
 function install:vuejs(){
-    logger:divider && logger:info "Intalling Vue.js"
-    if file:exists package.json; then
-      logger:info "Using NPM..."
-      npm install vue
-      logger:success "Installed Vue.js Successfully"
+    logger:divider && logger:info "Intalling Vue.js..."
+    if file:exists package.json && npm install vue; then
+      logger:success "Vue.js Installed Successfully."
     else
-      logger:failed "Failed to install Vue.js"
+      logger:failed "Vue.js Failed to Install."
+      logger:debug "Is there a package.json file for your project?"
     fi
 }
