@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+# This file is copied into the "app:build" application package as the entry point.
 function boot:basher(){
   local BASHER_PATH="${0%/*}/basher-framework"
   # shellcheck source="$BASHER_PATH/app.sh"
   source "$BASHER_PATH/app.sh"
+  os:speak "BasherApp Build Successful"
   os:notify "BasherApp" "Build Successful"
 }
 boot:basher

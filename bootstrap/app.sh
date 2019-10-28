@@ -68,10 +68,19 @@ function app:publish() {
 
 # ==== Build MacOS App Bundle from Self ====
 function app:build(){
-  directory:make ~/Desktop/Basher.app
-  directory:make ~/Desktop/Basher.app/Contents
+  if path:is:directory ~/Desktop/Basher.app && logger:confirm "Delete Existing Build?"; then
+    directory:force:remove ~/Desktop/Basher.app
+    logger:success "Destroyed Previous Build."
+  fi
   directory:make ~/Desktop/Basher.app/Contents/MacOS
   app:publish "bootstrap/basher" ~/Desktop/Basher.app/Contents/MacOS/basher
   file:make:executable ~/Desktop/Basher.app/Contents/MacOS/basher
   cp -rf "$BASHER_PATH" ~/Desktop/Basher.app/Contents/MacOS
+  logger:success "Application Built Successfully @ ~/Desktop/Basher.app"
+
+  if logger:confirm "Create Archive from Bundle?"; then
+    logger:info "Creating Archive..."
+    directory:archive ~/Desktop/Basher.app ~/Desktop/Basher.app.zip
+    logger:success "Created Archive Basher.app.zip Successfully."
+  fi
 }

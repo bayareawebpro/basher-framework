@@ -38,7 +38,7 @@ function directory:folders() {
   done
 }
 function directory:make(){
-  mkdir "$1" || return 1
+  mkdir -p "$1" || return 1
 }
 function directory:change(){
   cd "$1" || return 1
