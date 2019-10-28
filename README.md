@@ -127,7 +127,6 @@ php:dusk
 app:test
 app:boot
 app:reboot
-app:build # Output MacOS self contained bundle to Desktop.
 ```
 
 Build MacOS Bundle & Output to Desktop.
@@ -135,6 +134,7 @@ Build MacOS Bundle & Output to Desktop.
 app:build
 ```
 
+Publish Assets & Configurations
 ```shell script
 app:publish "resources/.myconf" "$HOME/.myconf"
 ```
