@@ -185,11 +185,14 @@ fi
 ```shell script
 cron:list
 cron:edit
-cron:install my-script.sh
-cron:uninstall my-script.sh
 
-if cron:has my-script.sh; then
-  logger:success "cron:has my-script.sh"
+COMMAND="* * * * * /usr/bin/env bash /path/to/script.sh"
+
+cron:install "$COMMAND"
+cron:uninstall "$COMMAND"
+
+if cron:has "$COMMAND"; then
+  logger:success "cron:has script.sh"
 fi
 ```
 

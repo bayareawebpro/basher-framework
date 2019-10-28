@@ -1,31 +1,35 @@
 #!/usr/bin/env bash
-MOCKED="$BASHER_PATH/tests/mocks/cron-mock.sh"
+#source "$BASHER_PATH/tests/setup.sh"
+
+MOCKED="* * * * * /usr/bin/env bash $BASHER_PATH/tests/mocks/cron-mock.sh > $BASHER_PATH/tests/mocks/cron-mock.sh.log"
+
+#cron:uninstall "$MOCKED"
 
 cron:list
 assert:truthy "cron:list"
 
 if cron:has "$MOCKED"; then
-  logger:failed "cron:has $(basename $MOCKED)"
+  logger:failed "cron:has"
 else
-  logger:success "cron:has $(basename $MOCKED)"
+  logger:success "cron:has"
 fi
 
 cron:install "$MOCKED"
-assert:truthy "cron:install $(basename $MOCKED)"
+assert:truthy "cron:installed"
 
 cron:list
 if cron:has "$MOCKED"; then
-  logger:success "cron:has $(basename $MOCKED)"
+  logger:success "cron:has installed"
 else
-  logger:failed "cron:has $(basename $MOCKED)"
+  logger:failed "cron:has installed"
 fi
 
 cron:uninstall "$MOCKED"
-assert:truthy "cron:uninstall $(basename $MOCKED)"
+assert:truthy "cron:uninstalled"
 cron:list
 
 if cron:has "$MOCKED"; then
-  logger:failed "cron:has $(basename $MOCKED)"
+  logger:failed "cron:has"
 else
-  logger:success "cron:has $(basename $MOCKED)"
+  logger:success "cron:has"
 fi
