@@ -13,7 +13,7 @@ function php:lint(){
   logger:divider
   logger:info "Linting Sourcecode..."
   if file:exists "vendor/bin/phpstan"; then
-    if vendor/bin/phpstan analyse; then
+    if php artisan code:analyse; then
       logger:success "Sourcecode Looks Good..."
     else
       logger:failed "Unit Tests Failed!"
@@ -21,9 +21,10 @@ function php:lint(){
     fi
   else
     logger:warning "PHPstan Not Installed."
-    if logger:confirm "Run: composer install nunomaduro/larastan?"; then
-      composer install nunomaduro/larastan
-      return "$(php:lint)"
+    if logger:confirm "Install package: nunomaduro/larastan?"; then
+      logger:info "Installing (nunomaduro/larastan)..."
+      composer require --dev nunomaduro/larastan
+      php:lint
     else
       return 1
     fi
@@ -42,9 +43,10 @@ function php:test(){
     fi
   else
     logger:warning "PHPunit Not Installed."
-    if logger:confirm "Run: composer install phpunit/phpunit?"; then
-      composer install phpunit/phpunit
-      return "$(php:test)"
+    if logger:confirm "Install package: phpunit/phpunit?"; then
+      logger:info "Installing (phpunit/phpunit)..."
+      composer require --dev phpunit/phpunit
+      php:test
     else
       return 1
     fi
@@ -54,18 +56,21 @@ function php:test(){
 function php:dusk(){
   logger:divider
   logger:info "Running Browser Tests..."
-  if file:exists "vendor/bin/dusk"; then
-    if vendor/bin/dusk; then
-      logger:success "Launching Dusk..."
+  if path:is:directory "vendor/laravel/dusk/bin"; then
+    logger:info "Launching Dusk..."
+    if php artisan dusk; then
+      logger:success "Dusk Completed Successfully..."
     else
       logger:failed "Launching Dusk Failed!"
       return 1
     fi
   else
     logger:warning "Laravel Dusk Not Installed."
-    if logger:confirm "Run: composer install laravel/dusk?"; then
-      composer install laravel/dusk
-      return "$(php:dusk)"
+    if logger:confirm "Install package: laravel/dusk?"; then
+      logger:info "Installing (laravel/dusk)..."
+      composer require --dev laravel/dusk
+      php artisan dusk:install
+      php:dusk
     else
       return 1
     fi
