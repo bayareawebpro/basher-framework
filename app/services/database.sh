@@ -46,7 +46,7 @@ function database:export() {
     logger:warning "Database Name not defined."
     logger:input "Enter DATABASE:" "EXPORT_PATH"
   fi
-  EXPORT_PATH="$EXPORT_PATH/$DATABASE-latest.sql"
+  EXPORT_PATH="$EXPORT_PATH/$DATABASE-$(date:filename).sql"
   if mysqldump --single-transaction --no-create-db --quick --default-character-set=utf8mb4 "$DATABASE" >"$EXPORT_PATH"; then
     logger:success "Database $DATABASE exported to $EXPORT_PATH."
   else
