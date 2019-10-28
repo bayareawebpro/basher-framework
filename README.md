@@ -74,6 +74,11 @@ Build MacOS Bundle & Output to Desktop.
 ```shell script
 app:build
 ```
+
+Run Commands
+```shell script
+open ~/Desktop/Basher.app --args "os:speak 'test'"
+```
 ---
 
 #### Datetime
