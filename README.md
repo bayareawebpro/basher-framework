@@ -70,6 +70,7 @@ app:require:all "services"
 ```
 
 Build MacOS Bundle & Output to Desktop.
+> See: /resources/bundle/Contents/MacOS/basher
 ```shell script
 app:build
 ```
