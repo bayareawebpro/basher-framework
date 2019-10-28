@@ -52,6 +52,9 @@ function directory:remove(){
 function directory:force:remove(){
   rm -rf "$1" || return 1
 }
+function directory:archive(){
+  zip -r "$1" "$2" || return 1
+}
 function directory:trim(){
   logger:divider && logger:info "Trimming Old Files..."
   if path:is:directory "$1"; then
@@ -67,9 +70,6 @@ function directory:trim(){
   else
     logger:failed "Trimming Old Files Failed.  Directory $1 not found."
   fi
-}
-function make:archive(){
-  zip -r "$1" "$2" || return 1
 }
 
 # ====== File Operations ================

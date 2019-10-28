@@ -26,38 +26,11 @@ Or Standalone
 ```
 ---
 
-## Config
-
-See env.default.sh
-```shell script
-#!/usr/bin/env bash
-# Comment Out to Hide Basher Banner
-export BASHER_BANNER=true
-
-# Add Command Aliases
-alias artisan='php artisan'
-
-# GIT Environment Vars
-export GIT_AUTHOR_NAME="Dan Alvidrez"
-export GIT_AUTHOR_EMAIL="dan@bayareawebpro.com"
-
-# BASHER Environment Vars
-export BASHER_GIT_USER="bayareawebpro"
-export BASHER_PROJECTS="$HOME/Sites"
-
-# Launch Chrome Using Faux HTTPS
-export BASHER_CHROME_SECURE=true
-
-# Define Database Auth or you will be prompted.
-export BASHER_DB_USER="root"
-export BASHER_DB_PASS="root"
-```
-
 ## App
 ```shell script
-app:test
 app:boot
 app:reboot
+app:test
 ```
 
 Build MacOS Bundle & Output to Desktop.
@@ -73,7 +46,7 @@ app:publish "resources/.myconf" "$HOME/.myconf"
 Require scripts from the app directory.
 ```shell script
 app:require "services/service.sh"
-app:require:all "my_dir"
+app:require:all "services"
 ```
 ---
 
@@ -219,16 +192,12 @@ done
 ## Filesystem
 
 ```shell script
-path:base $FILE
-path:filename $FILE
-path:extension $FILE
-
-path:is:file $FILE
 path:is:directory $DIR
-```
+path:is:file $FILE
 
-```shell script
-make:archive '/path/to/output.zip' $DIR
+path:extension $FILE
+path:filename $FILE
+path:base $FILE
 ```
 
 ```shell script
@@ -266,6 +235,7 @@ directory:make $DIR
 directory:previous
 directory:trim ~/Downloads 1 # Older than 1 day, with confirm
 directory:trim ~/Downloads 1 true # With no confirm
+directory:archive '/path/to/output.zip' $DIR
 ```
 
 ```shell script
