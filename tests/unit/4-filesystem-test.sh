@@ -63,19 +63,19 @@ file:copy "$PWD/file.txt" "$PWD/file2.txt"
 assert:truthy "file:copy"
 
 file:exists "$PWD/file2.txt"
-assert:truthy "file:exists"
+assert:truthy "file:exists file2.txt"
 
 file:is:newer "$PWD/file2.txt" "$PWD/file.txt"
-assert:truthy "file:is:newer"
+assert:truthy "file:is:newer file2.txt"
 
 file:is:older "$PWD/file.txt" "$PWD/file2.txt"
-assert:truthy "file:is:older"
+assert:truthy "file:is:older file.txt"
 
 file:append "test2" "$PWD/file2.txt"
-assert:truthy "file:append"
+assert:truthy "file:append file2.txt"
 
 str:is:equal "$(file:get "$PWD/file2.txt")" $'test\ntest2'
-assert:truthy "file:append file:get"
+assert:truthy "file:get file2.txt"
 
 file:read "$PWD/file2.txt"
 assert:truthy "file:read"
