@@ -1,0 +1,13 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: UnitTests
+        run: |
+          echo $PATH && source ./tests/setup.sh
+        shell: bash

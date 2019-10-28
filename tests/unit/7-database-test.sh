@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if str:empty "$BASHER_DB_USER"; then
+  logger:warning "Skipping: BASHER_DB_USER not configured."
+  continue
+fi
+
 ### TEST Database
 if has:database; then
   drop:database git_test_output > /dev/null 2>&1
