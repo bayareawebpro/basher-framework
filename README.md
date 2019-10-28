@@ -335,6 +335,7 @@ switch:project my-folder-name
 ```
 
 #### Installers
+Use the current working directory.
 ```shell script
 install:animatecss
 install:tailwindcss
@@ -342,6 +343,7 @@ install:vuejs
 ```
 
 #### Code Quality
+Use the current working directory.
 ```shell script
 php:quality # php:lint && php:test
 php:lint

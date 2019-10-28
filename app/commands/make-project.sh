@@ -8,9 +8,9 @@ function switch:project() {
   fi
 
   local DIR="$BASHER_PROJECTS/$PROJECT"
-  if path:is:directory "$DIR" && directory:change "$DIR"; then
-    logger:success "Project $1 @ $DIR"
+  if path:is:directory "$DIR"; then
     phpstorm:open "$PROJECT"
+    logger:success "Project $1 @ $DIR"
   else
     logger:failed "Switching To Project $1 @ $DIR Failed."
     return 1
@@ -18,7 +18,8 @@ function switch:project() {
 }
 
 function make:project() {
-  logger:divider && logger:info "Making Project..."
+  logger:divider
+  logger:info "Making Project..."
 
   if str:empty "$BASHER_PROJECTS"; then
     logger:failed "BASHER_PROJECTS must be defined and directory must exist."
