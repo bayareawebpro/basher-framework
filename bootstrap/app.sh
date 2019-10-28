@@ -56,13 +56,24 @@ function app:banner() {
 
 # ==== Publish Files ====
 function app:publish() {
-  if path:is:file "$2"; then
-    logger:info "$2 already exists."
-  elif file:exists "$BASHER_PATH/$1" && file:copy "$BASHER_PATH/$1" "$2"; then
-    logger:success "Published $BASHER_PATH/$1 => $2 completed."
+  if path:is:file "$1"; then
+    if path:is:file "$2"; then
+      logger:info "File already exists: $2"
+      return 1
+    else
+      file:copy "$BASHER_PATH/$1" "$2"
+      logger:success "Published: $1 => $2."
+    fi
+  elif path:is:directory "$1"; then
+    if path:is:directory "$2"; then
+      logger:info "Directory already exists: $2"
+      return 1
+    else
+      directory:copy "$BASHER_PATH/$1" "$2"
+      logger:success "Published: $1 => $2."
+    fi
   else
-    logger:failed "Publishing $BASHER_PATH/$1 => $2 failed."
-    return 1
+    logger:error "$1 not found."
   fi
 }
 
@@ -72,15 +83,21 @@ function app:build(){
     directory:force:remove ~/Desktop/Basher.app
     logger:success "Destroyed Previous Build."
   fi
-  directory:make ~/Desktop/Basher.app/Contents/MacOS
-  app:publish "bootstrap/basher" ~/Desktop/Basher.app/Contents/MacOS/basher
-  file:make:executable ~/Desktop/Basher.app/Contents/MacOS/basher
-  cp -rf "$BASHER_PATH" ~/Desktop/Basher.app/Contents/MacOS
-  logger:success "Application Built Successfully @ ~/Desktop/Basher.app"
 
-  if logger:confirm "Create Archive from Bundle?"; then
-    logger:info "Creating Archive..."
-    directory:archive ~/Desktop/Basher.app ~/Desktop/Basher.app.zip
-    logger:success "Created Archive Basher.app.zip Successfully."
+  # Copy Bundle
+  if (
+    file:make:executable "$BASHER_PATH/resources/bundle/Contents/MacOS/basher" && \
+    directory:copy "$BASHER_PATH/resources/bundle" ~/Desktop/Basher.app && \
+    directory:copy "$BASHER_PATH" ~/Desktop/Basher.app/Contents/MacOS/basher-framework
+  ); then
+    logger:success "Application Built Successfully @ ~/Desktop/Basher.app"
+    if logger:confirm "Create Archive from Bundle?"; then
+      logger:info "Creating Archive..."
+      directory:archive ~/Desktop/Basher.app ~/Desktop/Basher.app.zip
+      logger:success "Created Archive @ ~/Desktop/Basher.app.zip Successfully."
+    fi
+  else
+      logger:failed "Application Build Failed."
   fi
+
 }

@@ -60,7 +60,7 @@ app:test
 
 Publish Assets & Configurations
 ```shell script
-app:publish "resources/.myconf" "$HOME/.myconf"
+app:publish "resources/mysql.conf" "$HOME/.my.cnf"
 ```
 
 Require scripts from the app directory.
@@ -115,14 +115,21 @@ file:remove:force $FILE
 directory:list .
 directory:files .
 directory:folders .
+
+directory:copy $DIR $DIR2
+directory:force:copy $DIR $DIR2
+
 directory:remove $DIR
 directory:force:remove $DIR
-directory:change $DIR
+
 directory:make $DIR
+directory:change $DIR
 directory:previous
+
 directory:trim ~/Downloads 1 # Older than 1 day, with confirm
 directory:trim ~/Downloads 1 true # With no confirm
-directory:archive $DIR '/path/to/output.zip'
+
+directory:archive ~/Downloads /path/to/output.zip
 ```
 
 ```shell script

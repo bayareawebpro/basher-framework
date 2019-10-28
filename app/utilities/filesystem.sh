@@ -40,6 +40,12 @@ function directory:folders() {
 function directory:make(){
   mkdir -p "$1" || return 1
 }
+function directory:copy(){
+  cp -r "$1" "$2" || return 1
+}
+function directory:force:copy(){
+  cp -rf "$1" "$2" || return 1
+}
 function directory:change(){
   cd "$1" || return 1
 }

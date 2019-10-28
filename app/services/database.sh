@@ -57,12 +57,7 @@ function database:export() {
 
 # Publish MySql Config
 function make:myconf() {
-  if path:is:file "$HOME/.my.cnf"; then
-    logger:warning "$HOME/.my.cnf is already configured."
-    return 1
-  fi
-  file:copy "$BASHER_PATH/resources/mysql.conf" "$HOME/.my.cnf"
-  logger:success "Installed .my.cnf."
+  app:publish "resources/mysql.conf" "$HOME/.my.cnf"
 }
 
 # Has Database?
