@@ -181,22 +181,22 @@ if process:running my-script.sh; then
 fi
 ```
 
+#### CronTab
+```shell script
+cron:list
+cron:edit
+cron:install my-script.sh
+cron:uninstall my-script.sh
+
+if cron:has my-script.sh; then
+  logger:success "cron:has my-script.sh"
+fi
+```
+
 #### Remote
 ```shell script
 remote:require "http://some.app/script.sh"
 remote:ping "http://some.app"
-```
-
-#### CronTab
-```shell script
-cron:list
-cron:install my-script.sh
-cron:uninstall my-script.sh
-```
-```shell script
-if cron:has my-script.sh; then
-  logger:success "cron:has my-script.sh"
-fi
 ```
 
 #### Logger
