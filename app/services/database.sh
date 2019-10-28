@@ -18,7 +18,7 @@ function database:import() {
     logger:warning "Import path not defined."
     logger:input "Enter IMPORT_PATH:" "IMPORT_PATH"
   fi
-  if (! file:exists "$IMPORT_PATH" || ! file:readable "$IMPORT_PATH"); then
+  if (! file:exists "$IMPORT_PATH" || ! file:is:readable "$IMPORT_PATH"); then
     logger:failed "Import path ($IMPORT_PATH) is not readable or does not exist."
     return 1
   fi
@@ -44,9 +44,8 @@ function database:export() {
   fi
   if str:empty "$EXPORT_PATH"; then
     logger:warning "Database Name not defined."
-    logger:input "Enter DATABASE:" "EXPORT_PATH"
+    logger:input "Enter Export File Path:" "EXPORT_PATH"
   fi
-  EXPORT_PATH="$EXPORT_PATH/$DATABASE-$(date:filename).sql"
   if mysqldump --single-transaction --no-create-db --quick --default-character-set=utf8mb4 "$DATABASE" >"$EXPORT_PATH"; then
     logger:success "Database $DATABASE exported to $EXPORT_PATH."
   else
