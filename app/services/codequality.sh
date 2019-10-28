@@ -57,11 +57,10 @@ function php:dusk(){
   logger:divider
   logger:info "Running Browser Tests..."
   if path:is:directory "vendor/laravel/dusk/bin"; then
-    logger:info "Launching Dusk..."
     if php artisan dusk; then
-      logger:success "Dusk Completed Successfully..."
+      logger:success "Browser Testing Completed Successfully..."
     else
-      logger:failed "Launching Dusk Failed!"
+      logger:failed "Browser Testing Failed!"
       return 1
     fi
   else
