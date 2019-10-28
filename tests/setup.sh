@@ -6,21 +6,15 @@ source "$BASHER_PATH/app.sh"
 function assert:truthy() {
   if func:success; then
     logger:success "Assert: $1 true/Successful."
-    sleep 0.1
     else
     logger:failed "Assert: $1 true/Successful."
-    sleep 0.1
-    return 1
   fi
 }
 function assert:falsy() {
   if func:failed; then
     logger:success "Assert: $1 false/Failed."
-    sleep 0.1
     else
     logger:failed "Assert: $1 false/Failed."
-    sleep 0.1
-    return 1
   fi
 }
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$BASHER_PATH/tests/mocks/filesystem" || (echo "Failed to Change Directory" && return 1);
+cd "$BASHER_PATH/tests/mocks/filesystem" || (echo "Failed to Change Directory" && exit 1);
 rm -rf "$BASHER_PATH/tests/mocks/filesystem/test-dir"
 
 logger:warning "Working Directory $PWD"

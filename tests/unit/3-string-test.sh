@@ -12,11 +12,8 @@ assert:truthy "str:is:equal"
 str:not:equal "a" "b"
 assert:truthy "str:not:equal"
 
-str:matches:regex "123" "^[0-9]+$"
+str:matches:regex "123" ^[0-9]+$
 assert:truthy "str:matches:regex"
-
-str:matches:regex "asd" "^[0-9]+$"
-assert:falsy "str:matches:regex"
 
 str:is:equal "$(str:length "abc")" "3"
 assert:truthy "str:length"
