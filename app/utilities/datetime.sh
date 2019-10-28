@@ -7,10 +7,10 @@ function date:timestamp() {
 
 # Filename Formatted
 function date:filename() {
-  date +"%Y-%m-%d_%H:%M:%S"
+  date +"%Y-%m-%d_%H-%M-%S"
 }
 
 # Human Formatted
 function date:humanized() {
-  date +"%m/%d/%Y %H:%M:%S"
+  date +"%m/%d/%Y %I:%M%p"
 }
