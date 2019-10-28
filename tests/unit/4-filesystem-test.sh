@@ -29,7 +29,6 @@ assert:truthy "directory:change test-dir"
 str:is:equal "$PWD" "$BASHER_PATH/tests/mocks/filesystem/test-dir"
 assert:truthy "PWD is $PWD"
 
-
 file:put "test" "$PWD/file.txt"
 assert:truthy "file:put file.txt"
 
@@ -61,8 +60,10 @@ str:is:equal "test" "$(file:get "$PWD/file.txt")"
 assert:truthy "file:get file.txt equals test"
 
 file:copy "$PWD/file.txt" "$PWD/file2.txt"
+assert:truthy "file:copy"
+
 file:exists "$PWD/file2.txt"
-assert:truthy "file:copy && file:exists"
+assert:truthy "file:exists"
 
 file:is:newer "$PWD/file2.txt" "$PWD/file.txt"
 assert:truthy "file:is:newer"
