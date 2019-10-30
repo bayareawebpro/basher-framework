@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+
+# Install Supervisor
 function supervisor:install() {
   logger:divider
   if progam:exists "brew"; then
@@ -15,6 +17,7 @@ function supervisor:install() {
   fi
 }
 
+# Start Supervisor Process
 function supervisor:start() {
   logger:divider
   logger:info "Starting Supervisor..."
@@ -23,6 +26,7 @@ function supervisor:start() {
   sleep 3 && supervisor:logs
 }
 
+# Stop Supervisor Process
 function supervisor:stop() {
   logger:divider
   logger:info "Stopping Supervisor..."
@@ -35,14 +39,29 @@ function supervisor:stop() {
   sleep 3 && supervisor:logs
 }
 
+# Enter Process Control CLI
 function supervisor:control() {
-  supervisord -c "$BASHER_PATH/resources/supervisord/supervisord.conf"
+  supervisorctl -c "$BASHER_PATH/resources/supervisord/supervisord.conf"
 }
 
+# Read the Logs of the process.
 function supervisor:logs() {
   file:read "$BASHER_PATH/storage/logs/supervisord.log"
 }
 
+# Get the PID of the process.
 function supervisor:pid() {
   pgrep -f supervisord
 }
+
+# Install LaunchAgent (OSX)
+function supervisor:install:agent() {
+  launchctl load "$BASHER_PATH/resources/supervisord/com.process.supervisord.plist"
+}
+
+# UnInstall LaunchAgent (OSX)
+function supervisor:uninstall:agent() {
+  launchctl unload "$BASHER_PATH/resources/supervisord/com.process.supervisord.plist"
+}
+
+

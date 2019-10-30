@@ -345,6 +345,12 @@ supervisor:stop
 supervisor:pid
 ```
 
+MacOS Launch Agent
+```shell script
+supervisor:install:agent
+supervisor:uninstall:agent
+```
+
 #### Chrome
 > No argument for 127.0.0.1
 ```shell script
