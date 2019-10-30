@@ -203,10 +203,11 @@ done
 
 #### Functions
 ```shell script
-func:exists "my:func"
-func:inspect "my:func"
 func:success # Last Command Succeeded
 func:failed # Last Command Failed
+func:inspect "my:func"
+func:exists "my:func" || echo "no"
+progam:exists "gitV2" || echo "no"
 ```
 
 #### Processes
@@ -301,6 +302,19 @@ colors:lightblueb "im lightblueb"
 ------
 
 ## Services
+
+### Supervisord
+- resources/supervisord/supervisord.conf
+- resources/supervisord/programs/*.conf
+- storage/logs/supervisord.log
+```shell script
+supervisor:install
+supervisor:control
+supervisor:logs
+supervisor:start
+supervisor:stop
+supervisor:pid
+```
 
 #### Database
 ```shell script
