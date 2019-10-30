@@ -1,6 +1,6 @@
 #!/bin/bash
 install:animatecss() {
-  if npm install animate.css; then
+  if npm install --save-dev animate.css; then
     {
       echo "@import '~animate.css/source/_base.css';"
       echo "@import '~animate.css/source/fading_entrances/fadeInUp.css';"

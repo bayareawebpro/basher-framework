@@ -1,6 +1,6 @@
 #!/bin/bash
 install:fontawesomecss() {
-  if npm install @fortawesome/fontawesome-free; then
+  if npm install --save-dev @fortawesome/fontawesome-free; then
     {
       echo "@import '~@fortawesome/fontawesome-free/scss/solid';"
       echo "@import '~@fortawesome/fontawesome-free/scss/brands';"

@@ -12,7 +12,7 @@ function install:tailwindcss(){
 
     elif file:exists package.json; then
       logger:info "Using NPM, Laravel not detected..."
-      npm install tailwindcss && npx tailwind init
+      npm install --save-dev tailwindcss && npx tailwind init
       logger:success "tailwindcss installed via NPM"
     else
       logger:failed "Failed to install tailwindcss package.json not detected"
