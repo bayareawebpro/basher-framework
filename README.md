@@ -303,19 +303,6 @@ colors:lightblueb "im lightblueb"
 
 ## Services
 
-### Supervisord
-- resources/supervisord/supervisord.conf
-- resources/supervisord/programs/*.conf
-- storage/logs/supervisord.log
-```shell script
-supervisor:install
-supervisor:control
-supervisor:logs
-supervisor:start
-supervisor:stop
-supervisor:pid
-```
-
 #### Database
 ```shell script
 make:database:env my_database
@@ -343,6 +330,19 @@ git:branch dev
 git:branch gh-pages fresh
 git:branch:delete dev
 git:switch master
+```
+
+#### Supervisord
+- resources/supervisord/supervisord.conf
+- resources/supervisord/programs/*.conf
+- storage/logs/supervisord.log
+```shell script
+supervisor:install
+supervisor:control
+supervisor:logs
+supervisor:start
+supervisor:stop
+supervisor:pid
 ```
 
 #### Chrome
