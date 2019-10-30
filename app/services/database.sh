@@ -56,7 +56,7 @@ function database:export() {
 
 # Publish MySql Config
 function make:myconf() {
-  app:publish "resources/mysql.conf" "$HOME/.my.cnf"
+  app:publish "resources/database/mysql.conf" "$HOME/.my.cnf"
 }
 
 # Has Database?
