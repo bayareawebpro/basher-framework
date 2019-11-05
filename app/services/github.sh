@@ -29,7 +29,7 @@ function git:report() {
   logger:divider
   logger:info "Generating Commit Report..."
   echo "CommitHash,Author,Date,Comment" >git-commit-log.csv
-  git log --after='last month' --date=short --pretty=format:'%h,%an,%ad,%s' >>git-commit-log.csv
+  git log --after='last 33 days' --date=short --pretty=format:'%h,%an,%ad,%s' >>git-commit-log.csv
   logger:success "Commit Report Generated"
 }
 
