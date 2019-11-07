@@ -56,7 +56,7 @@ function app:banner() {
 
 # ==== Publish Files ====
 function app:publish() {
-  if path:is:file "$1"; then
+  if path:is:file "$BASHER_PATH/$1"; then
     if path:is:file "$2"; then
       logger:info "File already exists: $2"
       return 1
@@ -64,7 +64,7 @@ function app:publish() {
       file:copy "$BASHER_PATH/$1" "$2"
       logger:success "Published: $1 => $2."
     fi
-  elif path:is:directory "$1"; then
+  elif path:is:directory "$BASHER_PATH/$1"; then
     if path:is:directory "$2"; then
       logger:info "Directory already exists: $2"
       return 1
