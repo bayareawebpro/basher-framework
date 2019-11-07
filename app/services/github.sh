@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+function on:git:connected() {
+  logger:debug "on:git:connected (define function to use hook)"
+}
 
 # ========= Setup New Repo =========
 function git:setup() {
@@ -68,6 +71,9 @@ function git:connect() {
       logger:info "Setting Remote Upstream to origin master..."
       git push --set-upstream origin master
       logger:success "Git Remote Upstream is set to origin master and syncronized: $ORIGIN."
+      if func:exists "on:git:connected"; then
+        on:git:connected "$ORIGIN"
+      fi
     else
       logger:warning "Git Remote failed to be set to origin: $ORIGIN."
     fi
