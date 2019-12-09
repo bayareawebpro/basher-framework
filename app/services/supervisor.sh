@@ -17,6 +17,14 @@ function supervisor:install() {
   fi
 }
 
+# ReStart Supervisor Process
+function supervisor:restart() {
+  logger:divider
+  logger:info "ReStarting Supervisor..."
+  supervisor:stop
+  supervisor:start
+}
+
 # Start Supervisor Process
 function supervisor:start() {
   logger:divider
