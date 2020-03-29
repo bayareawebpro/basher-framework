@@ -13,7 +13,7 @@ ______  _______ _______ _     _ _______  ______
 > https://www.dropbox.com/s/w43btkvfqvu548n/Basher.mov?dl=0
 
 - Add Zsh Plugin: ~/.oh-my-zsh/custom/includeProfileApp.zsh
-- Or, add to to: ~/.profile
+- Or, add to bash profile: ~/.profile
 
 ```shell script
 #!/usr/bin/env bash
