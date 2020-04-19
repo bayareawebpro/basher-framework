@@ -28,32 +28,8 @@ Or Standalone
 ```shell script
 /usr/bin/env bash ~/basher-framework/app.sh
 ```
+
 ------
-
-## Projects
-```shell script
-make:laravel my-folder-name
-make:project my-folder-name
-switch:project my-folder-name
-```
-
-#### Installers
-Use the current working directory.
-```shell script
-install:animatecss
-install:tailwindcss
-install:vuejs
-```
-
-#### Code Quality
-Use the current working directory.
-```shell script
-php:quality # php:lint && php:test
-php:lint
-php:test
-php:dusk
-```
----
 
 # Application
 ```shell script
@@ -302,6 +278,31 @@ colors:lightblueb "im lightblueb"
 ------
 
 ## Services
+
+#### Projects
+```shell script
+make:laravel my-folder-name
+make:project my-folder-name
+switch:project my-folder-name
+```
+
+#### Installers
+Use the current working directory.
+```shell script
+install:animatecss
+install:tailwindcss
+install:vuejs
+```
+
+#### Code Quality
+Use the current working directory.
+```shell script
+php:quality # php:lint && php:test
+php:lint
+php:test
+php:dusk
+```
+
 
 #### Database
 ```shell script
