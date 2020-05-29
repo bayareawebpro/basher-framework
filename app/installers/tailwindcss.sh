@@ -5,7 +5,7 @@ function install:tailwindcss(){
     if path:is:file bootstrap/app.php; then
       logger:info "Detected Laravel, using Composer Package..."
       composer require laravel-frontend-presets/tailwindcss --dev
-      php artisan preset tailwindcss-auth
+      php artisan ui tailwindcss --auth
 
       logger:success "tailwindcss installed, running NPM..."
       npm install && npm run dev
